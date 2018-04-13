@@ -74,11 +74,7 @@ export default {
   }),
 
   created(){
-    this.usuario = Cookies.get('user');
-    var user = this.usuario;
-    setTimeout(function(){console.log(user)},2000)
-    //this.avatar =  JSON.parse(this.user).avatar;
-    //console.log(JSON.parse(this.user).avatar)
+    this.usuario = {avatar:''};
   },
 
   methods: {
