@@ -1,5 +1,5 @@
 <template>
-  <li class="nav-item dropdown">
+  <div>
     <button class="nav-link dropdown-toggle" href="#" role="button"
        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       {{ locales[locale] }}
@@ -10,7 +10,7 @@
         {{ value }}
       </button>
     </div>
-  </li>
+  </div>
 </template>
 
 <script>
@@ -37,15 +37,13 @@ export default {
 
 
 <style>
-  .footer-rows.button-row ul li{
-    list-style: none;
-  }
 
   button.dropdown-toggle{
     background: #fff !important;
     border: none !important;
     box-shadow: 0px 1px 1px 1px #ccc !important;
     padding: 10px 20px !important;
+    display:inline-block;
   }
 
   .dropdown-menu.show{
