@@ -4,7 +4,7 @@ import router from '@/router'
 import swal from 'sweetalert2'
 import i18n from '@/plugins/i18n'
 
-axios.defaults.baseURL = 'http://hackathon.luisvilches.cl';
+axios.defaults.baseURL = 'http://api.luisvilches.cl';
 
 // Request interceptor
 axios.interceptors.request.use(request => {
