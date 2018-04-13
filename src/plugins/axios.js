@@ -5,6 +5,7 @@ import swal from 'sweetalert2'
 import i18n from '@/plugins/i18n'
 
 axios.defaults.baseURL = 'http://api.luisvilches.cl';
+//axios.defaults.baseURL = 'http://localhost:1989';
 
 // Request interceptor
 axios.interceptors.request.use(request => {

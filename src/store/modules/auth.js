@@ -18,7 +18,7 @@ export const getters = {
 
 // mutations
 export const mutations = {
-  [types.SAVE_TOKEN] (state, { token,user, remember }) {
+  [types.SAVE_TOKEN] (state, { token, user, remember }) {
     console.log("token =>",token);
     state.token = token;
     state.user = user;
@@ -26,20 +26,20 @@ export const mutations = {
     Cookies.set('token', token, { expires: remember ? 365 : null })
   },
 
-  [types.FETCH_USER_SUCCESS] (state, { user }) {
-    console.log(user)
-    state.user = user
+  [types.FETCH_USER_SUCCESS] (state, { user,router }) {
+    state.user = user;
+    router.push({ name: 'welcome' });
   },
 
   [types.FETCH_USER_FAILURE] (state) {
+    alert("Password o Email incorrectos");
     state.token = null
-    Cookies.remove('token')
+    Cookies.remove('token');
   },
 
   [types.LOGOUT] (state) {
     state.user = null
     state.token = null
-
     Cookies.remove('token')
     Cookies.remove('user')
   },
@@ -59,14 +59,17 @@ export const actions = {
     commit(types.SAVE_TOKEN, payload)
   },
 
-  async fetchUser ({ commit }) {
-    console.log("se activa")
-    try {
-      const { data } = await axios.get('/auth/user/' + state.user._id)
-      commit(types.FETCH_USER_SUCCESS, { user: data })
-    } catch (e) {
+  async fetchUser ({ commit }, data) {
+    if(data.success){
+      commit(types.FETCH_USER_SUCCESS, { user: data.user,router:data.router })
+    } else {
       commit(types.FETCH_USER_FAILURE)
     }
+    /*try {
+     
+    } catch (e) {
+      
+    }*/
   },
 
   updateUser ({ commit }, payload) {
