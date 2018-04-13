@@ -116,7 +116,7 @@ export default {
 <style scoped>
   .change-password{
     width: 100%;
-    margin-top: 60px;
+    margin-top: 40px;
     overflow: hidden;
   }
 

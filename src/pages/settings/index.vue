@@ -1,82 +1,84 @@
 <template>
-  <div class="container-lg">
-    <div class="row">
-      <div class="col-md-3">
-            <div class="profile-photo">
-                <img src="http://via.placeholder.com/300x300" alt="">
+  <section class="seccion">
+    <div class="container-lg">
+      <div class="row">
+        <div class="col-md-3">
+              <div class="profile-photo">
+                  <img src="http://via.placeholder.com/300x300" alt="">
+              </div>
+              <li style="list-style:none; text-align:right; margin-top:10px;">
+                    <router-link :to="{ name: 'settings.edit.profile' }" active-class="active">
+                      ({{ $t('Edit profile') }})
+                    </router-link>
+                </li>
+              <div id="profile-info" class="">
+                  <h2 id="name" class="user-name">Matt Wright</h2>
+                  <a id="at" class="at-user" href="">@mateo_ventures</a>
+                  <div id="labels" class="">
+                      <span class="skyblue">UX/UI</span>
+                      <span class="magenta">Biz Dev</span>
+                  </div>
+                  <p id="followers" class=" follow-status"><strong>10k </strong>Followers </p>
+                  <p id="followins" class=" follow-status"><strong>200 </strong>Following </p>
+                  <p id="short-desc" class=" desc-text">I freakin’ loveeee hackathons! I’m a UX designer with some knowledge software development. I also love pizza. </p>
+                  <p id="location" class=""><i class="fas fa-map-marker-alt" aria-hidden="true"></i>Los Angeles, CA, USA</p>
+                  <div id="social" class="">
+                      <a href=""><i class="fab fa-twitter"></i></a>
+                      <a href=""><i class="fab fa-github"></i></a>
+                      <a href=""><i class="fab fa-linkedin-in"></i></a>
+                      <a href=""><img src="http://via.placeholder.com/45x45" alt="Bitmap"></a>
+                  </div>
+                  <div id="contact" class="">
+                      <a class="btn-primari" href="">Message</a>
+                      <a class="btn-primari active" href="">Following</a>
+                  </div>
+              </div>
+        </div>
+        <div class="col-md-9">
+                  <div class="row">
+              <nav class="profile-navigation">
+                <ul>
+                  <li>
+                    <router-link :to="{ name: 'settings.profile' }" class="profile-nav-link" active-class="active">
+                      {{ $t('projects') }}
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{ name: 'settings.schedule' }" class="profile-nav-link" active-class="active">
+                      {{ $t('schedule') }}
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{ name: 'settings.upvoted' }" class="profile-nav-link" active-class="active">
+                      {{ $t('upvoted') }}
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{ name: 'settings.badges' }" class="profile-nav-link" active-class="active">
+                      {{ $t('badges') }}
+                    </router-link>
+                  </li>
+                  <li style="color: #c3c3c3;">|</li>
+                  <li>
+                    <router-link :to="{ name: 'settings.password' }" class="profile-nav-link" active-class="active">
+                      {{ $t('password') }}
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{ name: 'settings.edit.profile' }" class="profile-nav-link" active-class="active">
+                      {{ $t('profile') }}
+                    </router-link>
+                  </li>
+                </ul>
+              </nav>
             </div>
-            <li style="list-style:none; text-align:right; margin-top:10px;">
-                  <router-link :to="{ name: 'settings.edit.profile' }" active-class="active">
-                    ({{ $t('Edit profile') }})
-                  </router-link>
-              </li>
-            <div id="profile-info" class="">
-                <h2 id="name" class="user-name">Matt Wright</h2>
-                <a id="at" class="at-user" href="">@mateo_ventures</a>
-                <div id="labels" class="">
-                    <span class="skyblue">UX/UI</span>
-                    <span class="magenta">Biz Dev</span>
-                </div>
-                <p id="followers" class=" follow-status"><strong>10k </strong>Followers </p>
-                <p id="followins" class=" follow-status"><strong>200 </strong>Following </p>
-                <p id="short-desc" class=" desc-text">I freakin’ loveeee hackathons! I’m a UX designer with some knowledge software development. I also love pizza. </p>
-                <p id="location" class=""><i class="fas fa-map-marker-alt" aria-hidden="true"></i>Los Angeles, CA, USA</p>
-                <div id="social" class="">
-                    <a href=""><i class="fab fa-twitter"></i></a>
-                    <a href=""><i class="fab fa-github"></i></a>
-                    <a href=""><i class="fab fa-linkedin-in"></i></a>
-                    <a href=""><img src="http://via.placeholder.com/45x45" alt="Bitmap"></a>
-                </div>
-                <div id="contact" class="">
-                    <a class="btn-primari" href="">Message</a>
-                    <a class="btn-primari active" href="">Following</a>
-                </div>
-            </div>
-      </div>
-      <div class="col-md-9">
-                <div class="row">
-            <nav class="profile-navigation">
-              <ul>
-                <li>
-                  <router-link :to="{ name: 'settings.profile' }" class="profile-nav-link" active-class="active">
-                    {{ $t('projects') }}
-                  </router-link>
-                </li>
-                <li>
-                  <router-link :to="{ name: 'settings.schedule' }" class="profile-nav-link" active-class="active">
-                    {{ $t('schedule') }}
-                  </router-link>
-                </li>
-                <li>
-                  <router-link :to="{ name: 'settings.upvoted' }" class="profile-nav-link" active-class="active">
-                    {{ $t('upvoted') }}
-                  </router-link>
-                </li>
-                <li>
-                  <router-link :to="{ name: 'settings.badges' }" class="profile-nav-link" active-class="active">
-                    {{ $t('badges') }}
-                  </router-link>
-                </li>
-                <li style="color: #c3c3c3;">|</li>
-                <li>
-                  <router-link :to="{ name: 'settings.password' }" class="profile-nav-link" active-class="active">
-                    {{ $t('password') }}
-                  </router-link>
-                </li>
-                <li>
-                  <router-link :to="{ name: 'settings.edit.profile' }" class="profile-nav-link" active-class="active">
-                    {{ $t('profile') }}
-                  </router-link>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        <transition name="fade" mode="out-in">
-          <router-view/>
-        </transition>
+          <transition name="fade" mode="out-in">
+            <router-view/>
+          </transition>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -235,7 +237,6 @@ export default {
   } 
 }
 .profile-navigation {
-  margin-top: 20px;
   width: 100%;
   text-align: center; 
 }

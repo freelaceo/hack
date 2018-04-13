@@ -2,6 +2,7 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import * as types from '../mutation-types'
 import Router from 'vue-router'
+import swal from 'sweetalert2'
 
 // state
 export const state = {
@@ -19,7 +20,6 @@ export const getters = {
 // mutations
 export const mutations = {
   [types.SAVE_TOKEN] (state, { token, user, remember }) {
-    console.log("token =>",token);
     state.token = token;
     state.user = user;
     Cookies.set('user',user,{expires:remember ? 365 : null})
@@ -28,13 +28,39 @@ export const mutations = {
 
   [types.FETCH_USER_SUCCESS] (state, { user,router }) {
     state.user = user;
+    var msg;
+    switch(Cookies.get('locale')){
+      case 'en':
+        msg = 'Login Success';
+        break;
+      case 'es':
+        msg = 'Inicio de sesión exitoso';
+    }
+    swal({
+      type: 'success',
+      title: msg,
+    })
     router.push({ name: 'welcome' });
   },
 
   [types.FETCH_USER_FAILURE] (state) {
-    alert("Password o Email incorrectos");
-    state.token = null
+    var msg;
+    switch(Cookies.get('locale')){
+      case 'en':
+        msg = 'Password or Email incorrect';
+        break;
+      case 'es':
+        msg = 'Usuario o Clave incorrectos';
+    }
+    swal({
+      type: 'error',
+      title: msg
+    })
     Cookies.remove('token');
+    Cookies.remove('user');
+    state.token = null
+    state.user = null
+    
   },
 
   [types.LOGOUT] (state) {
@@ -65,11 +91,6 @@ export const actions = {
     } else {
       commit(types.FETCH_USER_FAILURE)
     }
-    /*try {
-     
-    } catch (e) {
-      
-    }*/
   },
 
   updateUser ({ commit }, payload) {
@@ -98,12 +119,14 @@ export const actions = {
         f.append('shedule',p.form.schedule);
         f.append('date',p.form.date);
         f.append('userId',userID._id);
+
+        var t = p.form.type;
+        console.log(typeof t, t);
     
-    var data = await axios('/auth/hackathon',{
+    var {data} = await axios('/auth/hackathon',{
         method:"post",
         data: f
     })
-    console.log(data.data.data)
-    p.$router.push({name: 'home' , params: { id: data.data.data.titleLink }});
+    p.$router.push({name: 'home' , params: { id: data.data.titleLink }});
   }
 }

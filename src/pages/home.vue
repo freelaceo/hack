@@ -193,9 +193,8 @@ export default {
   },
   methods:{
     load: async function(){
-      const data = await axios('/auth/hackathon/url/'+this.$route.params.id,{method:"GET"});
-      this.hack.info = data.data.data;
-      console.log(this.hack.info.type)
+      const {data} = await axios('/auth/hackathon/url/'+this.$route.params.id,{method:"GET"});
+      this.hack.info = data.data;
       this.hack.tags = this.hack.info.type[0].split(",");
       const user = await axios('/auth/user/'+this.hack.info.userId,{method:"GET"})
       this.hack.user = user.data;
