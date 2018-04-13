@@ -1,60 +1,74 @@
 <template>
-  <div style="padding-top:20px; border:solid 1px #D3D3D3">
-    <form @submit.prevent="update" @keydown="form.onKeydown($event)">
-      <alert-success :form="form" :message="$t('profile_updated')"/>
+  <div>
+    <div class="change-password">
+      <form @submit.prevent="update" @keydown="form.onKeydown($event)">
+        <alert-success :form="form" :message="$t('profile_updated')"/>
 
-      <!-- Name -->
-      <div class="form-group row">
-        <label class="col-md-3 col-form-label text-md-right">{{ $t('name') }}</label>
-        <div class="col-md-7">
-          <input v-model="form.name" :class="{ 'is-invalid': form.errors.has('name') }" class="form-control" type="text" name="name" required="">
-          <has-error :form="form" field="name"/>
+        <!-- Name -->
+        <div class="form-group row">
+          <label class="col-md-offset-1 col-md-2 col-form-label">{{ $t('name') }}</label>
+          <div class="col-md-7">
+            <input v-model="form.name" :class="{ 'is-invalid': form.errors.has('name') }" class="form-control" type="text" name="name" required="">
+            <has-error :form="form" field="name"/>
+          </div>
         </div>
-      </div>
 
-      <!-- Username  -->
-      <div class="form-group row">
-        <label class="col-md-3 col-form-label text-md-right">{{ $t('username') }}</label>
-        <div class="col-md-7">
-          <input v-model="form.username" :class="{ 'is-invalid': form.errors.has('username') }" class="form-control" type="text" name="username" >
-          <has-error :form="form" field="username"/>
+        <!-- Username  -->
+        <div class="form-group row">
+          <label class="col-md-offset-1 col-md-2 col-form-label">{{ $t('username') }}</label>
+          <div class="col-md-7">
+            <input v-model="form.username" :class="{ 'is-invalid': form.errors.has('username') }" class="form-control" type="text" name="username" >
+            <has-error :form="form" field="username"/>
+          </div>
         </div>
-      </div>
 
-      <!-- Password Confirmation -->
-      <div class="form-group row">
-        <label class="col-md-3 col-form-label text-md-right">{{ $t('location') }}</label>
-        <div class="col-md-7">
-          <input v-model="form.location" :class="{ 'is-invalid': form.errors.has('location') }" class="form-control" type="text" name="location" required="">
-          <has-error :form="form" field="location"/>
+        <!-- Password Confirmation -->
+        <div class="form-group row">
+          <label class="col-md-offset-1 col-md-2 col-form-label">{{ $t('location') }}</label>
+          <div class="col-md-7">
+            <input v-model="form.location" :class="{ 'is-invalid': form.errors.has('location') }" class="form-control" type="text" name="location" required="">
+            <has-error :form="form" field="location"/>
+          </div>
         </div>
-      </div>
 
-      <!-- Description -->
-      <div class="form-group row">
-        <label class="col-md-3 col-form-label text-md-right">{{ $t('description') }}</label>
-        <div class="col-md-7">
-          <input v-model="form.description" :class="{ 'is-invalid': form.errors.has('description') }" class="form-control" type="text" name="description" required="">
-          <has-error :form="form" field="description"/>
+        <!-- Description -->
+        <div class="form-group row">
+          <label class="col-md-offset-1 col-md-2 col-form-label">{{ $t('description') }}</label>
+          <div class="col-md-7">
+            <textarea v-model="form.description" :class="{ 'is-invalid': form.errors.has('description') }" class="form-control" type="text" name="description" required=""></textarea>
+            <has-error :form="form" field="description"/>
+          </div>
         </div>
-      </div>
 
-      <!-- Image URL -->
-      <div class="form-group row">
-        <label class="col-md-3 col-form-label text-md-right">{{ $t('photo_url') }}</label>
-        <div class="col-md-7">
-          <input v-model="form.photo_url" :class="{ 'is-invalid': form.errors.has('photo_url') }" class="form-control" type="text" name="photo_url" required="">
-          <has-error :form="form" field="photo_url"/>
+        <!-- Image URL -->
+        <div class="form-group row">
+          <label class="col-md-offset-1 col-md-2 col-form-label">{{ $t('photo_url') }}</label>
+          <div class="col-md-7">
+            <label>
+              <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+            </label>
+           <!--  <input v-model="form.photo_url" :class="{ 'is-invalid': form.errors.has('photo_url') }" class="form-control" type="text" name="photo_url" required="">
+            <has-error :form="form" field="Photo_url"/> -->
+            <div id="file-drag-drop">
+              
+              <form class="drag-and-drop" ref="fileform">
+                  <span class="drop-files">
+                    <p>Or drop the files here!</p>
+                    <i class="fas fa-images"></i>
+                  </span>
+              </form>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <!-- Submit Button -->
-      <div class="form-group row">
-        <div class="col-md-9 ml-md-auto">
-          <v-button :loading="form.busy" type="success">{{ $t('update') }}</v-button>
+        <!-- Submit Button -->
+        <div class="form-group row">
+          <div class="col-md-12 text-center ml-md-auto">
+            <v-button :loading="form.busy" type="success">{{ $t('update') }}</v-button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -99,3 +113,37 @@ export default {
   }
 }
 </script>
+<style scoped>
+  .change-password{
+    width: 100%;
+    margin-top: 60px;
+    overflow: hidden;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+  .form-control:focus {
+      color: #495057;
+      background-color: #fff;
+      border-color: #80bdff;
+      outline: 0;
+      box-shadow: none;
+  }
+  form.drag-and-drop{
+    display: flex;
+    height: 200px;
+    width: 100%;
+    background: #ccc;
+    margin: auto;
+    margin-top: 10px;
+    text-align: center;
+    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+}
+ form.drag-and-drop .fa-images {
+  font-size: 30px;
+  margin-top: 10px;
+ }
+</style>
