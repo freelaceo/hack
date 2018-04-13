@@ -115,10 +115,7 @@ export default {
       });
 
       // Update the user.
-      //await this.$store.dispatch('auth/updateUser', { user: data })
-
-      // Redirect home.
-      this.$router.push({ name: 'welcome' })
+      await this.$store.dispatch('auth/fetchUser',{success:data.success,user:data.user,router:this.$router});
     }
   }
 }

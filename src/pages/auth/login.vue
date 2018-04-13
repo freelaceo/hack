@@ -96,22 +96,22 @@ export default {
       var f = new FormData();
       f.append('email',this.form.email);
       f.append('password',this.form.password);
+      
 
 
-      var data = await axios('/login',{method:'POST',data:f})
+      var {data} = await axios('/login',{method:'POST',data:f})
+
+      console.log(data)
 
        // Save the token.
         this.$store.dispatch('auth/saveToken', {
-          token: data.data.token,
-          user: data.data.user,
+          token: data.token,
+          user: data.user,
           remember: this.remember
         });
 
      // Fetch the user.
-        await this.$store.dispatch('auth/fetchUser');
-
-        // Redirect home.
-        this.$router.push({ name: 'welcome' })
+        await this.$store.dispatch('auth/fetchUser',{success:data.success,user:data.user,router:this.$router});
     }
   }
 }

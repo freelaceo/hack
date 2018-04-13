@@ -22,7 +22,7 @@
            <li class="nav-item dropdown">
               <a class="nav-link text-dark"
                  href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img :src="avatar" class="rounded-circle profile-photo mr-1">
+                <img :src="usuario ? '': usuario.avatar" class="rounded-circle profile-photo mr-1">
               </a>
               <div class="dropdown-menu">
                 <router-link :to="{ name: 'settings.profile' }" class="dropdown-item pl-3">
@@ -55,6 +55,7 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie'
 import { mapGetters } from 'vuex'
 import LocaleDropdown from './LocaleDropdown'
 
@@ -65,7 +66,7 @@ export default {
 
   data: () => ({
     appName: window.config.appName,
-    avatar: ''
+    usuario: null
   }),
 
   computed: mapGetters({
@@ -73,8 +74,11 @@ export default {
   }),
 
   created(){
-    this.avatar =  JSON.parse(this.user).avatar;
-    console.log(JSON.parse(this.user).avatar)
+    this.usuario = Cookies.get('user');
+    var user = this.usuario;
+    setTimeout(function(){console.log(user)},2000)
+    //this.avatar =  JSON.parse(this.user).avatar;
+    //console.log(JSON.parse(this.user).avatar)
   },
 
   methods: {
