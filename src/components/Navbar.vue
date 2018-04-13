@@ -26,10 +26,10 @@
 										<li><router-link :to="{name: 'hackathons.create'}" class="create-h-btn btn btn-md btn-red">{{ $t('create_hackathon') }}</router-link></li>
 									 	<li class="dropdown">
 											<a href="#">
-												<h6 class="user-name"><fa icon="user" fixed-width/> Nicolás</h6>
+												<h6 class="user-name"><fa icon="user" fixed-width/> {{usuario.name}}</h6>
 												<figure class="user-img">
-													<div v-if="avatar">
-														<img :src="avatar">
+													<div v-if="usuario.avatar">
+														<img :src="usuario.avatar">
 													</div>
 													<div v-else>
 														<img src="http://via.placeholder.com/100x100" alt="">
@@ -76,7 +76,7 @@
 
 		data: () => ({
 			appName: window.config.appName,
-			avatar: ''
+			usuario: {}
 		}),
 
 		computed: mapGetters({
@@ -133,6 +133,7 @@
 		},
 		created(){
 			window.addEventListener('resize', this.loadHeader);
+			this.usuario = JSON.parse(this.user);
 		},
 
 		mounted(){
