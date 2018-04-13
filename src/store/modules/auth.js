@@ -119,6 +119,9 @@ export const actions = {
         f.append('shedule',p.form.schedule);
         f.append('date',p.form.date);
         f.append('userId',userID._id);
+
+        var t = p.form.type;
+        console.log(typeof t, t);
     
     var {data} = await axios('/auth/hackathon',{
         method:"post",
