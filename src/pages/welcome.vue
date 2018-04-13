@@ -5,11 +5,26 @@
 <div class="container-lg">
   <br>
   <h2>{{$t('featureHackathon')}}</h2>
-  <hackathons-items :data="feature" />
+   <div v-if="feature.length == 0">
+    <p>Sin items</p>
+  </div>
+  <div v-else>
+    <hackathons-items :data="feature"/>
+  </div>
   <h2>{{$t('popularHackWorld')}}</h2>
-  <hackathons-items :data="4"/>
+   <div v-if="popular.length == 0">
+    <p>Sin items</p>
+  </div>
+  <div v-else>
+    <hackathons-items :data="popular"/>
+  </div>
   <h2>{{$t('virtualHackathon')}}</h2>
-  <hackathons-items :data="4"/>
+   <div v-if="virtual.length == 0">
+    <p>Sin items</p>
+  </div>
+  <div v-else>
+    <hackathons-items :data="virtual"/>
+  </div>
 </div>
 
 <banner-component style="display:block; height: auto;min-height: 670px;"/>
@@ -17,11 +32,26 @@
 <div class="max-width-block mbt">
 
   <h2>{{$t('blockchainHackathon')}}</h2>
-  <hackathons-items :data="4"/>
+   <div v-if="blockchain.length == 0">
+    <p>Sin items</p>
+  </div>
+  <div v-else>
+    <hackathons-items :data="blockchain"/>
+  </div>
   <h2>{{$t('EverythingIoT')}}</h2>
-  <hackathons-items :data="4"/>
+  <div v-if="iot.length == 0">
+    <p>Sin items</p>
+  </div>
+  <div v-else>
+    <hackathons-items :data="iot"/>
+  </div>
   <h2>{{$t('popularHackWorld')}}</h2>
-  <hackathons-items :data="4"/>
+  <div v-if="popular.length == 0">
+    <p>Sin items</p>
+  </div>
+  <div v-else>
+    <hackathons-items :data="popular"/>
+  </div>
 </div>
 
 </section>
@@ -52,7 +82,11 @@ export default {
 
   data: () => ({
     title: window.config.appName,
-    feature:[]
+    feature:[],
+    virtual:[],
+    blockchain:[],
+    iot:[],
+    popular:[]
   }),
 
   computed: mapGetters({
@@ -64,8 +98,22 @@ export default {
   },
   methods:{
     load: async function(){
-      const data =  await  axios('/hackathon/public',{method:'get'})
-      this.feature = data.data.data;
+      const {data} =  await  axios('/hackathon/public',{method:'get'});
+
+      this.feature = data.data;
+      this.virtual = this.filter(data.data,'virtual');
+      this.blockchain = this.filter(data.data,'blockchain');
+      this.iot = this.filter(data.data,'iot');
+      this.popular = [];
+    }, 
+    filter:function(data,cat){
+      return data.filter((item,index) => {
+        if(index <= 4){
+          if(item.type[0].includes(cat)){
+            return item;
+          }
+        }
+      })
     }
   }
 }

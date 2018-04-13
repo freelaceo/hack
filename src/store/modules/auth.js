@@ -2,6 +2,7 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import * as types from '../mutation-types'
 import Router from 'vue-router'
+import swal from 'sweetalert2'
 
 // state
 export const state = {
@@ -18,28 +19,53 @@ export const getters = {
 
 // mutations
 export const mutations = {
-  [types.SAVE_TOKEN] (state, { token,user, remember }) {
-    console.log("token =>",token);
+  [types.SAVE_TOKEN] (state, { token, user, remember }) {
     state.token = token;
     state.user = user;
     Cookies.set('user',user,{expires:remember ? 365 : null})
     Cookies.set('token', token, { expires: remember ? 365 : null })
   },
 
-  [types.FETCH_USER_SUCCESS] (state, { user }) {
-    console.log(user)
-    state.user = user
+  [types.FETCH_USER_SUCCESS] (state, { user,router }) {
+    state.user = user;
+    var msg;
+    switch(Cookies.get('locale')){
+      case 'en':
+        msg = 'Login Success';
+        break;
+      case 'es':
+        msg = 'Inicio de sesión exitoso';
+    }
+    swal({
+      type: 'success',
+      title: msg,
+    })
+    router.push({ name: 'welcome' });
   },
 
   [types.FETCH_USER_FAILURE] (state) {
+    var msg;
+    switch(Cookies.get('locale')){
+      case 'en':
+        msg = 'Password or Email incorrect';
+        break;
+      case 'es':
+        msg = 'Usuario o Clave incorrectos';
+    }
+    swal({
+      type: 'error',
+      title: msg
+    })
+    Cookies.remove('token');
+    Cookies.remove('user');
     state.token = null
-    Cookies.remove('token')
+    state.user = null
+    
   },
 
   [types.LOGOUT] (state) {
     state.user = null
     state.token = null
-
     Cookies.remove('token')
     Cookies.remove('user')
   },
@@ -59,12 +85,10 @@ export const actions = {
     commit(types.SAVE_TOKEN, payload)
   },
 
-  async fetchUser ({ commit }) {
-    console.log("se activa")
-    try {
-      const { data } = await axios.get('/auth/user/' + state.user._id)
-      commit(types.FETCH_USER_SUCCESS, { user: data })
-    } catch (e) {
+  async fetchUser ({ commit }, data) {
+    if(data.success){
+      commit(types.FETCH_USER_SUCCESS, { user: data.user,router:data.router })
+    } else {
       commit(types.FETCH_USER_FAILURE)
     }
   },
@@ -96,11 +120,10 @@ export const actions = {
         f.append('date',p.form.date);
         f.append('userId',userID._id);
     
-    var data = await axios('/auth/hackathon',{
+    var {data} = await axios('/auth/hackathon',{
         method:"post",
         data: f
     })
-    console.log(data.data.data)
-    p.$router.push({name: 'home' , params: { id: data.data.data.titleLink }});
+    p.$router.push({name: 'home' , params: { id: data.data.titleLink }});
   }
 }
