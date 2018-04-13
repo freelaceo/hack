@@ -101,8 +101,6 @@ export default {
 
       var {data} = await axios('/login',{method:'POST',data:f})
 
-      console.log(data)
-
        // Save the token.
         this.$store.dispatch('auth/saveToken', {
           token: data.token,
