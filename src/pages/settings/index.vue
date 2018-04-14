@@ -5,7 +5,7 @@
         <div class="col-md-3">
               <div class="user_img">
               <figure class="full">
-                <img src="http://via.placeholder.com/230x230" alt="Nombre usuario">
+                <img :src="user.avatar" :alt="user.name">
                 <span class="caption" @click="upload()">Cambiar avatar</span>
               </figure>
               <input type="file" name="file" id="file">
@@ -16,16 +16,15 @@
                     </router-link>
                 </li>
               <div id="profile-info" class="">
-                  <h2 id="name" class="user-name">Matt Wright</h2>
-                  <a id="at" class="at-user" href="">@mateo_ventures</a>
-                  <div id="labels" class="">
-                      <span class="skyblue">UX/UI</span>
-                      <span class="magenta">Biz Dev</span>
+                  <h2 id="name" class="user-name">{{user.name}}</h2>
+                  <a id="at" class="at-user" href="">{{user.username}}</a>
+                  <div id="labels" class="" v-if="user.invite">
+                      <span class="skyblue" v-for="(item,index) in user.invite" :key="index">{{item}}</span>
                   </div>
-                  <p id="followers" class=" follow-status"><strong>10k </strong>Followers </p>
-                  <p id="followins" class=" follow-status"><strong>200 </strong>Following </p>
-                  <p id="short-desc" class=" desc-text">I freakin’ loveeee hackathons! I’m a UX designer with some knowledge software development. I also love pizza. </p>
-                  <p id="location" class=""><i class="fas fa-map-marker-alt" aria-hidden="true"></i>Los Angeles, CA, USA</p>
+                  <p id="followers" class=" follow-status" v-if="user.followers"><strong>{{user.followers}} </strong>Followers </p>
+                  <p id="followins" class=" follow-status" v-if="user.followins"><strong>{{user.followins}} </strong>Following </p>
+                  <p id="short-desc" class=" desc-text" v-if="user.description">{{user.description}}</p>
+                  <p id="location" class="" v-if="user.location"><i class="fas fa-map-marker-alt" aria-hidden="true"></i>{{user.location}}</p>
                   <div id="social" class="">
                       <a href=""><i class="social-icons fab fa-twitter"></i></a>
                       <a href=""><i class="social-icons fab fa-github"></i></a>
@@ -200,7 +199,6 @@ i.social-icons {
         text-decoration: none;
         color: #FFF;
         background-color: #4A90E2;
-        box-shadow: ;
     }
 
 

@@ -5,9 +5,21 @@ import Router from 'vue-router'
 import swal from 'sweetalert2'
 
 
+function sumarDias(fecha, dias){
+  fecha.setDate(fecha.getDate() + dias);
+  return fecha;
+}
+
+function expiresTokenUser(){
+  var fechauno = new Date();
+  var fechados = new Date(window.localStorage.getItem('expired'));
+  return fechauno.getTime() >= fechados.getTime();
+}
+
 function setTokenUser(token,user){
   window.localStorage.setItem('token',token);
   window.localStorage.setItem('user',JSON.stringify(user));
+  window.localStorage.setItem('expired',sumarDias(new Date(),14));
 }
 
 function getTokenUser(){
@@ -17,13 +29,20 @@ function getTokenUser(){
 function removeTokenUser(){
   window.localStorage.removeItem('token');
   window.localStorage.removeItem('user');
+  window.localStorage.removeItem('expired');
 }
 
-function setterState(estado){
-  if(estado === 'logout'){
+function updateUser(user){
+  window.localStorage.removeItem('user');
+  window.localStorage.setItem('user',user);
+  setterState('login');
+}
+
+function setterState(e){
+  if(e === 'logout'){
     state.token = null;
     state.user = null;
-  } else if(estado === 'login') {
+  } else if(e === 'login') {
     state.token = getTokenUser().token;
     state.user = getTokenUser().user;
   }
@@ -33,15 +52,17 @@ function setterState(estado){
 export const state = {
   //user: Cookies.get('user'),
   //token: Cookies.get('token')
-  user: null,
-  token: null
+  //user: null,
+  //token: null,
+  user: getTokenUser().user,
+  token: getTokenUser().token
 }
 
 // getters
 export const getters = {
   user: state => state.user,
   token: state => state.token,
-  check: state => state.user !== null
+  check: state => state.user
 }
 
 // mutations
@@ -56,7 +77,7 @@ export const mutations = {
   },
 
   [types.FETCH_USER_SUCCESS] (state, { token,user,router }) {
-    //state.user = user; //Cookies.set('user',user,{expires:365})
+    //state.user = user; Cookies.set('user',user,{expires:365})
     setTokenUser(token,user);
     setterState('login');
     var msg;
@@ -87,9 +108,9 @@ export const mutations = {
       type: 'error',
       title: msg
     })
-    //Cookies.remove('token'); //Cookies.remove('user'); //state.token = null //state.user = null
+    //Cookies.remove('token'); Cookies.remove('user'); state.token = null; state.user = null
     removeTokenUser();
-    setterState({token:null,user:null});
+    setterState('login');
     
   },
 
@@ -100,7 +121,8 @@ export const mutations = {
   },
 
   [types.UPDATE_USER] (state, { user }) {
-    state.user = user
+    //state.user = user
+    updateUser(user);
   },
 
   [types.CREATE_HACKATHON] (state, { obj }) {
@@ -155,5 +177,12 @@ export const actions = {
         data: f
     })
     p.$router.push({name: 'home' , params: { id: data.data.titleLink }});
+  },
+
+  async expiredSession(){
+    return expiresTokenUser();
+  },
+  async expiredSessionClear(){
+    removeTokenUser();
   }
 }
