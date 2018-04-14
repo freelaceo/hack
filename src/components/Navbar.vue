@@ -137,25 +137,21 @@
 		created(){
 			window.addEventListener('resize', this.loadHeader);
 			//this.loadHeader();
-			this.$store.dispatch('auth/updateUser');
 		},
 
 		mounted(){
 			window.addEventListener('resize', this.loadHeader);
 			this.loadHeader();
-			this.$store.dispatch('auth/updateUser');
 		},
 
 		beforeUpdate(){
 			window.addEventListener('resize', this.loadHeader);
 			this.loadHeader();
-			this.$store.dispatch('auth/updateUser');
 		},
 
 		updated(){
 			window.addEventListener('resize', this.loadHeader);
 			this.loadHeader();
-			this.$store.dispatch('auth/updateUser');
 		}
 	}
 </script>

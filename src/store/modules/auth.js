@@ -19,17 +19,22 @@ function removeTokenUser(){
   window.localStorage.removeItem('user');
 }
 
-function setterState(){
-  state.token = getTokenUser().token;
-  state.token = getTokenUser().user;
+function setterState(estado){
+  if(estado === 'logout'){
+    state.token = null;
+    state.user = null;
+  } else if(estado === 'login') {
+    state.token = getTokenUser().token;
+    state.user = getTokenUser().user;
+  }
 }
 
 // state
 export const state = {
   //user: Cookies.get('user'),
   //token: Cookies.get('token')
-  user: getTokenUser().user,
-  token: getTokenUser().token
+  user: null,
+  token: null
 }
 
 // getters
@@ -45,6 +50,7 @@ export const mutations = {
     //state.token = token;
     //state.user = user;
     setTokenUser(token,user);
+
     //Cookies.set('user',user,{expires:remember ? 365 : null})
     //Cookies.set('token', token, { expires: remember ? 365 : null })
   },
@@ -52,7 +58,7 @@ export const mutations = {
   [types.FETCH_USER_SUCCESS] (state, { token,user,router }) {
     //state.user = user; //Cookies.set('user',user,{expires:365})
     setTokenUser(token,user);
-    setterState();
+    setterState('login');
     var msg;
     switch(Cookies.get('locale')){
       case 'en':
@@ -83,13 +89,13 @@ export const mutations = {
     })
     //Cookies.remove('token'); //Cookies.remove('user'); //state.token = null //state.user = null
     removeTokenUser();
-    setterState();
+    setterState({token:null,user:null});
     
   },
 
   [types.LOGOUT] (state,{router}) {
+    setterState('logout');
     removeTokenUser();
-    setterState();
     router.push({name:'welcome'})
   },
 
@@ -129,10 +135,6 @@ export const actions = {
     return data.url
   },
 
-  async updateUser(){
-    console.log("se activa")
-    setterState();
-  },
 
   async createHackathon ({commit},p){
     var userID = JSON.parse(state.user);
