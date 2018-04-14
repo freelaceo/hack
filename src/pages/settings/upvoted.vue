@@ -1,41 +1,71 @@
 <template>
-<div class="border-padding container">
-  <div class="panel-header">
-    <h1>Upvoted</h1>
-    <span class="edit-panel">(Edit)</span>
+<div class="row">
+  <div class="head-proyects">
+      <h3 class="proyects-titles">Upvoted</h3>
+      <a href="" class="proyects-edit">(Edit)</a>
   </div>
-  <div class="panel-body">
-    <div class="card">
-      <div class="col-md-6">
-        Upvoted
-      </div>
-    </div>
-  </div>
+  <Items :data="Upvoted"/>
 </div>
 </template>
 
 <script>
 import Form from 'vform'
 import { mapGetters } from 'vuex'
+import Item from '../../components/user-profile/items'
 
 export default {
   scrollToTop: false,
 
   metaInfo () {
     return { title: this.$t('upvoted') }
-  }
+  },
+  components : {
+    Item
+  },
+  data(){
+      return {
+          Upvoted:[
+              {
+                  title: "ShareStop",
+                  content:"The sharing must stop!",
+                  image: "http://via.placeholder.com/90x90",
+                  friends:['http://via.placeholder.com/45x45','http://via.placeholder.com/45x45','http://via.placeholder.com/45x45'],
+                  quote:45
+              },
+              {
+                  title: "ShareStop",
+                  content:"The sharing must stop!",
+                  image: "http://via.placeholder.com/90x90",
+                  friends:['http://via.placeholder.com/45x45','http://via.placeholder.com/45x45','http://via.placeholder.com/45x45'],
+                  quote:45
+              }
+          ]
+      }
+    }
 }
 </script>
 <style scoped>
-  
-  .border-padding{
-    border:solid 1px #c4c4c4;
-    padding: 20px 10px 20px 10px;
-  }
-  .panel-header {
+.head-proyects {
+    width: calc(100% - 40px);
+    margin: 40px 0 26px 20px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding:20px;
-  }
+    align-items: flex-end;
+    }
+h3.proyects-titles{
+  font-size: 30px;
+    font-weight: 600;
+    color: #333;
+}
+
+a.proyects-edit{
+  font-size: 16px;
+  color: #9B9B9B;
+  font-weight: normal; 
+  text-decoration: none;
+}
+a.proyects-edit:hover,  a.proyects-edit:active,  a.proyects-edit.active{
+  color: #4A4A4A;
+  text-decoration: underline;
+}
 </style>
