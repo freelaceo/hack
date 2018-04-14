@@ -10,158 +10,156 @@
             </div>
         </div> 
     </section>
-    <section id="container-medio">
+    <section id="seccion">
         <div class="container-lg avenir">
             <div class="row">
-              <form @submit.prevent="createNewHackathon" @keydown="form.onKeydown($event)">
-               <!-- Step 1 -->
-                <div v-show="step.number === 1" class="col-sm-12 info-medio-a jumbotron">
-                    <h4 class="avenir">Step 1 of 3</h4>
-                    <br>
-                    <h2 class="avenir">Where will this hackathon take place?</h2>
-                    <br>
-                    <form class="form-inline">
-                       <input class="form-control mr-sm-2" v-model="form.place" type="search" aria-label="Search">
-                     </form>
-                   <div class="col-sm-12 next-button avenir">
-                      <button @click.prevent="next" class="btn btn-2040 btn-blue">Next</button>
-                   </div>
-                </div>
-                 <div v-show="step.number === 2 || step.number === 3" class="col-sm-12 info-medio-a">
-                     <h4 class="avenir">Step 1 of 3</h4>
-                     <br>
-                     <h2 class="avenir">Where will this hackathon take place?</h2>
-                     <br>
-                     <h3 class="avenir">{{form.place}} <strong style="color: #5094E6;">(change location)</strong></h3>
-                </div>
-               <!-- Step 2 -->
-                  <div v-show="step.number === 2 || step.number === 3" class="col-sm-12 info-medio-b">
-                      <h4 class="avenir">Step 2 of 3</h4>
+              <div class="flex">
+                <form @submit.prevent="createNewHackathon" @keydown="form.onKeydown($event)">
+                 <!-- Step 1 -->
+                  <div v-show="step.number === 1" class="info-medio-a">
+                      <h4 class="avenir">Step 1 of 3</h4>
                       <br>
-                      <h2 class="avenir">What type of Hackathon?</h2>
-                      <br>
-                      <form class="form-inline ">
-                         <input class="form-control mr-sm-2 avenir wd100" type="search" placeholder="Search for a theme" aria-label="Search">
-                       </form>
-                       <div>
-                           <div class="row cajita-botones wd50">
-                               <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <label class="check label">
-                                            <input class="check__input" type="checkbox" v-model="form.type" value="virtual" id="virtual">
-                                            <div class="check__text">Virtual</div>
-                                        </label>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label class="check label">
-                                            <input class="check__input" type="checkbox" v-model="form.type" value="blockchain" id="blockchain">
-                                            <div class="check__text">Blockchain</div>
-                                        </label>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <!--label for="university" class="btn btn-line">University <input type="checkbox" v-model="form.hackathon_type" value="university" id="university" class="badgebox"><span class="badge">&check;</span></label-->
-                                        <label class="check label">
-                                            <input class="check__input" type="checkbox" v-model="form.type" value="university" id="university">
-                                            <div class="check__text">University</div>
-                                        </label>
-                                    </div>
-                                </div>
-                                   <div class="col-sm-12 offset-6 more">
-                                       <h5><img src="img/reload.png" alt=""> More...</h5>
-                                   </div>
-                                   <div v-show="step.number === 2" class="col-sm-12 next-button">
-                                       <button @click.prevent="next" class="btn btn-next">Next</button>
-                                   </div>
-                               </div>
-                               <div class="col-md-4"></div>
-
-                           </div>
-                       </div>            
-                 </div> <!-- End step 2 -->
-
-                 <!-- Step 3 -->
-                  <div v-show="step.number === 3" class="col-sm-12 info-medio-c">
-                      <h4>Step 3 of 3</h4>
-                      <br>
-                      <h2>Who should we invite?</h2>
+                      <h2 class="avenir">Where will this hackathon take place?</h2>
                       <br>
                       <form class="form-inline">
-                         <input class="form-control mr-sm-2" type="search" placeholder="Search for skillsets" aria-label="Search">
+                         <input class="form-control mr-sm-2" v-model="form.place" type="search" aria-label="Search">
                        </form>
-                       <div>
-                           <div class="row cajita-botones wd50">
-                               <div class="col-md-8">
-                                   <div class="row">
-                                       <div class="col-md-4">
-                                           <!--label for="html" class="btn btn-primary">HTML <input type="checkbox" value="virtual" v-model="form.who_invite" id="html" class="badgebox"><span class="badge">&check;</span></label-->
-                                           <label class="check label">
-                                                <input class="check__input" type="checkbox" v-model="form.invite" value="html" id="html">
-                                                <div class="check__text">HTML</div>
-                                            </label>
-                                       </div>
-                                       <div class="col-md-4">
-                                           <!--label for="javascript" class="btn btn-primary">JavaScript <input type="checkbox" v-model="form.who_invite" value="javascript" id="javascript" class="badgebox"><span class="badge">&check;</span></label-->
-                                           <label class="check label">
-                                                <input class="check__input" type="checkbox" v-model="form.invite" value="javascript" id="javascript">
-                                                <div class="check__text">JavaScript</div>
-                                            </label>
-                                       </div>
-                                       <div class="col-md-4">
-                                           <!--label for="css" class="btn btn-primary">CSS <input type="checkbox" v-model="form.who_invite" value="css" id="css" class="badgebox"><span class="badge">&check;</span></label-->
-                                           <label class="check label">
-                                                <input class="check__input" type="checkbox" v-model="form.invite" value="css" id="css">
-                                                <div class="check__text">CSS</div>
-                                            </label>
-                                       </div>
-                                   </div>
-                                   <div class="col-sm-12 offset-6 more">
-                                       <h5><img src="img/reload.png" alt=""> More...</h5>
-                                   </div>
-                                   <div v-show="step.number === 3" class="col-sm-12 next-button">
-                                       <button @click.prevent="next" class="btn btn-next">Next</button>
-                                   </div>
-                               </div>
-                               <div class="col-md-4"></div>
+                     <div class="next-button avenir">
+                        <button @click.prevent="next" class="btn btn-2040 btn-blue">Next</button>
+                     </div>
+                  </div>
+                   <div v-show="step.number === 2 || step.number === 3" class="info-medio-a">
+                       <h4 class="avenir">Step 1 of 3</h4>
+                       <br>
+                       <h2 class="avenir">Where will this hackathon take place?</h2>
+                       <br>
+                       <h3 class="avenir">{{form.place}} <strong style="color: #5094E6;">(change location)</strong></h3>
+                  </div>
+                 <!-- Step 2 -->
+                    <div v-show="step.number === 2 || step.number === 3" class="info-medio-b">
+                        <h4 class="avenir">Step 2 of 3</h4>
+                        <br>
+                        <h2 class="avenir">What type of Hackathon?</h2>
+                        <br>
+                        <form class="form-inline ">
+                           <input class="form-control mr-sm-2 avenir wd100" type="search" placeholder="Search for a theme" aria-label="Search">
+                         </form>
+                         <div>
+                             <div class="cajita-botones">
+                                      <div class="tags">
+                                          <label class="check label">
+                                              <input class="check__input" type="checkbox" v-model="form.type" value="virtual" id="virtual">
+                                              <div class="check__text">Virtual</div>
+                                          </label>
+                                      </div>
+                                      <div class="tags">
+                                          <label class="check label">
+                                              <input class="check__input" type="checkbox" v-model="form.type" value="blockchain" id="blockchain">
+                                              <div class="check__text">Blockchain</div>
+                                          </label>
+                                      </div>
+                                      <div class="tags">
+                                          <!--label for="university" class="btn btn-line">University <input type="checkbox" v-model="form.hackathon_type" value="university" id="university" class="badgebox"><span class="badge">&check;</span></label-->
+                                          <label class="check label">
+                                              <input class="check__input" type="checkbox" v-model="form.type" value="university" id="university">
+                                              <div class="check__text">University</div>
+                                          </label>
+                                      </div>
+                              </div>
+                              <div>
+                                     <div class="more">
+                                         <h5><img src="img/reload.png" alt=""> More...</h5>
+                                     </div>
+                                     <div v-show="step.number === 2" class="next-button">
+                                         <button @click.prevent="next" class="btn btn-2040 btn-blue">Next</button>
+                                     </div>
+                                 <div class=""></div>
 
-                           </div>
-                       </div>            
-              </div> <!-- End step 3 -->
-              <!-- Step 4 -->
-                <div v-show="step.number === 4" class="col-sm-12 col-md-12 offset-md-5">
-                    <h4>Step 4 of 4</h4>
-                    <br>
-                    <h1>Tell us about your hackathon</h1>
-                    <b></b>
-                </div>
-               <div v-show="step.number === 4" class="col-sm-12 col-md-12 offset-md-5">
-                        <div class="form-group">
-                            <label for="title">What is the title of your hackathon?</label>
-                            <input type="title" v-model="form.title" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="address">Venue Address</label>
-                            <input type="address" v-model="form.address" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="date-time">Date and time</label>
-                            <input type="date-time" v-model="form.date" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="reserve">Link to reserve seats?</label>
-                            <input type="reserve" v-model="form.linkreserv" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="overvies">Overvies</label>
-                            <textarea v-model="form.overvies" class="form-control" rows="7"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="Schedule">Schedule</label>
-                            <textarea v-model="form.schedule" class="form-control" rows="7"></textarea>
-                        </div>
-                        <v-button :loading="form.busy" type="primary">{{ $t('continue') }}</v-button>
-                </div><!-- End Step 4 -->
-              </form>
+                             </div>
+                         </div>            
+                   </div> <!-- End step 2 -->
+
+                   <!-- Step 3 -->
+                    <div v-show="step.number === 3" class="info-medio-c">
+                        <h4>Step 3 of 3</h4>
+                        <br>
+                        <h2>Who should we invite?</h2>
+                        <br>
+                        <form class="form-inline">
+                           <input class="form-control mr-sm-2" type="search" placeholder="Search for skillsets" aria-label="Search">
+                         </form>
+                         <div>
+                             <div class="cajita-botones">
+                                         <div class="tags">
+                                             <!--label for="html" class="btn btn-primary">HTML <input type="checkbox" value="virtual" v-model="form.who_invite" id="html" class="badgebox"><span class="badge">&check;</span></label-->
+                                             <label class="check label">
+                                                  <input class="check__input" type="checkbox" v-model="form.invite" value="html" id="html">
+                                                  <div class="check__text">HTML</div>
+                                              </label>
+                                         </div>
+                                         <div class="tags">
+                                             <!--label for="javascript" class="btn btn-primary">JavaScript <input type="checkbox" v-model="form.who_invite" value="javascript" id="javascript" class="badgebox"><span class="badge">&check;</span></label-->
+                                             <label class="check label">
+                                                  <input class="check__input" type="checkbox" v-model="form.invite" value="javascript" id="javascript">
+                                                  <div class="check__text">JavaScript</div>
+                                              </label>
+                                         </div>
+                                         <div class="tags">
+                                             <!--label for="css" class="btn btn-primary">CSS <input type="checkbox" v-model="form.who_invite" value="css" id="css" class="badgebox"><span class="badge">&check;</span></label-->
+                                             <label class="check label">
+                                                  <input class="check__input" type="checkbox" v-model="form.invite" value="css" id="css">
+                                                  <div class="check__text">CSS</div>
+                                              </label>
+                                         </div>
+                                     </div>
+                                <div>
+                                     <div class="more">
+                                         <h5><img src="img/reload.png" alt=""> More...</h5>
+                                     </div>
+                                     <div v-show="step.number === 3" class="next-button">
+                                         <button @click.prevent="next" class="btn btn-2040 btn-blue">Next</button>
+                                     </div>
+                                      <div class=""></div>
+
+                                </div>
+                         </div>            
+                </div> <!-- End step 3 -->
+                <!-- Step 4 -->
+                  <div v-show="step.number === 4" class="">
+                      <h4>Step 4 of 4</h4>
+                      <br>
+                      <h1>Tell us about your hackathon</h1>
+                      <b></b>
+                  </div>
+                 <div v-show="step.number === 4" class="">
+                          <div class="form-group">
+                              <label for="title">What is the title of your hackathon?</label>
+                              <input type="title" v-model="form.title" class="form-control">
+                          </div>
+                          <div class="form-group">
+                              <label for="address">Venue Address</label>
+                              <input type="address" v-model="form.address" class="form-control">
+                          </div>
+                          <div class="form-group">
+                              <label for="date-time">Date and time</label>
+                              <input type="date-time" v-model="form.date" class="form-control">
+                          </div>
+                          <div class="form-group">
+                              <label for="reserve">Link to reserve seats?</label>
+                              <input type="reserve" v-model="form.linkreserv" class="form-control">
+                          </div>
+                          <div class="form-group">
+                              <label for="overvies">Overvies</label>
+                              <textarea v-model="form.overvies" class="form-control" rows="7"></textarea>
+                          </div>
+                          <div class="form-group">
+                              <label for="Schedule">Schedule</label>
+                              <textarea v-model="form.schedule" class="form-control" rows="7"></textarea>
+                          </div>
+                          <v-button :loading="form.busy" type="primary">{{ $t('continue') }}</v-button>
+                  </div><!-- End Step 4 -->
+                </form>
+              </div>
             </div>
           </div>
     </section>
@@ -222,7 +220,21 @@ export default {
 
 
 <style scoped>
-
+.flex {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}
+form {
+  width: 60%; 
+}
+.form-inline {
+  width: 100%;
+}
+.form-control{
+  width: 100% !important;
+}
 h1,h2,h3,h4,h5,h6,p,.avenir{
     font-family: "Avenir Next" !important;
 }
@@ -251,7 +263,9 @@ h1,h2,h3,h4,h5,h6,p,.avenir{
   padding-left: 3rem;
 }
 
-
+.tags{
+  margin-right: 20px;
+}
 .wd100{
     width: 100%;
 }
@@ -263,31 +277,21 @@ h1,h2,h3,h4,h5,h6,p,.avenir{
 }
 
 .info-medio-a{
-  margin-bottom: 4rem;
+  margin-bottom: 30px;
   border-bottom: 1px solid #DEDEDE;
+  padding-bottom: 20px;
 }
 
 .info-medio-b{
-  margin-bottom: 4rem;
+  margin-bottom: 30px;
   border-bottom: 1px solid #DEDEDE;
+  padding-bottom: 20px;
 }
 
-.info-medio-a h3{
-  margin-bottom: 6rem;
-}
 
 .info-medio-a input{
   width: 35rem;
 }
-
-.info-medio-b button{
-  width: 100%;
-    background-color: white;
-    color: black;
-    border: 1px solid;
-    margin-bottom: 0.6rem;
-    box-shadow: 0px 1px 8px 1px #7d7a7a61;
-} 
 
 
 
@@ -331,8 +335,8 @@ h1,h2,h3,h4,h5,h6,p,.avenir{
 }
 
 .more{
-  margin-top: 2rem;
-  margin-bottom: 4rem;
+  margin-top: 20px;
+  margin-bottom: 10px;
 
 }
 .info-medio-b button:hover,
@@ -343,9 +347,10 @@ h1,h2,h3,h4,h5,h6,p,.avenir{
 } 
 
 .cajita-botones{
-  margin-top: 1rem;
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-start;
 }
-
 #container-medio .btn-next{
   width: 10rem;
     background: white;
