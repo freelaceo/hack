@@ -22,6 +22,29 @@
           </div>
         </div>
 
+        <!-- Skills  -->
+        <div class="form-group">
+          <label class="label-text">{{ $t('Skills') }}</label>
+          <div class="box-input flex-wrap">
+            <input v-model="form.userskills" :class="{ 'is-invalid': form.errors.has('username') }" class="form-control" type="text" name="username" >
+            <has-error :form="form" field="username"/>
+            <div class="cajita-botones">
+              <div class="tags">
+                  <label class="check label">
+                      <input class="check__input" type="checkbox" v-model="form" value="virtual" id="virtual">
+                      <div class="check__text">UX/UI</div>
+                  </label>
+              </div>
+              <div class="tags">
+                  <label class="check label">
+                      <input class="check__input" type="checkbox" v-model="form" value="blockchain" id="blockchain">
+                      <div class="check__text">Biz Dev</div>
+                  </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Password Confirmation -->
         <div class="form-group">
           <label class="label-text">{{ $t('location') }}</label>
@@ -36,6 +59,40 @@
           <label class="label-text">{{ $t('description') }}</label>
           <div class="box-input">
             <textarea v-model="form.description" :class="{ 'is-invalid': form.errors.has('description') }" class="form-control" type="text" name="description" required=""></textarea>
+            <has-error :form="form" field="description"/>
+          </div>
+        </div>
+          
+        <!-- Social -->
+        <div class="form-group">
+          <label class="label-text">{{ $t('social') }}</label>
+          <div class="box-input">
+            <i class="social-icons fab fa-twitter"></i>
+            <input v-model="form" :class="{ 'is-invalid': form.errors.has('description') }" class="form-control" type="text" name="social-twitter" required=""></input>
+            <has-error :form="form" field="description"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="label-text"></label>
+          <div class="box-input">
+            <i class="social-icons fab fa-github"></i>
+            <input v-model="form" :class="{ 'is-invalid': form.errors.has('description') }" class="form-control" type="text" name="social-git" required=""></input>
+            <has-error :form="form" field="description"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="label-text"></label>
+          <div class="box-input">
+            <i class="social-icons fab fa-linkedin-in"></i>
+            <input v-model="form" :class="{ 'is-invalid': form.errors.has('description') }" class="form-control" type="text" name="social-in" required=""></input>
+            <has-error :form="form" field="description"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="label-text"></label>
+          <div class="box-input">
+            <i class="social-icons fab fa-linkedin-in"></i>
+            <input v-model="form" :class="{ 'is-invalid': form.errors.has('description') }" class="form-control" type="text" name="social-in" required=""></input>
             <has-error :form="form" field="description"/>
           </div>
         </div>
@@ -102,6 +159,59 @@ export default {
 }
 </script>
 <style scoped>
+i.social-icons {
+  font-size: 30px;
+  color: #4A4A4A;
+  margin-left:-50px;
+  padding-right: 20px;
+}
+.cajita-botones{
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-start;
+}
+.tags {
+    margin-right: 20px;
+}
+.check {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%!important;
+}
+
+.flex-wrap{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.check__text {
+  border: 1px solid #4A4A4A;
+  border-radius: 3px;
+  box-shadow: 0px 0px 1px 1px #ccc;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+  text-transform: capitalize;
+  color: #4A4A4A;
+  display: inline-block;
+  font-weight: 300;
+  font-family: 'Avenir Next';
+  width: 100%!important;
+}
+
+.check__input {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+}
+
+.check__input:checked + .check__text {
+  color: #fff;
+  border-color: #4A90E2;
+  background: #4A90E2;
+  counter-increment: checked;
+}
   .change-password{
     width: 100%;
     margin-top: 40px;
@@ -127,6 +237,8 @@ export default {
  }
  .form-group .box-input {
   width: 70%;
+  display: flex;
+  justify-content: flex-start;
  }
  .form-group .box-button {
   width: 100%;

@@ -17,7 +17,7 @@
                 </li>
               <div id="profile-info" class="">
                   <h2 id="name" class="user-name">{{user.name}}</h2>
-                  <a id="at" class="at-user" href="">{{user.username}}</a>
+                  <a id="at" class="at-user" href="">@{{user.username}}</a>
                   <div id="labels" class="" v-if="user.invite">
                       <span class="skyblue" v-for="(item,index) in user.invite" :key="index">{{item}}</span>
                   </div>
@@ -127,7 +127,19 @@ i.social-icons {
   color: #4A4A4A;
 }
 #file{display:none;}
-  .user_img{position:relative;}
+  .user_img{
+    position:relative;    
+    width: 277px;
+    height: 277px;
+  }
+  .user_img figure {
+    width: 277px;
+    height: 277px;
+  }
+  .user_img figure img{
+    min-height: 277px;
+    object-fit: cover;
+}
   .user_img .caption{text-align:center;position:absolute;width:100%;padding:10px 0;background: rgba(0,0,0,.4);color:#fff;left:0;bottom:0;transition:all .3s ease;opacity:0;font-size:14px;cursor:pointer;}
   .user_img .caption:hover{background: rgba(0,0,0,.7);}
   .user_img:hover .caption{opacity:1}
