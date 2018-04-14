@@ -5,8 +5,8 @@
 		<section class="seccion">
 			<div class="container-lg">
 				<div class="row">
-					<div id="aside" class="col-md-3 text-center">
-						<div class="user_img">
+					<div id="aside" class="col-md-3">
+						<div class="user_img mb-15">
 							<figure class="full">
 								<img src="http://via.placeholder.com/230x230" alt="Nombre usuario">
 								<span class="caption" @click="upload()">Cambiar avatar</span>
@@ -15,39 +15,37 @@
 						</div>
 						
 						<div class="user_info">
-							<h2 class="subtitle mb-10 text-center">Organizers</h2>
+							<h2 class="subtitle mb-15">Organizers</h2>
 							<p class="asidep">{{this.hack.user.name}}</p>
 							<a href="" class="btn btn-sm btn-red mt-15">Contact Organizers</a>
 						</div>
 
 						<div class="hack-section mt-30">
-							<h2 class="subtitle mb-10">Hackers</h2>
-							<div class="row">
-								<div class="col-md-4"><figure class="hacker"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
-								<div class="col-md-4"><figure class="hacker"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
-								<div class="col-md-4"><figure class="hacker"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
-								<div class="col-md-4"><figure class="hacker"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
-								<div class="col-md-4"><figure class="hacker"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
-								<div class="col-md-4"><figure class="hacker"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
+							<h2 class="subtitle mb-15 subtitle-add">Hackers <a href="#">See all</a></h2>
+							<div class="row total">
+								<div class="col-md-4"><figure class="hacker rounded"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
+								<div class="col-md-4"><figure class="hacker rounded"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
+								<div class="col-md-4"><figure class="hacker rounded"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
+								<div class="col-md-4"><figure class="hacker rounded"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
+								<div class="col-md-4"><figure class="hacker rounded"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
+								<div class="col-md-4"><figure class="hacker rounded"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
 							</div>
-							<div class="text-right mt-10"><a href="" class="seeAll">See all</a></div>
 						</div>
 
 						<div class="hack-section mt-30">
-							<h2 class="subtitle mb-10 text-center">Projects</h2>
-							<div class="row">
-								<div class="col-md-4"><figure class="hacker"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
-								<div class="col-md-4"><figure class="hacker"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
-								<div class="col-md-4"><figure class="hacker"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
-								<div class="col-md-4"><figure class="hacker"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
-								<div class="col-md-4"><figure class="hacker"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
-								<div class="col-md-4"><figure class="hacker"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
+							<h2 class="subtitle mb-15 subtitle-add">Projects <a href="#">See all</a></h2>
+							<div class="row total">
+								<div class="col-md-4"><figure class="hacker rounded"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
+								<div class="col-md-4"><figure class="hacker rounded"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
+								<div class="col-md-4"><figure class="hacker rounded"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
+								<div class="col-md-4"><figure class="hacker rounded"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
+								<div class="col-md-4"><figure class="hacker rounded"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
+								<div class="col-md-4"><figure class="hacker rounded"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
 							</div>
-							<div class="text-right mt-10"><a href="" class="seeAll">See all</a></div>
 						</div>
 
 						<div class="hack-section mt-30">
-							<h2 class="subtitle mb-10 text-center">Partners</h2>
+							<h2 class="subtitle mb-15 text-center">Partners</h2>
 							<figure class="full mt-15"><img src="http://via.placeholder.com/230x180" alt="" class=""></figure>
 							<figure class="full mt-15"><img src="http://via.placeholder.com/230x180" alt="" class=""></figure>
 							<figure class="full mt-15"><img src="http://via.placeholder.com/230x180" alt="" class=""></figure>
@@ -55,31 +53,32 @@
 					</div>
 
 					<div id="content" class="col-md-9">
+						<h2 class="subtitle mb-15">Main info</h2>
 						<div class="inputs-box">
-							<input type="text" class="form-control" :value="hack.info.title">
-							<ul id="event-data">
+							<input type="text" class="form-control" :value="hack.info.title" placeholder="Nombre del evento">
+							<div id="event-data">
 								<!--li><span class="icon-calendar"></span>October 21-22, 2017</li-->
-								<li>
-									<span class="icon-time"></span>
-									<input type="text" class="form-control" :value="hack.info.date">
-								</li>
-								<li>
-									<span class="icon-location"></span>
-									<input type="text" class="form-control" :value="hack.info.address">
-								</li>
-								<li>
-									<span class="icon-clip"></span>
-									<input type="text" class="form-control" :value="hack.info.linkreserv">
-								</li>
-							</ul>
+								<div class="cont">
+									<span class="fa fa-clock"></span>
+									<input type="text" class="form-control" :value="hack.info.date" placeholder="Fecha">
+								</div>
+								<div class="cont">
+									<span class="fa fa-map-marker-alt"></span>
+									<input type="text" class="form-control" :value="hack.info.address" placeholder="Dirección">
+								</div>
+								<div class="cont">
+									<span class="fa fa-globe"></span>
+									<input type="text" class="form-control" :value="hack.info.linkreserv" placeholder="URL">
+								</div>
+							</div>
 
 							<div class="event-desc mt-30">
-								<h2 class="subtitle mb-10">Overview</h2>
+								<h2 class="subtitle mb-15">Overview</h2>
 								<textarea name="" class="form-control" id="" cols="30" rows="10" :value="hack.info.overvies"></textarea>
 							</div>
 
 							<div class="event-desc mt-30">
-								<h2 class="subtitle mb-10">Schedule</h2>
+								<h2 class="subtitle mb-15">Schedule</h2>
 								<textarea name="" class="form-control" id="" cols="30" rows="10" :value="hack.info.shedule"></textarea>
 							</div>
 
@@ -110,51 +109,69 @@
 								</div>						
 							</div> -->
 
-							<div class="prizes mt-30">
-								<h2 class="subtitle mb-10">Prizes</h2>
-
+							<div class="mt-30" id="prizes">
+								<h2 class="subtitle mb-15 subtitle-add">Prizes <a href="#" @click="newPrize();">Add</a></h2>
 								<div class="row">
-									<div class="col-md-4 text-center">
-										<figure class="full"><img src="http://via.placeholder.com/163x163" alt="trophy"></figure>
-										<h4 class="place">First Place</h4>
-										<p class="price">50,000 HKD</p>
-										<a href="" class="bArrow fas fa-chevron-down mt-10"><figure></figure></a>
+									<div class="col-md-4 text-center prize-item">
+										<div class="cont">
+											<figure class="full mb-10">
+												<img src="http://via.placeholder.com/300x300" alt="trophy">
+												<span class="caption">Subir imágen</span>
+												<input type="file" name="prize-1">
+											</figure>
+											<input type="text" class="form-control" name="prize-name-1" placeholder="Prize name">
+											<input type="text" class="form-control" name="prize-value-1" placeholder="Prize value">
+										</div>
 									</div>
 								</div>
 							</div>
 
-							<div class="challenges mt-30">
-								<h2 class="subtitle mb-10">Challenges</h2>
+							<div class="mt-30" id="challenges">
+								<h2 class="subtitle mb-15 subtitle-add">Challenges <a href="#" @click="newChallenge()">Add</a></h2>
 
-								<h4 class="headp">Smart Workplace</h4>
-								<p class="pbody">Develop intelligent and user friendly solutions to make workplaces more efficient.  Ideas can range from the transportation to work, parking, booking of different facilities to information communication & sharing.</p>
-								<h4 class="headp">Smart Property Management</h4>
-								<p class="pbody">Develop ideas & solutions to disrupt traditional property management into a whole new operation that saves manpower and allows for proactive & predictive services.</p>
+								<ul class="challenges">
+									<li class="challenge-item">
+										<div class="cont">
+											<input class="form-control" type="text" name="challenge-name-1" placeholder="Challenge name">
+											<textarea class="form-control" name="challenge-description-1" placeholder="Challange Description"></textarea>
+										</div>
+									</li>
+								</ul>
 							</div>
 
-							<div class="judges mt-30">
-								<h2 class="subtitle mb-10">Judges</h2>
+							<div class="mt-30" id="judges">
+								<h2 class="subtitle mb-15 subtitle-add">Judges <a href="#" @click="newJuge()">Add</a></h2>
 								<div class="row">
-									<div class="col-md-4 text-center">
-										<figure class="full"><img src="http://via.placeholder.com/163x163" alt="Usuario"></figure>
-										<p class="name">Adi Abili</p>
-										<p class="profesion">#Boss</p>
+									<div class="col-md-4 text-center judge-item">
+										<div class="cont">
+											<figure class="full mb-10">
+												<img src="http://via.placeholder.com/300x300" alt="trophy">
+												<span class="caption">Subir imágen</span>
+												<input type="file" name="judge-1">
+											</figure>
+											<input type="text" class="form-control" name="judge-name-1" placeholder="Judge name">
+											<input type="text" class="form-control" name="judge-value-1" placeholder="Judge value">
+										</div>
 									</div>
 								</div>
 							</div>
 
-							<div class="judging-criteria mt-30">
-								<h2 class="subtitle mb-10">Judging Criteria</h2>
-								<ol class="criterial">
-									<li>Impact - Are you changing the world</li>
-									<li>UX/UI - Is your app pretty? How’s the usability?</li>
-									<li>Tech Chops - How solid is the tech?</li>
-									<li>Execution - Is your team bad ass or what?</li>
-								</ol>
+							<div class="mt-30" id="judging-criteria">
+								<h2 class="subtitle mb-15 subtitle-add">Judging Criteria <a href="#" @click="newCriteria()">Add</a></h2>
+								<ul class="criterial">
+									<li class="criterial-item">
+										<input type="text" name="criterial-1" class="form-control small" placeholder="Criteria name">
+									</li>
+								</ul>
 							</div>
 
-							<div class="tags mt-30">
-								<h2 class="subtitle mb-10">Tags</h2>
+							<div class="mt-30" id="tags">
+								<h2 class="subtitle mb-15 subtitle-add">Tags <a href="#" @click="newTag()">Add</a></h2>
+
+								<div class="new-tag mb-15">
+									<input type="text" name="tag-1" placeholder="Tag name" class="form-control small">
+								</div>
+
 								<ul class="tags">
 									<li v-for="(tag,index) in hack.tags" :key="index" class="tags-links"><a href="#">{{tag}}</a></li>
 								</ul>
@@ -189,7 +206,7 @@ export default {
 				user:{},
 				tags:{}
 			},
-			banner:'http://via.placeholder.com/1440x330'
+			banner: 'http://via.placeholder.com/1440x330'
 		}
 	},
 	created(){
@@ -204,20 +221,89 @@ export default {
 			const user = await axios('/auth/user/'+this.hack.info.userId,{method:"GET"})
 			this.hack.user = user.data;
 		},
+
 		publish: async function(){
 			const data = await  axios('/auth/hackathon/publish/'+this.hack.info._id,{method:'put'})
 			this.$router.push({name: 'welcome' });
 		}, 
+
 		upload: function(){
 			document.querySelector('#file').click();
+		},
+
+		newPrize: function(){
+			var prizeItem = document.querySelector('#prizes .row .prize-item:first-child').cloneNode(true);
+			var container = document.querySelector('#prizes .row');
+			container.appendChild(prizeItem);
+			return false;
+		},
+
+		newChallenge: function(){
+			var challengeItem = document.querySelector('.challenges .challenge-item:first-child').cloneNode(true);
+			var container = document.querySelector('.challenges');
+			container.appendChild(challengeItem);
+			return false;
+		},
+
+		newJuge: function(){
+			var judgeItem = document.querySelector('#judges .row .judge-item:first-child').cloneNode(true);
+			var container = document.querySelector('#judges .row');
+			container.appendChild(judgeItem);
+			return false;
+		},
+
+		newCriteria: function(){
+			var judgeItem = document.querySelector('#judging-criteria .criterial-item:first-child').cloneNode(true);
+			var container = document.querySelector('#judging-criteria .criterial');
+			container.appendChild(judgeItem);
+			return false;
+		},
+
+		newTag: function(){
+			document.querySelector('.new-tag').style.display = 'block';
 		}
 	}
 }
 </script>
 <style scoped>
+	figure.rounded{border-radius:100% !important;overflow:hidden;position: relative;}
+	figure.rounded img{width:100%;height:auto;display:block;}
 	#file{display:none;}
 	.user_img{position:relative;}
 	.user_img .caption{position:absolute;width:100%;padding:10px 0;background: rgba(0,0,0,.4);color:#fff;left:0;bottom:0;transition:all .3s ease;opacity:0;font-size:14px;cursor:pointer;}
 	.user_img .caption:hover{background: rgba(0,0,0,.7);}
 	.user_img:hover .caption{opacity:1}
+	.form-control{padding:10px 15px;}
+	#event-data .cont{position:relative;margin-top:10px;}
+	/*#event-data .cont:last-of-type{margin-bottom:0}*/
+	#event-data .cont span{position:absolute;left:15px;top:0;bottom:0;margin:auto;font-size:16px;color: #555;height:16px;}
+	#event-data .cont input{padding:10px 15px 10px 45px;}
+	.subtitle{font-size:18px;color:#333;font-weight:600}
+	.subtitle-add{display:block;width:100%;padding-bottom:10px;border-bottom:1px solid #ddd}
+	.subtitle-add a{float:right;font-weight:normal;font-size:14px;transform:translate(0, 25%);color:#ff4343;}
+
+	.prize-item .cont, .judge-item .cont{border:1px solid #f1f1f1;padding:10px;}
+	.prize-item .cont input[type="file"], .judge-item .cont input[type="file"]{display:none;}
+	.prize-item figure, .judge-item figure{position:relative;}
+	.prize-item figure .caption, .judge-item figure .caption{position:absolute;width:100%;padding:10px 0;background: rgba(0,0,0,.4);color:#fff;left:0;bottom:0;transition:all .3s ease;opacity:.5;font-size:14px;cursor:pointer;}
+	.prize-item figure:hover .caption, .judge-item figure:hover .caption{opacity:1}
+	.prize-item figure .caption:hover, .judge-item figure .caption:hover{background: rgba(0,0,0,.7);}
+	.prize-item .cont .form-control, .judge-item .cont .form-control{margin-bottom:10px;font-size:14px;}
+	.prize-item .cont .form-control:last-of-type, .judge-item .cont .form-control:last-of-type{margin-bottom:0}
+
+	.challenges .cont{border:1px solid #f1f1f1;padding:10px;}
+	.challenges .cont .form-control{margin-bottom:10px;font-size:14px;}
+	.challenges .cont .form-control:last-child{margin-bottom:0}
+	.challenges li{margin-bottom:15px;}
+	.challenges li:last-of-type{margin-bottom:0}
+
+	.form-control.small{font-size:14px;}
+	.criterial li{margin-bottom:15px;}
+	.criterial li:last-of-type{margin-bottom:0}
+
+	#tags .new-tag{display: none;}
+	.tags li{display:inline-block;margin-right:15px;}
+	.tags li:last-of-type{margin-right: 0}
+	.tags li a{display:block;padding:10px;border-radius:5px;color:#555;background:#eee;text-decoration:none;transition:all .3s ease;}
+	.tags li a:hover{background:#ccc}
 </style>
