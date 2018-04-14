@@ -53,6 +53,7 @@
 
 <script>
 import Form from 'vform'
+import axios from 'axios'
 import { mapGetters } from 'vuex'
 
 
@@ -86,8 +87,16 @@ export default {
 
   methods: {
     async update () {
-      const { data } = await this.form.patch('http://localhost:8000/api/settings/profile')
-      this.$store.dispatch('auth/updateUser', { user: data })
+      var f = new FormData();
+      f.append('name',this.form.name);
+      f.append('username',this.form.username);
+      f.append('location',this.form.location);
+      f.append('description',this.form.description);
+      const { data } = await axios('/auth/user/update/'+this.user._id,{method:"PUT",data:f})
+      console.log(data)
+      if(data.success){
+        this.$store.dispatch('auth/updateUser', { user: data.data })
+      }
     }
   }
 }

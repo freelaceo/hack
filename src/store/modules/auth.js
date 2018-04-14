@@ -34,7 +34,7 @@ function removeTokenUser(){
 
 function updateUser(user){
   window.localStorage.removeItem('user');
-  window.localStorage.setItem('user',user);
+  window.localStorage.setItem('user',JSON.stringify(user));
   setterState('login');
 }
 
@@ -45,6 +45,7 @@ function setterState(e){
   } else if(e === 'login') {
     state.token = getTokenUser().token;
     state.user = getTokenUser().user;
+    console.log(state)
   }
 }
 
@@ -159,7 +160,7 @@ export const actions = {
 
 
   async createHackathon ({commit},p){
-    var userID = JSON.parse(state.user);
+    var userID = state.user;
     var f = new FormData();
         f.append('place',p.form.place);
         f.append('type',p.form.type);
@@ -176,7 +177,7 @@ export const actions = {
         method:"post",
         data: f
     })
-    p.$router.push({name: 'home' , params: { id: data.data.titleLink }});
+    p.$router.push({name: 'edit' , params: { id: data.data.titleLink }});
   },
 
   async expiredSession(){

@@ -26,10 +26,10 @@
                   <p id="short-desc" class=" desc-text" v-if="user.description">{{user.description}}</p>
                   <p id="location" class="" v-if="user.location"><i class="fas fa-map-marker-alt" aria-hidden="true"></i>{{user.location}}</p>
                   <div id="social" class="">
-                      <a href=""><i class="social-icons fab fa-twitter"></i></a>
-                      <a href=""><i class="social-icons fab fa-github"></i></a>
-                      <a href=""><i class="social-icons fab fa-linkedin-in"></i></a>
-                      <a href=""><i class="social-icons fab fa-linkedin-in"></i></a>
+                      <!--a v-if="user.socials.facebook.url" :href="user.socials.facebook.url"><i class="social-icons fab fa-twitter"></i></a>
+                      <a v-if="user.socials.twitter.url" :href="user.socials.twitter.url"><i class="social-icons fab fa-github"></i></a>
+                      <a v-if="user.socials.linkedin.url" :href="user.socials.linkedin.url"><i class="social-icons fab fa-linkedin-in"></i></a>
+                      <a v-if="user.socials.other.url" :href="user.socials.other.url"><i class="social-icons fab fa-linkedin-in"></i></a-->
                   </div>
                   <div id="contact" class="">
                       <a class="btn-primari" href="">Message</a>
@@ -86,15 +86,37 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import axios from 'axios'
 export default {
   middleware: 'auth',
+
+  data(){
+    return{
+      files: null
+    }
+  },
 
   computed: mapGetters({
     user: 'auth/user'
   }),
   methods:{
-    upload: function(){
-      document.querySelector('#file').click();
+    async upload(){
+      var self = this;
+      var up = document.querySelector('#file');
+      up.click();
+      up.addEventListener('change', function(){
+        self.files = this.files[0];
+        self.updateAvatar();
+      })
+    },
+    async updateAvatar(){
+       var img = new FormData();
+        img.append('avatar', this.files)
+        const { data } = await axios('/auth/user/set/avatar/'+this.user._id,{method:"PUT",data:img})
+        console.log(data)
+        if(data.success){
+          this.$store.dispatch('auth/updateUser', { user: data.data })
+        }
     }
   }
 }

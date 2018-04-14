@@ -36,7 +36,7 @@ export default [
   { path: '/password/reset', name: 'password.request', component: PasswordEmail },
   { path: '/password/reset/:token', name: 'password.reset', component: PasswordReset },
   { path: '/home/:id', name: 'home', component: Home },
-  { path: '/edit/:id', name: 'home', component: HackathonsEdit },
+  { path: '/edit/:id', name: 'edit', component: HackathonsEdit },
   //Settings
   { path: '/settings',
     component: Settings,
