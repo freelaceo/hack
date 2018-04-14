@@ -4,10 +4,32 @@ import * as types from '../mutation-types'
 import Router from 'vue-router'
 import swal from 'sweetalert2'
 
+
+function setTokenUser(token,user){
+  window.localStorage.setItem('token',token);
+  window.localStorage.setItem('user',JSON.stringify(user));
+}
+
+function getTokenUser(){
+  return {token:window.localStorage.getItem('token'),user:JSON.parse(window.localStorage.getItem('user'))}
+}
+
+function removeTokenUser(){
+  window.localStorage.removeItem('token');
+  window.localStorage.removeItem('user');
+}
+
+function setterState(){
+  state.token = getTokenUser().token;
+  state.token = getTokenUser().user;
+}
+
 // state
 export const state = {
-  user: Cookies.get('user'),
-  token: Cookies.get('token')
+  //user: Cookies.get('user'),
+  //token: Cookies.get('token')
+  user: getTokenUser().user,
+  token: getTokenUser().token
 }
 
 // getters
@@ -20,15 +42,17 @@ export const getters = {
 // mutations
 export const mutations = {
   [types.SAVE_TOKEN] (state, { token, user, remember }) {
-    state.token = token;
-    state.user = user;
-    Cookies.set('user',user,{expires:remember ? 365 : null})
-    Cookies.set('token', token, { expires: remember ? 365 : null })
+    //state.token = token;
+    //state.user = user;
+    setTokenUser(token,user);
+    //Cookies.set('user',user,{expires:remember ? 365 : null})
+    //Cookies.set('token', token, { expires: remember ? 365 : null })
   },
 
-  [types.FETCH_USER_SUCCESS] (state, { user,router }) {
-    state.user = user;
-    Cookies.set('user',user,{expires:365})
+  [types.FETCH_USER_SUCCESS] (state, { token,user,router }) {
+    //state.user = user; //Cookies.set('user',user,{expires:365})
+    setTokenUser(token,user);
+    setterState();
     var msg;
     switch(Cookies.get('locale')){
       case 'en':
@@ -57,18 +81,16 @@ export const mutations = {
       type: 'error',
       title: msg
     })
-    Cookies.remove('token');
-    Cookies.remove('user');
-    state.token = null
-    state.user = null
+    //Cookies.remove('token'); //Cookies.remove('user'); //state.token = null //state.user = null
+    removeTokenUser();
+    setterState();
     
   },
 
-  [types.LOGOUT] (state) {
-    state.user = null
-    state.token = null
-    Cookies.remove('token')
-    Cookies.remove('user')
+  [types.LOGOUT] (state,{router}) {
+    removeTokenUser();
+    setterState();
+    router.push({name:'welcome'})
   },
 
   [types.UPDATE_USER] (state, { user }) {
@@ -88,7 +110,7 @@ export const actions = {
 
   async fetchUser ({ commit }, data) {
     if(data.success){
-      commit(types.FETCH_USER_SUCCESS, { user: data.user,router:data.router })
+      commit(types.FETCH_USER_SUCCESS, { token:data.token,user: data.user,router:data.router })
     } else {
       commit(types.FETCH_USER_FAILURE)
     }
@@ -98,13 +120,18 @@ export const actions = {
     commit(types.UPDATE_USER, payload)
   },
 
-  async logout ({ commit }) {
-    commit(types.LOGOUT)
+  async logout ({ commit }, router) {
+    commit(types.LOGOUT,router)
   },
 
   async fetchOauthUrl (ctx, { provider }) {
     const { data } = await axios.post(`http://api.hackathon.gravityweb.com.ve:8003/api/oauth/${provider}`)
     return data.url
+  },
+
+  async updateUser(){
+    console.log("se activa")
+    setterState();
   },
 
   async createHackathon ({commit},p){

@@ -70,9 +70,9 @@
 		},
 
 		data: () => ({
-			appName: window.config.appName,
-			usuario: {}
+			appName: window.config.appName
 		}),
+
 
 		computed: mapGetters({
 			user: 'auth/user'
@@ -81,7 +81,7 @@
 		methods: {
 			async logout () {
 				// Log out the user.
-				await this.$store.dispatch('auth/logout')
+				await this.$store.dispatch('auth/logout',{router:this.$router});
 
 				// Redirect to login.
 				this.$router.push({ name: 'login' })
@@ -136,22 +136,26 @@
 
 		created(){
 			window.addEventListener('resize', this.loadHeader);
-			this.loadHeader();
+			//this.loadHeader();
+			this.$store.dispatch('auth/updateUser');
 		},
 
 		mounted(){
 			window.addEventListener('resize', this.loadHeader);
 			this.loadHeader();
+			this.$store.dispatch('auth/updateUser');
 		},
 
 		beforeUpdate(){
 			window.addEventListener('resize', this.loadHeader);
 			this.loadHeader();
+			this.$store.dispatch('auth/updateUser');
 		},
 
 		updated(){
 			window.addEventListener('resize', this.loadHeader);
 			this.loadHeader();
+			this.$store.dispatch('auth/updateUser');
 		}
 	}
 </script>

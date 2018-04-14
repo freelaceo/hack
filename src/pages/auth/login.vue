@@ -109,7 +109,7 @@ export default {
         });
 
      // Fetch the user.
-        await this.$store.dispatch('auth/fetchUser',{success:data.success,user:data.user,router:this.$router});
+        await this.$store.dispatch('auth/fetchUser',{success:data.success,token:data.token,user:data.user,router:this.$router});
     }
   }
 }
