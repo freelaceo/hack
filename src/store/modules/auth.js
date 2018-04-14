@@ -6,7 +6,7 @@ import swal from 'sweetalert2'
 
 // state
 export const state = {
-  user: Cookies.get('user') || null,
+  user: Cookies.get('user'),
   token: Cookies.get('token')
 }
 
