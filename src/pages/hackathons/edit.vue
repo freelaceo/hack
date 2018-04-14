@@ -7,7 +7,7 @@
 				<div class="row">
 					<div id="aside" class="col-md-3">
 						<div class="user_img mb-15">
-							<figure class="full">
+							<figure class="full text-center">
 								<img src="http://via.placeholder.com/230x230" alt="Nombre usuario">
 								<span class="caption" @click="upload()">Cambiar avatar</span>
 							</figure>
@@ -20,31 +20,81 @@
 							<a href="" class="btn btn-sm btn-red mt-15">Contact Organizers</a>
 						</div>
 
-						<div class="hack-section mt-30">
-							<h2 class="subtitle mb-15 subtitle-add">Hackers <a href="#">See all</a></h2>
+						<div class="hack-section mt-60">
+							<h2 class="subtitle mb-15 subtitle-add">Hackers <span>See all</span></h2>
 							<div class="row total">
-								<div class="col-md-4"><figure class="hacker rounded"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
-								<div class="col-md-4"><figure class="hacker rounded"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
-								<div class="col-md-4"><figure class="hacker rounded"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
-								<div class="col-md-4"><figure class="hacker rounded"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
-								<div class="col-md-4"><figure class="hacker rounded"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
-								<div class="col-md-4"><figure class="hacker rounded"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
+								<div class="col-md-4">
+									<figure class="hacker rounded">
+										<img src="http://via.placeholder.com/73x73" alt="Usuario">
+									</figure>
+								</div>
+								<div class="col-md-4">
+									<figure class="hacker rounded">
+										<img src="http://via.placeholder.com/73x73" alt="Usuario">
+									</figure>
+								</div>
+								<div class="col-md-4">
+									<figure class="hacker rounded">
+										<img src="http://via.placeholder.com/73x73" alt="Usuario">
+									</figure>
+								</div>
+								<div class="col-md-4">
+									<figure class="hacker rounded">
+										<img src="http://via.placeholder.com/73x73" alt="Usuario">
+									</figure>
+								</div>
+								<div class="col-md-4">
+									<figure class="hacker rounded">
+										<img src="http://via.placeholder.com/73x73" alt="Usuario">
+									</figure>
+								</div>
+								<div class="col-md-4">
+									<figure class="hacker rounded">
+										<img src="http://via.placeholder.com/73x73" alt="Usuario">
+									</figure>
+								</div>
 							</div>
 						</div>
 
-						<div class="hack-section mt-30">
-							<h2 class="subtitle mb-15 subtitle-add">Projects <a href="#">See all</a></h2>
+						<div class="hack-section mt-60">
+							<h2 class="subtitle mb-15 subtitle-add">Projects <span>See all</span></h2>
 							<div class="row total">
-								<div class="col-md-4"><figure class="hacker rounded"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
-								<div class="col-md-4"><figure class="hacker rounded"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
-								<div class="col-md-4"><figure class="hacker rounded"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
-								<div class="col-md-4"><figure class="hacker rounded"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
-								<div class="col-md-4"><figure class="hacker rounded"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
-								<div class="col-md-4"><figure class="hacker rounded"><img src="http://via.placeholder.com/73x73" alt="Usuario"></figure></div>
+								<div class="col-md-4">
+									<figure class="hacker rounded">
+										<img src="http://via.placeholder.com/73x73" alt="Usuario">
+									</figure>
+								</div>
+								<div class="col-md-4">
+									<figure class="hacker rounded">
+										<img src="http://via.placeholder.com/73x73" alt="Usuario">
+									</figure>
+								</div>
+								<div class="col-md-4">
+									<figure class="hacker rounded">
+										<img src="http://via.placeholder.com/73x73" alt="Usuario">
+									</figure>
+								</div>
+								<div class="col-md-4">
+									<figure class="hacker rounded">
+										<img src="http://via.placeholder.com/73x73" alt="Usuario">
+									</figure>
+								</div>
+								<div class="col-md-4">
+									<figure class="hacker rounded">
+										<img src="http://via.placeholder.com/73x73" alt="Usuario">
+									</figure>
+								</div>
+								<div class="col-md-4">
+									<figure class="hacker rounded">
+										<img src="http://via.placeholder.com/73x73" alt="Usuario">
+									</figure>
+								</div>
 							</div>
 						</div>
 
-						<div class="hack-section mt-30">
+						<div class="hack-section
+						 mt-60
+						 ">
 							<h2 class="subtitle mb-15 text-center">Partners</h2>
 							<figure class="full mt-15"><img src="http://via.placeholder.com/230x180" alt="" class=""></figure>
 							<figure class="full mt-15"><img src="http://via.placeholder.com/230x180" alt="" class=""></figure>
@@ -110,7 +160,7 @@
 							</div> -->
 
 							<div class="mt-30" id="prizes">
-								<h2 class="subtitle mb-15 subtitle-add">Prizes <a href="#" @click="newPrize();">Add</a></h2>
+								<h2 class="subtitle mb-15 subtitle-add">Prizes <span @click="newPrize();">Add</span></h2>
 								<div class="row">
 									<div class="col-md-4 text-center prize-item">
 										<div class="cont">
@@ -127,7 +177,7 @@
 							</div>
 
 							<div class="mt-30" id="challenges">
-								<h2 class="subtitle mb-15 subtitle-add">Challenges <a href="#" @click="newChallenge()">Add</a></h2>
+								<h2 class="subtitle mb-15 subtitle-add">Challenges <span @click="newChallenge()">Add</span></h2>
 
 								<ul class="challenges">
 									<li class="challenge-item">
@@ -140,7 +190,7 @@
 							</div>
 
 							<div class="mt-30" id="judges">
-								<h2 class="subtitle mb-15 subtitle-add">Judges <a href="#" @click="newJuge()">Add</a></h2>
+								<h2 class="subtitle mb-15 subtitle-add">Judges <span @click="newJuge()">Add</span></h2>
 								<div class="row">
 									<div class="col-md-4 text-center judge-item">
 										<div class="cont">
@@ -157,7 +207,7 @@
 							</div>
 
 							<div class="mt-30" id="judging-criteria">
-								<h2 class="subtitle mb-15 subtitle-add">Judging Criteria <a href="#" @click="newCriteria()">Add</a></h2>
+								<h2 class="subtitle mb-15 subtitle-add">Judging Criteria <span @click="newCriteria()">Add</span></h2>
 								<ul class="criterial">
 									<li class="criterial-item">
 										<input type="text" name="criterial-1" class="form-control small" placeholder="Criteria name">
@@ -166,7 +216,7 @@
 							</div>
 
 							<div class="mt-30" id="tags">
-								<h2 class="subtitle mb-15 subtitle-add">Tags <a href="#" @click="newTag()">Add</a></h2>
+								<h2 class="subtitle mb-15 subtitle-add">Tags <span @click="newTag()">Add</span></h2>
 
 								<div class="new-tag mb-15">
 									<input type="text" name="tag-1" placeholder="Tag name" class="form-control small">
@@ -280,9 +330,9 @@ export default {
 	#event-data .cont input{padding:10px 15px 10px 45px;}
 	.subtitle{font-size:18px;color:#333;font-weight:600}
 	.subtitle-add{display:block;width:100%;padding-bottom:10px;border-bottom:1px solid #ddd}
-	.subtitle-add a{float:right;font-weight:normal;font-size:14px;transform:translate(0, 25%);color:#ff4343;}
+	.subtitle-add span{float:right;font-weight:normal;font-size:14px;transform:translate(0, 25%);color:#ff4343;cursor:pointer;}
 
-	.prize-item .cont, .judge-item .cont{border:1px solid #f1f1f1;padding:10px;}
+	.prize-item .cont, .judge-item .cont{border:1px solid #ddd;padding:10px;}
 	.prize-item .cont input[type="file"], .judge-item .cont input[type="file"]{display:none;}
 	.prize-item figure, .judge-item figure{position:relative;}
 	.prize-item figure .caption, .judge-item figure .caption{position:absolute;width:100%;padding:10px 0;background: rgba(0,0,0,.4);color:#fff;left:0;bottom:0;transition:all .3s ease;opacity:.5;font-size:14px;cursor:pointer;}
@@ -291,7 +341,7 @@ export default {
 	.prize-item .cont .form-control, .judge-item .cont .form-control{margin-bottom:10px;font-size:14px;}
 	.prize-item .cont .form-control:last-of-type, .judge-item .cont .form-control:last-of-type{margin-bottom:0}
 
-	.challenges .cont{border:1px solid #f1f1f1;padding:10px;}
+	.challenges .cont{border:1px solid #ddd;padding:10px;}
 	.challenges .cont .form-control{margin-bottom:10px;font-size:14px;}
 	.challenges .cont .form-control:last-child{margin-bottom:0}
 	.challenges li{margin-bottom:15px;}

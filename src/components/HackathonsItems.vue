@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-bottom:40px" class="container-lg top">
+  <div class="container-lg ">
       <div class="row events">
         <div v-for="(item,index) in data" class="col-md-3" v-bind:key="index">
           <router-link :to="{ name: 'home', params: {id: item.titleLink } }">
