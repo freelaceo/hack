@@ -3,9 +3,13 @@
     <div class="container-lg">
       <div class="row">
         <div class="col-md-3">
-              <div class="profile-photo">
-                  <img src="http://via.placeholder.com/300x300" alt="">
-              </div>
+              <div class="user_img">
+              <figure class="full">
+                <img src="http://via.placeholder.com/230x230" alt="Nombre usuario">
+                <span class="caption" @click="upload()">Cambiar avatar</span>
+              </figure>
+              <input type="file" name="file" id="file">
+            </div>
               <li style="list-style:none; text-align:right; margin-top:10px;">
                     <router-link :to="{ name: 'settings.edit.profile' }" active-class="active">
                       ({{ $t('Edit profile') }})
@@ -23,10 +27,10 @@
                   <p id="short-desc" class=" desc-text">I freakin’ loveeee hackathons! I’m a UX designer with some knowledge software development. I also love pizza. </p>
                   <p id="location" class=""><i class="fas fa-map-marker-alt" aria-hidden="true"></i>Los Angeles, CA, USA</p>
                   <div id="social" class="">
-                      <a href=""><i class="fab fa-twitter"></i></a>
-                      <a href=""><i class="fab fa-github"></i></a>
-                      <a href=""><i class="fab fa-linkedin-in"></i></a>
-                      <a href=""><img src="http://via.placeholder.com/45x45" alt="Bitmap"></a>
+                      <a href=""><i class="social-icons fab fa-twitter"></i></a>
+                      <a href=""><i class="social-icons fab fa-github"></i></a>
+                      <a href=""><i class="social-icons fab fa-linkedin-in"></i></a>
+                      <a href=""><i class="social-icons fab fa-linkedin-in"></i></a>
                   </div>
                   <div id="contact" class="">
                       <a class="btn-primari" href="">Message</a>
@@ -88,12 +92,24 @@ export default {
 
   computed: mapGetters({
     user: 'auth/user'
-  })
+  }),
+  methods:{
+    upload: function(){
+      document.querySelector('#file').click();
+    }
+  }
 }
 </script>
 <style scoped>
-
-
+i.social-icons {
+  font-size: 30px;
+  color: #4A4A4A;
+}
+#file{display:none;}
+  .user_img{position:relative;}
+  .user_img .caption{text-align:center;position:absolute;width:100%;padding:10px 0;background: rgba(0,0,0,.4);color:#fff;left:0;bottom:0;transition:all .3s ease;opacity:0;font-size:14px;cursor:pointer;}
+  .user_img .caption:hover{background: rgba(0,0,0,.7);}
+  .user_img:hover .caption{opacity:1}
 #aside {
         padding-top: 0px;
         padding-bottom: 20px;
@@ -161,9 +177,11 @@ export default {
     }
     #profile-info #social{
         margin: 26px 0;
+        display: flex;
+        justify-content: flex-start;
     }
     #profile-info #social a {
-        margin-right: 16px;
+        margin-right: 30px;
     }
     a.btn-primari {
         display: inline-block;

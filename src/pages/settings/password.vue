@@ -5,26 +5,26 @@
         <alert-success :form="form" :message="$t('password_updated')"/>
 
         <!-- Password -->
-        <div class="form-group row">
-          <label class="col-md-offset-1 col-md-3 col-form-label">{{ $t('new_password') }}</label>
-          <div class="col-md-7">
+        <div class="form-group">
+          <label class="label-text">{{ $t('new_password') }}</label>
+          <div class="box-input">
             <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control" type="password" name="password" required="">
             <has-error :form="form" field="password"/>
           </div>
         </div>
 
         <!-- Password Confirmation -->
-        <div class="form-group row">
-          <label class="col-md-offset-1 col-md-3 col-form-label">{{ $t('confirm_password') }}</label>
-          <div class="col-md-7">
+        <div class="form-group">
+          <label class="label-text">{{ $t('confirm_password') }}</label>
+          <div class="box-input">
             <input v-model="form.password_confirmation" :class="{ 'is-invalid': form.errors.has('password_confirmation') }" class="form-control" type="password" name="password_confirmation" required="">
             <has-error :form="form" field="password_confirmation"/>
           </div>
         </div>
 
         <!-- Submit Button -->
-        <div class="form-group row">
-          <div class="col-md-12 text-center ml-md-auto">
+        <div class="form-group">
+          <div class="box-button">
             <v-button :loading="form.busy" type="success">{{ $t('update') }}</v-button>
           </div>
         </div>
@@ -68,7 +68,10 @@ export default {
   }
 
   .form-group {
-    margin-bottom: 20px;
+    width: 80%;
+    margin: 0 auto 20px auto;
+    display: flex;
+    justify-content: space-between;
   }
   .form-control:focus {
       color: #495057;
@@ -77,4 +80,14 @@ export default {
       outline: 0;
       box-shadow: none;
   }
+ .form-group .label-text {
+  width: 30%;
+ }
+ .form-group .box-input {
+  width: 70%;
+ }
+ .form-group .box-button {
+  width: 100%;
+  text-align: center;
+ }
 </style>
