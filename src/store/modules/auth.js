@@ -28,6 +28,7 @@ export const mutations = {
 
   [types.FETCH_USER_SUCCESS] (state, { user,router }) {
     state.user = user;
+    Cookies.set('user',user,{expires:365})
     var msg;
     switch(Cookies.get('locale')){
       case 'en':
@@ -119,9 +120,6 @@ export const actions = {
         f.append('shedule',p.form.schedule);
         f.append('date',p.form.date);
         f.append('userId',userID._id);
-
-        var t = p.form.type;
-        console.log(typeof t, t);
     
     var {data} = await axios('/auth/hackathon',{
         method:"post",

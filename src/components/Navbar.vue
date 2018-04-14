@@ -25,11 +25,11 @@
 										<li><router-link :to="{name: 'login'}" class="nav-option">{{ $t('notifications') }}</router-link></li>
 										<li><router-link :to="{name: 'hackathons.create'}" class="create-h-btn btn btn-md btn-red">{{ $t('create_hackathon') }}</router-link></li>
 									 	<li class="dropdown">
-											<a href="#">
-												<h6 class="user-name"><fa icon="user" fixed-width/> {{usuario.name}}</h6>
+											<a>
+												<h6 class="user-name"><fa icon="user" fixed-width/> {{user.name}}</h6>
 												<figure class="user-img">
-													<div v-if="usuario.avatar">
-														<img :src="usuario.avatar">
+													<div v-if="user.avatar">
+														<img :src="user.avatar">
 													</div>
 													<div v-else>
 														<img src="http://via.placeholder.com/100x100" alt="">
@@ -133,7 +133,6 @@
 		},
 		created(){
 			window.addEventListener('resize', this.loadHeader);
-			this.usuario = JSON.parse(this.user);
 		},
 
 		mounted(){

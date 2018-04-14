@@ -16,6 +16,7 @@ axios.interceptors.request.use(request => {
 
   const locale = store.getters['lang/locale']
   if (locale) {
+
     request.headers.common['Accept-Language'] = locale
   }
 
