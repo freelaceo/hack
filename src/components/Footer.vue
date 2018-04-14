@@ -83,12 +83,12 @@ export default {
 </script>
 
 <style scoped>
-	.main-footer{padding:30px 0;}
+	.main-footer{padding:30px 0;border-top:1px solid #ddd}
 	.main-footer .footer-title{font-size:20px;color:#222;}
 	.footer-links li{font-size:16px;display:block;}
 	.footer-links li a{color:#4A4A4A;transition:all .3s ease;display:inline-block;}
 	.footer-links li a:hover{opacity:.7;text-decoration:none;}
-	.footer-legal{margin-top:30px;padding-top:30px;border-top:1px solid #ddd}
+	.footer-legal{margin-top:30px;padding-top:15px;border-top:1px solid #eee}
 	.footer-legal .copy-menu, .footer-legal .social{display:inline-block;vertical-align:middle;}
 	.footer-legal .copy-menu{margin-right:30px;}
 	.footer-legal .copy-menu li, .footer-legal .social li{display:inline-block;margin-right:15px;}

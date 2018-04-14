@@ -7,6 +7,6 @@ export default async (to, from, next) => {
     await store.dispatch('auth/expiredSessionClear');
     next({ name: 'login' })
   } else {
-    next({ name: 'home-page' })
+    next()
   }
 }
