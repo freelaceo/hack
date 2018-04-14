@@ -115,7 +115,7 @@ export default {
       });
 
       // Update the user.
-      await this.$store.dispatch('auth/fetchUser',{success:data.success,user:data.user,router:this.$router});
+      await this.$store.dispatch('auth/fetchUser',{success:data.success,user:data.user,router:this.$router}); 
     }
   }
 }
