@@ -25,15 +25,10 @@
 										<li><router-link :to="{name: 'login'}" class="nav-option">{{ $t('notifications') }}</router-link></li>
 										<li><router-link :to="{name: 'hackathons.create'}" class="create-h-btn btn btn-md btn-red">{{ $t('create_hackathon') }}</router-link></li>
 									 	<li class="dropdown">
-											<a>
+											<a href="#">
 												<h6 class="user-name"><fa icon="user" fixed-width/> {{user.name}}</h6>
 												<figure class="user-img">
-													<div v-if="user.avatar">
-														<img :src="user.avatar">
-													</div>
-													<div v-else>
-														<img src="http://via.placeholder.com/100x100" alt="">
-													</div>
+													<img :src="user.avatar">
 												</figure>
 											</a>
 											<ul class="submenu">
@@ -104,19 +99,21 @@
 				var dropdown = document.querySelector('.main-header .dropdown');
 
 				// Menú dropdown
-				dropdown.querySelector('a').addEventListener('click', function(e){
-					e.preventDefault();
-					var submenu = this.parentNode.querySelector('.submenu');
+				if(dropdown){
+					dropdown.querySelector('a').addEventListener('click', function(e){
+						e.preventDefault();
+						var submenu = this.parentNode.querySelector('.submenu');
 
-					if( window.getComputedStyle(submenu).display == '' || window.getComputedStyle(submenu).display == 'none'){
-						submenu.style.display = 'block';
-					}else{
-						submenu.style.display = 'none';
-					}
-				});
+						if( window.getComputedStyle(submenu).display == '' || window.getComputedStyle(submenu).display == 'none'){
+							submenu.style.display = 'block';
+						}else{
+							submenu.style.display = 'none';
+						}
+					});
+				}
 
 				var windowsWidth = window.innerWidth;
-				var headerHeight = document.querySelector(".main-header").clientHeight ;
+				var headerHeight = document.querySelector(".main-header").clientHeight;
 				var menu = document.querySelector('.heading-options');
 				var navToggle = document.querySelector('.main-header .logo-wrapper #navToggle');
 
@@ -127,12 +124,15 @@
 				}
 				else if(windowsWidth < 961){
 					document.querySelector('body').style.paddingTop = 0;
+					menu.style.display = 'none';
 					navToggle.onclick = function(){ este.openMenu(); };
 				}
 			}
 		},
+
 		created(){
 			window.addEventListener('resize', this.loadHeader);
+			this.loadHeader();
 		},
 
 		mounted(){
@@ -141,6 +141,12 @@
 		},
 
 		beforeUpdate(){
+			window.addEventListener('resize', this.loadHeader);
+			this.loadHeader();
+		},
+
+		updated(){
+			window.addEventListener('resize', this.loadHeader);
 			this.loadHeader();
 		}
 	}
