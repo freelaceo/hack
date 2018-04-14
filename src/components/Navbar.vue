@@ -32,6 +32,7 @@
 												</figure>
 											</a>
 											<ul class="submenu">
+												<li><a href="#" onclick="return false;">{{user.name}}</a></li>
 												<li><router-link :to="{ name: 'settings.profile' }">
 													<fa icon="cog" fixed-width/>
 													{{ $t('settings') }}
@@ -157,7 +158,7 @@
 </script>
 
 <style scoped>
-	.main-header{position:fixed;left:0;top:0;width:100%;background:#fff;padding:10px 0;z-index:99;border-bottom:1px solid #ddd;box-shadow:0 1px 5px rgba(0,0,0,.2)}
+	.main-header{position:fixed;left:0;top:0;width:100%;background:#fff;padding:10px 0;z-index:99;box-shadow:0 1px 5px rgba(0,0,0,.2)}
 	.main-header .logo-wrapper > *{display:inline-block;vertical-align:middle;}
 	.main-header .logo-wrapper figure{margin-right:15px;}
 	.main-header .logo-wrapper h1{font-size:22px;}
@@ -174,7 +175,7 @@
 	.main-header .dropdown h6{display:none;}
 	.main-header .dropdown .user-img{position:relative;overflow:hidden;border-radius:100%;width:60px;height:60px;display:block;}
 	.main-header .dropdown .user-img figure{position:absolute;left:-50%;bottom:-50%;right:-50%;top:-50%;margin:auto;max-width:100%;height:100%;}
-	.main-header .dropdown .submenu{position: absolute;right: 0;min-width: 200px;margin-top: 13px;background: #fff;display:none;text-align: left;box-shadow:0 3px 5px rgba(0,0,0,.2);z-index:99999}
+	.main-header .dropdown .submenu{position: absolute;right: 0;min-width: 200px;margin-top: 12px;background: #fff;display:none;text-align: left;box-shadow:0 3px 5px rgba(0,0,0,.2);z-index:99999;border-top: 1px solid #ddd}
 	.main-header .dropdown .submenu li{display:block;font-size:13px;}
 	.main-header .dropdown .submenu li a{display: block;padding:10px 15px;transition:all .3s ease;color:#444;}
 	.main-header .dropdown .submenu li a:hover{background:#eee;text-decoration:none;}
@@ -186,6 +187,7 @@
 		.main-header .logo-wrapper #navToggle{color: #ff4343;font-size:35px;cursor: pointer;transition: all .3s ease;position:absolute;right:15px;top:0;bottom:0;height:35px;margin:auto;display:block;}
 		.main-header .logo-wrapper #navToggle:hover{opacity:.7}
 		.main-header .dropdown h6{display:block;}
+		.main-header .dropdown .submenu li:first-of-type{display:none;}
 		.main-header .dropdown .user-img{display:none}
 	}
 	@media screen and (max-width:768px){

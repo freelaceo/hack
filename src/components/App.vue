@@ -90,7 +90,8 @@ p, li, label{font-size:14px;line-height:normal;color:#555;margin:0;padding:0}
 img{max-width:100%;}
 figure.full img{width:100%;height:auto;display:block;}
 .font-16{font-size:16px;}
-.title-2{font-size: 30px;font-weight:600;color:#333;}
+.title-2{font-size: 30px;font-weight:600;color:#333;line-height:normal;}
+.title-3{font-size: 22px;font-weight:600;color:#333;line-height:normal;}
 
 .btn{display:inline-block;text-decoration:none;transition:all .3s ease;}
 .btn-lg{padding:15px 30px;border-radius:5px;font-size:16px;}
@@ -100,8 +101,10 @@ figure.full img{width:100%;height:auto;display:block;}
 .btn-blue{background: #4A90E2;color:#fff !important;}
 .btn-black{background: #343D46;color:#fff !important;}
 .btn-green{background: #5EB98C;color:#fff !important;}
+.txt-white{color:#fff;}
 
 .seccion{padding:60px 0; position: relative;}
+.seccion-content{margin:60px 0;position:relative;}
 .padding-30{padding:30px;}
 .container-lg{max-width: 1200px;margin:0 auto;}
 .row{margin:0 -15px}
