@@ -5,22 +5,22 @@
 <div class="container-lg">
   <br>
   <h2>{{$t('featureHackathon')}}</h2>
-   <div v-if="feature.length == 0">
-    <p>Sin items</p>
+   <div v-if="feature.length == 0" class="notItems">
+    <p>{{noItem}}</p>
   </div>
   <div v-else>
-    <hackathons-items :data="feature"/>
+    <hackathons-items :data="feature" />
   </div>
   <h2>{{$t('popularHackWorld')}}</h2>
-   <div v-if="popular.length == 0">
-    <p>Sin items</p>
+   <div v-if="popular.length == 0" class="notItems">
+    <p>{{noItem}}</p>
   </div>
   <div v-else>
     <hackathons-items :data="popular"/>
   </div>
   <h2>{{$t('virtualHackathon')}}</h2>
-   <div v-if="virtual.length == 0">
-    <p>Sin items</p>
+   <div v-if="virtual.length == 0" class="notItems">
+    <p>{{noItem}}</p>
   </div>
   <div v-else>
     <hackathons-items :data="virtual"/>
@@ -32,22 +32,22 @@
 <div class="max-width-block mbt">
 
   <h2>{{$t('blockchainHackathon')}}</h2>
-   <div v-if="blockchain.length == 0">
-    <p>Sin items</p>
+   <div v-if="blockchain.length == 0" class="notItems">
+    <p>{{noItem}}</p>
   </div>
   <div v-else>
     <hackathons-items :data="blockchain"/>
   </div>
   <h2>{{$t('EverythingIoT')}}</h2>
-  <div v-if="iot.length == 0">
-    <p>Sin items</p>
+  <div v-if="iot.length == 0" class="notItems">
+    <p>{{noItem}}</p>
   </div>
   <div v-else>
     <hackathons-items :data="iot"/>
   </div>
   <h2>{{$t('popularHackWorld')}}</h2>
-  <div v-if="popular.length == 0">
-    <p>Sin items</p>
+  <div v-if="popular.length == 0" class="notItems">
+    <p>{{noItem}}</p>
   </div>
   <div v-else>
     <hackathons-items :data="popular"/>
@@ -86,7 +86,8 @@ export default {
     virtual:[],
     blockchain:[],
     iot:[],
-    popular:[]
+    popular:[],
+    noItem:'no Items'
   }),
 
   computed: mapGetters({
@@ -229,5 +230,11 @@ flex-wrap: wrap;
 
 
 /*# sourceMappingURL=hackathon-items.component.css.map */
+
+.notItems{
+  margin-top: 40px !important;
+  margin-bottom: 40px;
+  padding: 20px;
+}
 
 </style>

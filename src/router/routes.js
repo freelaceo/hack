@@ -60,7 +60,7 @@ export default [
         { path: 'upvoted', name: 'settings.upvoted', component: SettingsUpvoted },
         { path: 'badges', name: 'settings.badges', component: SettingsBadges }
       ] },
-      {path:'/home-page',name:'home-page',component:HomePage},
+      {path:'/explore',name:'home-page',component:HomePage},
       {path:'/user',name:'user-profile',component:UserProfile},
       {path:'/project',name:'project-page',component:ProjectPage},
 
