@@ -97,11 +97,15 @@
 			loadHeader: function(){
 				var este = this;
 				var dropdown = document.querySelector('.main-header .dropdown');
-
 				// Menú dropdown
 				if(dropdown){
+					document.addEventListener('click', function(){
+						dropdown.querySelector('.submenu').style.display = 'none';
+					});
+
 					dropdown.querySelector('a').addEventListener('click', function(e){
 						e.preventDefault();
+						e.stopPropagation();
 						var submenu = this.parentNode.querySelector('.submenu');
 
 						if( window.getComputedStyle(submenu).display == '' || window.getComputedStyle(submenu).display == 'none'){
