@@ -43,7 +43,7 @@
           </div> 
         </div>
         <div class="col-lg-9">
-                  <div class="row">
+                  <div class="row bor-bot">
               <nav class="profile-navigation">
                 <ul>
                   <li>
@@ -126,9 +126,19 @@ export default {
 }
 </script>
 <style scoped>
+.bor-bot{
+    margin-bottom: 20px;
+    border: 0;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    overflow: hidden;
+    padding-bottom: 20px;
+}
 i.social-icons {
   font-size: 30px;
   color: #4A4A4A;
+}
+.v-card-mob-left{
+  padding-right: 20px;
 }
 .flex {
     display: flex;
@@ -181,10 +191,11 @@ i.social-icons {
         font-family: 'Avenir Next';
     }
     #profile-info h2.user-name {
-        font-size: 30px;
+        font-size: 27px;
         font-weight: 600;
         color: #333;
         margin-top: 20px;
+        line-height: 32px;
     }
     #profile-info .at-user {
         font-size: 14px;
@@ -520,7 +531,6 @@ i.social-icons {
 }
 .v-card-mob-left{
   width: 40%;
-  padding-right: 20px;
 }
 .v-card-mob-right{
   width: 60%;

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="row bor-top">
     <div class="change-password">
       <form @submit.prevent="update" @keydown="form.onKeydown($event)">
         <alert-success :form="form" :message="$t('password_updated')"/>
@@ -63,7 +63,7 @@ export default {
 <style scoped>
   .change-password{
     width: 100%;
-    margin-top: 40px;
+    margin-top: 20px;
     overflow: hidden;
   }
 
@@ -95,4 +95,8 @@ export default {
   width: 100%;
   text-align: center;
  }
+ @media only screen and (max-width: 991px) {
+  .form-group {
+    width: 100%;}
+}
 </style>

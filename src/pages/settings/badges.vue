@@ -47,7 +47,7 @@ export default {
 <style scoped>
 .head-proyects {
     width: calc(100% - 40px);
-    margin: 40px 0 26px 20px;
+    margin: 20px 0 26px 20px;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
