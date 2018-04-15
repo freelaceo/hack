@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="row">
     <div class="change-password">
       <form @submit.prevent="update" @keydown.enter.prevent="form.onKeydown($event)">
         <alert-success :form="form" :message="$t('profile_updated')"/>
@@ -191,8 +191,7 @@ export default {
   }
 }
 </script>
-<style scoped>
-i.social-icons {
+<style scoped>i.social-icons {
   font-size: 30px;
   color: #4A4A4A;
   padding-right: 20px;
@@ -248,7 +247,7 @@ i.social-icons {
 }
   .change-password{
     width: 100%;
-    margin-top: 40px;
+    margin-top: 20px;
     overflow: hidden;
   }
 
@@ -289,4 +288,9 @@ i.social-icons {
 .form-control{
   border-radius: 0px!important;
 }
+@media only screen and (max-width: 991px) {
+  .form-group {
+    width: 100%;}
+}
+
 </style>
