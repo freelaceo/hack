@@ -17,7 +17,7 @@
 						<div class="user_info">
 							<h2 class="subtitle mb-15">Organizers</h2>
 							<p class="asidep">{{this.hack.user.name}}</p>
-							<a href="" class="btn btn-sm btn-red mt-15">Contact Organizers</a>
+							<!--a href="" class="btn btn-sm btn-red mt-15">Contact Organizers</a-->
 						</div>
 
 						<div class="hack-section mt-60">
@@ -111,13 +111,11 @@
 
 							<div class="mt-30" id="prizes">
 								<h2 class="subtitle mb-15 subtitle-add">Prizes <span @click="newPrize();">Add</span></h2>
-								<div class="row">
+								<div class="row" id="prizesItems"> 
 									<div class="col-md-4 text-center prize-item">
 										<div class="cont">
 											<figure class="full mb-10">
-												<img src="http://via.placeholder.com/300x300" alt="trophy">
-												<span class="caption">Subir imágen</span>
-												<input type="file" name="prize-1">
+												<img src="http://api.luisvilches.cl/cup.png" alt="trophy">
 											</figure>
 											<input type="text" class="form-control" name="prize-name-1" placeholder="Prize name">
 											<input type="text" class="form-control" name="prize-value-1" placeholder="Prize value">
@@ -201,13 +199,15 @@ export default {
 	},
 	data(){
 		return {
+			indexPrizes:0,
 			hack:{
 				info:{},
 				user:{},
 				tags:{}
 			},
 			banner: 'http://via.placeholder.com/1440x330',
-			files: null
+			files: null,
+			pizes:[]
 		}
 	},
 	created(){
@@ -240,9 +240,19 @@ export default {
 		},
 
 		newPrize: function(){
-			var prizeItem = document.querySelector('#prizes .row .prize-item:first-child').cloneNode(true);
+			var col = document.createElement('div');	
+			col.className = "col-md-4 text-center prize-item"
+			var tmp = `<div class="cont">
+				<figure class="full mb-10">
+					<img src="http://api.luisvilches.cl/cup.png" alt="trophy" class="pdImage">
+				</figure>
+				<input type="text" class="form-control" name="prize-name-1" placeholder="Prize name">
+				<input type="text" class="form-control" name="prize-value-1" placeholder="Prize value">
+			</div>`;
+			col.innerHTML = tmp;
+			//var prizeItem = document.querySelector('#prizes .row .prize-item:first-child').cloneNode(true);
 			var container = document.querySelector('#prizes .row');
-			container.appendChild(prizeItem);
+			container.appendChild(col);
 			return false;
 		},
 
@@ -301,6 +311,7 @@ export default {
 	.subtitle-add span{float:right;font-weight:normal;font-size:14px;transform:translate(0, 25%);color:#ff4343;cursor:pointer;}
 
 	.prize-item .cont, .judge-item .cont{border:1px solid #ddd;padding:10px;}
+	.prize-item img{ padding: 50px;}
 	.prize-item .cont input[type="file"], .judge-item .cont input[type="file"]{display:none;}
 	.prize-item figure, .judge-item figure{position:relative;}
 	.prize-item figure .caption, .judge-item figure .caption{position:absolute;width:100%;padding:10px 0;background: rgba(0,0,0,.4);color:#fff;left:0;bottom:0;transition:all .3s ease;opacity:.5;font-size:14px;cursor:pointer;}
@@ -324,4 +335,6 @@ export default {
 	.tags li:last-of-type{margin-right: 0}
 	.tags li a{display:block;padding:10px;border-radius:5px;color:#555;background:#eee;text-decoration:none;transition:all .3s ease;}
 	.tags li a:hover{background:#ccc}
+
+	.pdImage{padding: 50px !important;}
 </style>
