@@ -7,7 +7,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6 nopadding">
+        <div class="col-md-6">
           <div class="register-form">
             <div class="register-form-panel form-wrapper">
               <form @submit.prevent="login" @keydown="form.onKeydown($event)">
@@ -143,7 +143,6 @@ export default {
 
   .register-section .register-wrapper {
     display: flex;
-    align-items: center;
     flex-direction: column;
     height: 100%;
     justify-content: center;
@@ -171,13 +170,12 @@ export default {
           padding: 60px; }
         .register-section .register-wrapper .register-form .register-advice {
           font-size: 17px;
-          width: 100%;
-          float: left; }
+          width: 100%; }
           .register-section .register-wrapper .register-form .register-advice a {
             text-decoration: none;
             color: #468ee5; }
         .register-section .register-wrapper .register-form .register-input-wrapper {
-          float: left;
+          
           width: 100%;
           margin-bottom: 20px; }
           .register-section .register-wrapper .register-form .register-input-wrapper.last {
