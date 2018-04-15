@@ -66,33 +66,33 @@
         <div class="form-group">
           <label class="label-text">{{ $t('social') }}</label>
           <div class="box-input">
-            <i class="social-icons fab fa-twitter"></i>
             <input v-model="form.socials.twitter" :class="{ 'is-invalid': form.errors.has('description') }" class="form-control" type="text" name="social-twitter"/>
             <has-error :form="form" field="description"/>
+            <i class="social-icons fab fa-twitter"></i>
           </div>
         </div>
         <div class="form-group">
           <label class="label-text"></label>
           <div class="box-input">
-            <i class="social-icons fab fa-facebook"></i>
             <input v-model="form.socials.facebook" :class="{ 'is-invalid': form.errors.has('description') }" class="form-control" type="text" name="social-git" />
             <has-error :form="form" field="description"/>
+            <i class="social-icons fab fa-facebook"></i>
           </div>
         </div>
         <div class="form-group">
           <label class="label-text"></label>
-          <div class="box-input">
-            <i class="social-icons fab fa-linkedin-in"></i>
+          <div class="box-input"> 
             <input v-model="form.socials.linkedin" :class="{ 'is-invalid': form.errors.has('description') }" class="form-control" type="text" name="social-in" />
             <has-error :form="form" field="description"/>
+            <i class="social-icons fab fa-linkedin-in"></i>
           </div>
         </div>
         <div class="form-group">
           <label class="label-text"></label>
           <div class="box-input">
-            <i class="social-icons fab fa-github"></i>
             <input v-model="form.socials.other" :class="{ 'is-invalid': form.errors.has('description') }" class="form-control" type="text" name="social-in" />
             <has-error :form="form" field="description"/>
+            <i class="social-icons fab fa-github"></i>
           </div>
         </div>
 
@@ -195,8 +195,9 @@ export default {
 i.social-icons {
   font-size: 30px;
   color: #4A4A4A;
-  margin-left:-50px;
   padding-right: 20px;
+  margin-left: -50px;
+  padding-top: 5px;
 }
 .cajita-botones{
   margin-top: 20px;
@@ -256,6 +257,7 @@ i.social-icons {
     margin: 0 auto 20px auto;
     display: flex;
     justify-content: space-between;
+    flex-flow: column;
   }
   .form-control:focus {
       color: #495057;
@@ -266,10 +268,12 @@ i.social-icons {
   }
 
 .form-group .label-text {
-  width: 30%;
- }
+  width: 100%;
+  font-size: 16px; 
+  margin-bottom: 8px;
+   }
  .form-group .box-input {
-  width: 70%;
+  width: 100%;
   display: flex;
   justify-content: flex-start;
  }
