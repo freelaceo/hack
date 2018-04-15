@@ -133,7 +133,6 @@ export default {
     width: 100%;
     height: auto;
     background-color: #fff;
-    margin-top: 150px;
   }
 
   @media (max-width: 768px) {
@@ -159,7 +158,7 @@ export default {
         color: #827f7f;
         font-family: "Avenir Next";
         font-weight: normal;
-        margin-bottom: 60px;
+        margin-bottom: 30px;
       }
       .register-section .register-wrapper .register-form {
         border: 1px solid #c5c3c3;
@@ -192,7 +191,18 @@ export default {
             border-radius: 3px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
             font-family: MontserratThin;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"!important;
+             }
+          .register-section .register-wrapper .register-form .register-input-wrapper input::-webkit-input-placeholder {
+                font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"!important;
+              }
+          .register-section .register-wrapper .register-form .register-input-wrapper input:-moz-placeholder {
+                font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"!important; 
+              }
+          .register-section .register-wrapper .register-form .register-input-wrapper input:-ms-input-placeholder { 
+                font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"!important; 
+              }
             .register-section .register-wrapper .register-form .register-input-wrapper input:-moz-placeholder {
               color: #8d8c8c;
               font-family: MontserratRegular; }
@@ -226,6 +236,7 @@ export default {
             cursor: pointer;
             padding: 20px;
             color: #ff5959;
+            font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
           }
             .register-section .register-wrapper .register-form .register-btn-wrapper button:hover {
               background-color: #ff5959;
