@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="change-password">
-      <form @submit.prevent="update" @keydown="form.onKeydown($event)">
+      <form @submit.prevent="update" @keydown.enter.prevent="form.onKeydown($event)">
         <alert-success :form="form" :message="$t('profile_updated')"/>
 
         <!-- Name -->
         <div class="form-group">
           <label class="label-text">{{ $t('name') }}</label>
           <div class="box-input">
-            <input v-model="form.name" :class="{ 'is-invalid': form.errors.has('name') }" class="form-control" type="text" name="name" required="">
+            <input v-model="form.name" :class="{ 'is-invalid': form.errors.has('name') }" class="form-control" type="text" name="name">
             <has-error :form="form" field="name"/>
           </div>
         </div>
@@ -26,30 +26,29 @@
         <div class="form-group">
           <label class="label-text">{{ $t('Skills') }}</label>
           <div class="box-input flex-wrap">
-            <input v-model="form.userskills" :class="{ 'is-invalid': form.errors.has('username') }" class="form-control" type="text" name="username" >
-            <has-error :form="form" field="username"/>
+            <vue-tags-input
+              v-model="filterValue"
+              :tags="form.skills"
+              :autocomplete-items="tags"
+              :add-only-from-autocomplete="true"
+              @tags-changed="updateTag"
+            />
             <div class="cajita-botones">
-              <div class="tags">
+              <div class="tags" v-for="skill in form.skill" :key="skill">
                   <label class="check label">
-                      <input class="check__input" type="checkbox" v-model="form" value="virtual" id="virtual">
-                      <div class="check__text">UX/UI</div>
+                      <input class="check__input" type="checkbox" :value="skill" :id="skill">
+                      <div class="check__text">{{skill}}</div>
                   </label>
-              </div>
-              <div class="tags">
-                  <label class="check label">
-                      <input class="check__input" type="checkbox" v-model="form" value="blockchain" id="blockchain">
-                      <div class="check__text">Biz Dev</div>
-                  </label>
-              </div>
+              </div >
             </div>
           </div>
         </div>
 
-        <!-- Password Confirmation -->
+        <!-- location -->
         <div class="form-group">
           <label class="label-text">{{ $t('location') }}</label>
           <div class="box-input">
-            <input v-model="form.location" :class="{ 'is-invalid': form.errors.has('location') }" class="form-control" type="text" name="location" required="">
+            <input v-model="form.location" :class="{ 'is-invalid': form.errors.has('location') }" class="form-control" type="text" name="location">
             <has-error :form="form" field="location"/>
           </div>
         </div>
@@ -58,7 +57,7 @@
         <div class="form-group">
           <label class="label-text">{{ $t('description') }}</label>
           <div class="box-input">
-            <textarea v-model="form.description" :class="{ 'is-invalid': form.errors.has('description') }" class="form-control" type="text" name="description" required=""></textarea>
+            <textarea v-model="form.description" :class="{ 'is-invalid': form.errors.has('description') }" class="form-control" type="text" name="description" ></textarea>
             <has-error :form="form" field="description"/>
           </div>
         </div>
@@ -67,33 +66,33 @@
         <div class="form-group">
           <label class="label-text">{{ $t('social') }}</label>
           <div class="box-input">
-            <input v-model="form" :class="{ 'is-invalid': form.errors.has('description') }" class="form-control" type="text" name="social-twitter" required=""></input>
-            <has-error :form="form" field="description"/>
             <i class="social-icons fab fa-twitter"></i>
+            <input v-model="form.socials.twitter" :class="{ 'is-invalid': form.errors.has('description') }" class="form-control" type="text" name="social-twitter"/>
+            <has-error :form="form" field="description"/>
           </div>
         </div>
         <div class="form-group">
           <label class="label-text"></label>
           <div class="box-input">
-            <input v-model="form" :class="{ 'is-invalid': form.errors.has('description') }" class="form-control" type="text" name="social-git" required=""></input>
+            <i class="social-icons fab fa-facebook"></i>
+            <input v-model="form.socials.facebook" :class="{ 'is-invalid': form.errors.has('description') }" class="form-control" type="text" name="social-git" />
             <has-error :form="form" field="description"/>
-          <i class="social-icons fab fa-github"></i>
           </div>
         </div>
         <div class="form-group">
           <label class="label-text"></label>
           <div class="box-input">
-            <input v-model="form" :class="{ 'is-invalid': form.errors.has('description') }" class="form-control" type="text" name="social-in" required=""></input>
-            <has-error :form="form" field="description"/>
             <i class="social-icons fab fa-linkedin-in"></i>
+            <input v-model="form.socials.linkedin" :class="{ 'is-invalid': form.errors.has('description') }" class="form-control" type="text" name="social-in" />
+            <has-error :form="form" field="description"/>
           </div>
         </div>
         <div class="form-group">
           <label class="label-text"></label>
           <div class="box-input">
-            <input v-model="form" :class="{ 'is-invalid': form.errors.has('description') }" class="form-control" type="text" name="social-in" required=""></input>
+            <i class="social-icons fab fa-github"></i>
+            <input v-model="form.socials.other" :class="{ 'is-invalid': form.errors.has('description') }" class="form-control" type="text" name="social-in" />
             <has-error :form="form" field="description"/>
-            <i class="social-icons fab fa-linkedin-in"></i>
           </div>
         </div>
 
@@ -112,7 +111,7 @@
 import Form from 'vform'
 import axios from 'axios'
 import { mapGetters } from 'vuex'
-
+import VueTagsInput from '@johmun/vue-tags-input';
 
 export default {
   scrollToTop: false,
@@ -120,14 +119,25 @@ export default {
   metaInfo () {
     return { title: this.$t('settings') }
   },
-
+  components:{
+    VueTagsInput
+  },
   data: () => ({
+    tagSend:[],
+    tags:[],
     form: new Form({
       name: '',
       username: '',
       location: '',
       description: '',
       photo_url: '',
+      socials:{
+        facebook:'',
+        twitter:'',
+        linkedin:'',
+        other:''
+      },
+      skills:''
     })
   }),
 
@@ -136,25 +146,48 @@ export default {
   }),
 
   created () {
-    // Fill the form with user data.
     this.form.keys().forEach(key => {
       this.form[key] = this.user[key]
-    })
+    });
+
+    this.chargerData();
   },
 
   methods: {
+    async chargerData(){
+      const { data } = await axios('/auth/tags',{method:"GET"})
+      this.tags = data.map(e => {
+        return {text: e.tags[0]}
+      });
+    },
+    updateTag(newTags) {
+      this.autocompleteItems = [];
+      this.form.skills = newTags;
+      this.tagSend = this.form.skills.map(e => e.text);
+    },
+    async addSkill(){
+      var s = new FormData();
+      s.append('skills',this.tagSend);
+      const {data} = await axios('auth/user/add/skill/'+this.user_id,{method:"POST",data:s})
+      console.log(data)
+    },
     async update () {
       var f = new FormData();
       f.append('name',this.form.name);
       f.append('username',this.form.username);
       f.append('location',this.form.location);
       f.append('description',this.form.description);
+      f.append('facebook',this.form.socials.facebook);
+      f.append('twitter',this.form.socials.twitter);
+      f.append('linkedin',this.form.socials.linkedin);
+      f.append('other',this.form.socials.other);
+      f.append('skills',this.tagSend);
       const { data } = await axios('/auth/user/update/'+this.user._id,{method:"PUT",data:f})
       console.log(data)
       if(data.success){
         this.$store.dispatch('auth/updateUser', { user: data.data })
       }
-    }
+    },
   }
 }
 </script>
@@ -162,9 +195,8 @@ export default {
 i.social-icons {
   font-size: 30px;
   color: #4A4A4A;
-  margin-left: -50px;
+  margin-left:-50px;
   padding-right: 20px;
-  padding-top: 5px;
 }
 .cajita-botones{
   margin-top: 20px;
@@ -224,7 +256,6 @@ i.social-icons {
     margin: 0 auto 20px auto;
     display: flex;
     justify-content: space-between;
-    flex-flow: column;
   }
   .form-control:focus {
       color: #495057;
@@ -235,12 +266,10 @@ i.social-icons {
   }
 
 .form-group .label-text {
-  width: 100%;
-  font-size: 16px; 
-  margin-bottom: 8px;
+  width: 30%;
  }
  .form-group .box-input {
-  width: 100%;
+  width: 70%;
   display: flex;
   justify-content: flex-start;
  }
@@ -248,4 +277,12 @@ i.social-icons {
   width: 100%;
   text-align: center;
  }
+.vue-tags-input{
+  width: 100%!important;
+  max-width: 100%!important;
+}
+
+.form-control{
+  border-radius: 0px!important;
+}
 </style>

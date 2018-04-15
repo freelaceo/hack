@@ -30,10 +30,10 @@
                   <p id="short-desc" class=" desc-text" v-if="user.description">{{user.description}}</p>
                   <p id="location" class="" v-if="user.location"><i class="fas fa-map-marker-alt" aria-hidden="true"></i>{{user.location}}</p>
                   <div id="social" class="">
-                      <!--a v-if="user.socials.facebook.url" :href="user.socials.facebook.url"><i class="social-icons fab fa-twitter"></i></a>
-                      <a v-if="user.socials.twitter.url" :href="user.socials.twitter.url"><i class="social-icons fab fa-github"></i></a>
-                      <a v-if="user.socials.linkedin.url" :href="user.socials.linkedin.url"><i class="social-icons fab fa-linkedin-in"></i></a>
-                      <a v-if="user.socials.other.url" :href="user.socials.other.url"><i class="social-icons fab fa-linkedin-in"></i></a-->
+                      <a v-if="user.socials.twitter" :href="user.socials.twitter"><i class="social-icons fab fa-twitter"></i></a>
+                      <a v-if="user.socials.facebook" :href="user.socials.facebook"><i class="social-icons fab fa-facebook"></i></a>
+                      <a v-if="user.socials.linkedin" :href="user.socials.linkedin"><i class="social-icons fab fa-linkedin-in"></i></a>
+                      <a v-if="user.socials.other" :href="user.socials.other"><i class="social-icons fab fa-github"></i></a>
                   </div>
                   <div id="contact" class="">
                       <a class="btn-primari" href="">Message</a>
