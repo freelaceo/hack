@@ -2,14 +2,14 @@
 	<footer class="main-footer">
 		<div class="container-lg">
 			<div class="row flex">
-				<div class="col-md-3 text-center">
+				<div class="col-md-3 mb-15 text-center">
 					<div class="cont-ext">
 						<div class="cont-int">
 							<locale-dropdown/>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-3 mb-15">
 					<h6 class="footer-title mb-15">Hackathon.io</h6>
 					<nav class="footer-links">
 						<ul>
@@ -20,7 +20,7 @@
 						</ul>
 					</nav>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-3 mb-15">
 					<h6 class="footer-title mb-15">Hackathons</h6>
 					<nav class="footer-links">
 						<ul>
@@ -31,7 +31,7 @@
 						</ul>
 					</nav>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-3 mb-15">
 					<h6 class="footer-title mb-15">Jobs</h6>
 					<nav class="footer-links">
 						<ul>
@@ -83,7 +83,7 @@ export default {
 </script>
 
 <style scoped>
-	.main-footer{padding:30px 0;border-top:1px solid #ddd}
+	.main-footer{padding:30px 0;border-top:1px solid #ddd;overflow: hidden;margin-top: 60px;}
 	.main-footer .footer-title{font-size:20px;color:#222;}
 	.footer-links li{font-size:16px;display:block;}
 	.footer-links li a{color:#4A4A4A;transition:all .3s ease;display:inline-block;}
