@@ -131,7 +131,7 @@
                       <h1>Tell us about your hackathon</h1>
                       <b></b>
                   </div>
-                 <div v-show="step.number === 4" class="">
+                 <div v-show="step.number === 4" class="info-medio-d">
                           <div class="form-group">
                               <label for="title">What is the title of your hackathon?</label>
                               <input type="title" v-model="form.title" class="form-control">
@@ -287,6 +287,16 @@ h1,h2,h3,h4,h5,h6,p,.avenir{
   border-bottom: 1px solid #DEDEDE;
   padding-bottom: 20px;
 }
+.info-medio-c{
+  margin-bottom: 30px;
+  border-bottom: 1px solid #DEDEDE;
+  padding-bottom: 20px;
+}
+.info-medio-d{
+  margin-bottom: 30px;
+  border-bottom: 1px solid #DEDEDE;
+  padding-bottom: 20px;
+}
 
 
 .info-medio-a input{
@@ -419,14 +429,12 @@ h1,h2,h3,h4,h5,h6,p,.avenir{
 .check__input {
   position: absolute;
   left: -9999px;
-  top: 0;
 }
 
 .check__input:checked + .check__text {
   color: #fff;
   border-color: #4A90E2;
   background: #4A90E2;
-  counter-increment: checked;
 }
 
 .length__counter:before {

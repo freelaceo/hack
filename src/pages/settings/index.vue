@@ -2,22 +2,26 @@
   <section class="seccion">
     <div class="container-lg">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-lg-3 flex">
+          <div class="v-card-mob-left"> 
               <div class="user_img">
-              <figure class="full">
-                <img :src="user.avatar" :alt="user.name">
-                <span class="caption" @click="upload()">Cambiar avatar</span>
-              </figure>
-              <input type="file" name="file" id="file">
-            </div>
-              <li style="list-style:none; text-align:right; margin-top:10px;">
+                <figure class="full">
+                  <img :src="user.avatar" :alt="user.name">
+                  <span class="caption" @click="upload()">Cambiar avatar</span>
+                </figure>
+                <input type="file" name="file" id="file">
+              </div>
+              <li class="edit-profile">
                     <router-link :to="{ name: 'settings.edit.profile' }" active-class="active">
                       ({{ $t('Edit profile') }})
                     </router-link>
-                </li>
+              </li>
+          </div>
+          <div class="v-card-mob-right">
               <div id="profile-info" class="">
                   <h2 id="name" class="user-name">{{user.name}}</h2>
                   <a id="at" class="at-user" href="">@{{user.username}}</a>
+
                   <div id="labels" class="" v-if="user.invite">
                       <span class="skyblue" v-for="(item,index) in user.invite" :key="index">{{item}}</span>
                   </div>
@@ -36,8 +40,9 @@
                       <a class="btn-primari active" href="">Following</a>
                   </div>
               </div>
+          </div> 
         </div>
-        <div class="col-md-9">
+        <div class="col-lg-9">
                   <div class="row">
               <nav class="profile-navigation">
                 <ul>
@@ -61,8 +66,7 @@
                       {{ $t('badges') }}
                     </router-link>
                   </li>
-                  <li style="color: #c3c3c3;">|</li>
-                  <li>
+                  <li class="separador">
                     <router-link :to="{ name: 'settings.password' }" class="profile-nav-link" active-class="active">
                       {{ $t('password') }}
                     </router-link>
@@ -126,20 +130,39 @@ i.social-icons {
   font-size: 30px;
   color: #4A4A4A;
 }
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    align-self: flex-start;
+}
 #file{display:none;}
   .user_img{
     position:relative;    
-    width: 277px;
-    height: 277px;
+    width: 100%;
+    max-width: 277px;
+    max-height: 277px;
   }
   .user_img figure {
-    width: 277px;
-    height: 277px;
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .user_img figure:before{
+    content: '';
+    width: 100%;
+    padding-top: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
   }
   .user_img figure img{
-    min-height: 277px;
     object-fit: cover;
-}
+} 
+  .edit-profile{
+    text-align: left;
+    margin-top: 10px;
+    list-style: none;
+  }
   .user_img .caption{text-align:center;position:absolute;width:100%;padding:10px 0;background: rgba(0,0,0,.4);color:#fff;left:0;bottom:0;transition:all .3s ease;opacity:0;font-size:14px;cursor:pointer;}
   .user_img .caption:hover{background: rgba(0,0,0,.7);}
   .user_img:hover .caption{opacity:1}
@@ -294,13 +317,16 @@ i.social-icons {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  max-width: 780px;
   margin: 0 auto; 
   padding: 5px 10px 5px 10px;
 }
 .profile-navigation li {
   list-style: none;
   padding: 5px 10px 5px 10px;
+}
+.profile-navigation li.separador{
+  border-left: 1px solid #999 !important;
+  padding-left: 30px;
 }
 .profile-navigation .profile-nav-link {
   color: #999999;
@@ -310,6 +336,13 @@ i.social-icons {
 .profile-navigation .profile-nav-link.active {
       color: #4c4c4c;
       text-decoration: underline; 
+}
+
+
+@media only screen and (max-width: 900px) {
+ .profile-navigation .profile-nav-link {
+  font-size: 17px;
+}
 }
 #user-info {
   display: flex;
@@ -468,6 +501,39 @@ i.social-icons {
   border: 1px solid #6d6d6d;
   padding: 4px 8px; 
 }
-
+@media only screen and (max-width: 562px) {
+.profile-navigation ul{
+    flex-flow: wrap;
+}
+.profile-navigation ul li{
+    list-style: none;
+    padding: 5px 10px 5px 10px;
+    width: 33%;
+}
+}
 /*# sourceMappingURL=profile.component.css.map */
+@media only screen and (max-width: 961px) {
+  .flex {
+    display: flex;
+    flex-wrap: nowrap;
+    align-self: flex-start;
+}
+.v-card-mob-left{
+  width: 40%;
+  padding-right: 20px;
+}
+.v-card-mob-right{
+  width: 60%;
+}
+}
+@media only screen and (max-width: 640px) {
+
+.v-card-mob-left{
+  width: 100%;
+  padding-right: 0;
+}
+.v-card-mob-right{
+  width: 100%;
+}
+}
 </style>

@@ -72,6 +72,7 @@ export default {
     margin: 0 auto 20px auto;
     display: flex;
     justify-content: space-between;
+    flex-flow: column;
   }
   .form-control:focus {
       color: #495057;
@@ -80,11 +81,15 @@ export default {
       outline: 0;
       box-shadow: none;
   }
- .form-group .label-text {
-  width: 30%;
+.form-group .label-text {
+  width: 100%;
+  font-size: 16px; 
+  margin-bottom: 8px;
  }
  .form-group .box-input {
-  width: 70%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
  }
  .form-group .box-button {
   width: 100%;
