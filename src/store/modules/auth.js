@@ -51,10 +51,6 @@ function setterState(e){
 
 // state
 export const state = {
-  //user: Cookies.get('user'),
-  //token: Cookies.get('token')
-  //user: null,
-  //token: null,
   user: getTokenUser().user,
   token: getTokenUser().token
 }
@@ -69,16 +65,10 @@ export const getters = {
 // mutations
 export const mutations = {
   [types.SAVE_TOKEN] (state, { token, user, remember }) {
-    //state.token = token;
-    //state.user = user;
     setTokenUser(token,user);
-
-    //Cookies.set('user',user,{expires:remember ? 365 : null})
-    //Cookies.set('token', token, { expires: remember ? 365 : null })
   },
 
   [types.FETCH_USER_SUCCESS] (state, { token,user,router }) {
-    //state.user = user; Cookies.set('user',user,{expires:365})
     setTokenUser(token,user);
     setterState('login');
     var msg;
@@ -105,14 +95,14 @@ export const mutations = {
       case 'es':
         msg = 'Usuario o Clave incorrectos';
     }
+    
     swal({
       type: 'error',
       title: msg
-    })
-    //Cookies.remove('token'); Cookies.remove('user'); state.token = null; state.user = null
+    });
+
     removeTokenUser();
     setterState('login');
-    
   },
 
   [types.LOGOUT] (state,{router}) {

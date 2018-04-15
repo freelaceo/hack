@@ -104,8 +104,8 @@ export default {
         q.append('password',this.form.password);
         q.append('password_confirmation',this.form.password_confirmation);
         
-      const register = await axios('/register',{method:"POST",data:q})
-      const {data} = await axios('/login',{method:'POST',data:q})
+      const register = await axios('/register',{method:"POST",data:q});
+      const {data} = await axios('/login',{method:'POST',data:q});
 
       // Save the token.
      this.$store.dispatch('auth/saveToken', {
@@ -115,7 +115,7 @@ export default {
       });
 
       // Update the user.
-      await this.$store.dispatch('auth/fetchUser',{success:data.success,user:data.user,router:this.$router}); 
+      await this.$store.dispatch('auth/fetchUser',{success:data.success,token:data.token,user:data.user,router:this.$router});
     }
   }
 }

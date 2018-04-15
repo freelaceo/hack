@@ -5,7 +5,7 @@ const { locale, locales } = window.config
 
 // state
 export const state = {
-  locale: Cookies.get('locale') || locale,
+  locale: window.localStorage.getItem('locale') || locale,
   locales: locales
 }
 
@@ -27,6 +27,6 @@ export const actions = {
   setLocale ({ commit }, { locale }) {
     commit(types.SET_LOCALE, { locale })
 
-    Cookies.set('locale', locale, { expires: 365 })
+    window.localStorage.setItem('locale', locale,)
   }
 }
