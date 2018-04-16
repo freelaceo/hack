@@ -1,6 +1,6 @@
 <template>
 	<main>
-		<Banner :img="banner" val="Publish" type="success" :event="publish"/>
+		<Banner :img="banner" val="Publish" type="success" :event="publish" :save="update"/>
 		
 		<section class="seccion">
 			<div class="container-lg">
@@ -45,7 +45,7 @@
 						<div class="hack-section
 						 mt-60
 						 ">
-							<h2 class="subtitle mb-15 text-center">Partners</h2>
+							<h2 class="subtitle mb-15 subtitle-add">Patners <span class="btn btn-red mt20min" @click="newPatner()">Add</span></h2>
 							<figure class="full mt-15"><img src="http://via.placeholder.com/230x180" alt="" class=""></figure>
 							<figure class="full mt-15"><img src="http://via.placeholder.com/230x180" alt="" class=""></figure>
 							<figure class="full mt-15"><img src="http://via.placeholder.com/230x180" alt="" class=""></figure>
@@ -61,6 +61,7 @@
 								<div class="cont">
 									<span class="fa fa-clock"></span>
 									<input type="text" class="form-control" :value="hack.info.date" placeholder="Fecha">
+									<!--datetime type="datetime" v-model="datetime" format="DD MM YYYY" class="theme-orange"></datetime-->
 								</div>
 								<div class="cont">
 									<span class="fa fa-map-marker-alt"></span>
@@ -110,36 +111,36 @@
 							</div> -->
 
 							<div class="mt-30" id="prizes">
-								<h2 class="subtitle mb-15 subtitle-add">Prizes <span @click="newPrize();">Add</span></h2>
+								<h2 class="subtitle mb-15 subtitle-add">Prizes <span class="btn btn-red mt20min" @click="newPrize();">Add</span></h2>
 								<div class="row" id="prizesItems"> 
-									<div class="col-md-4 text-center prize-item">
+									<div class="col-md-4 text-center prize-item" v-for="(cup,index) in prizes" :key="index">
 										<div class="cont">
 											<figure class="full mb-10">
-												<img src="http://api.luisvilches.cl/cup.png" alt="trophy">
+												<img src="../../assets/trophy.png" alt="trophy">
 											</figure>
-											<input type="text" class="form-control" name="prize-name-1" placeholder="Prize name">
-											<input type="text" class="form-control" name="prize-value-1" placeholder="Prize value">
+											<input type="text" class="form-control" v-model="prizes[index].title" name="prize-name-1" placeholder="Prize name">
+											<input type="text" class="form-control" v-model="prizes[index].description" name="prize-value-1" placeholder="Prize value">
 										</div>
 									</div>
 								</div>
 							</div>
 
 							<div class="mt-30" id="challenges">
-								<h2 class="subtitle mb-15 subtitle-add">Challenges <span @click="newChallenge()">Add</span></h2>
+								<h2 class="subtitle mb-15 subtitle-add">Challenges <span class="btn btn-red mt20min" @click="newChallenge()">Add</span></h2>
 
 								<ul class="challenges">
-									<li class="challenge-item">
+									<li class="challenge-item" v-for="(item,index) in challenges" :key="index">
 										<div class="cont">
-											<input class="form-control" type="text" name="challenge-name-1" placeholder="Challenge name">
-											<textarea class="form-control" name="challenge-description-1" placeholder="Challange Description"></textarea>
+											<input class="form-control" type="text" v-model="challenges[index].title" name="challenge-name-1" placeholder="Challenge name">
+											<textarea class="form-control" v-model="challenges[index].description" name="challenge-description-1" placeholder="Challange Description"></textarea>
 										</div>
 									</li>
 								</ul>
 							</div>
 
 							<div class="mt-30" id="judges">
-								<h2 class="subtitle mb-15 subtitle-add">Judges <span @click="newJuge()">Add</span></h2>
-								<div class="row">
+								<h2 class="subtitle mb-15 subtitle-add">Judges <span class="btn btn-red mt20min" @click="newJuge()">Add</span></h2>
+								<!--div class="row">
 									<div class="col-md-4 text-center judge-item">
 										<div class="cont">
 											<figure class="full mb-10">
@@ -151,32 +152,37 @@
 											<input type="text" class="form-control" name="judge-value-1" placeholder="Judge value">
 										</div>
 									</div>
-								</div>
+								</div-->
+
+								<!--multiselect v-model="skills" tag-placeholder="Add this as new Judge" placeholder="Search or add a Judge" label="name" track-by="code" :options="tags" :multiple="true" :taggable="false" @tag="addTag"></multiselect-->
+								<multiselect v-model="judge" placeholder="Fav No Man’s Sky path" label="title" track-by="title" :multiple="true" :options="judges" :option-height="5" :custom-label="customLabel" :show-labels="false">
+									<template slot="singleLabel" slot-scope="props"><img class="option__image" :src="props.option.img" alt="No Man’s Sky"><span class="option__desc"><span class="option__title">{{ props.option.title }}</span></span></template>
+									<template slot="option" slot-scope="props"><img class="option__image" :src="props.option.img" alt="No Man’s Sky">
+									<div class="option__desc"><span class="option__title">{{ props.option.title }}</span>   |  <span class="option__small">{{ props.option.desc }}</span></div>
+									</template>
+								</multiselect>
 							</div>
 
 							<div class="mt-30" id="judging-criteria">
-								<h2 class="subtitle mb-15 subtitle-add">Judging Criteria <span @click="newCriteria()">Add</span></h2>
+								<h2 class="subtitle mb-15 subtitle-add">Judging Criteria <span class="btn btn-red mt20min" @click="newCriteria()">Add</span></h2>
 								<ul class="criterial">
-									<li class="criterial-item">
-										<input type="text" name="criterial-1" class="form-control small" placeholder="Criteria name">
+									<li class="criterial-item" v-for="(c,index) in critrials" :key="index">
+										<input type="text" name="criterial-1" v-model="critrials[index].text" class="form-control small" placeholder="Criteria name">
 									</li>
 								</ul>
 							</div>
 
 							<div class="mt-30" id="tags">
-								<h2 class="subtitle mb-15 subtitle-add">Tags <span @click="newTag()">Add</span></h2>
-
-								<div class="new-tag mb-15">
-									<input type="text" name="tag-1" placeholder="Tag name" class="form-control small">
-								</div>
-
-								<ul class="tags">
-									<li v-for="(tag,index) in hack.tags" :key="index" class="tags-links"><a href="#">{{tag}}</a></li>
-								</ul>
+								<h2 class="subtitle mb-15 subtitle-add">Tags</h2>
 							</div>
 
+							<multiselect v-model="skills" tag-placeholder="Add this as new tag" placeholder="Search or add a tag" label="name" track-by="code" :options="tags" :multiple="true" :taggable="false" @tag="addTag"></multiselect>
+
 							<div class="mapa mt-30">
-								<figure class="map full"><img src="http://via.placeholder.com/900x300" alt=""></figure>
+								<figure class="map full">
+									<!--img src="http://via.placeholder.com/900x300" alt=""-->
+									<Maps/>
+								</figure>
 							</div>
 					</div>
 				</div>
@@ -189,25 +195,43 @@
 <script>
 import axios from 'axios'
 import Banner from '../../components/new-hackathon/banner'
+import { stringify } from 'querystring';
+import VueTagsInput from '@johmun/vue-tags-input';
+import Multiselect from 'vue-multiselect'
+import datetime from 'vuejs-datetimepicker';
+import Maps from '../../components/maps'
+
 export default {
 	middleware: 'auth',
 	components:{
-		Banner
+		Banner,
+		VueTagsInput,
+		Multiselect,
+		datetime,
+		Maps
 	},
 	metaInfo () {
 		return { title: this.$t('home') }
 	},
 	data(){
 		return {
-			indexPrizes:0,
+			filterValue:'',
 			hack:{
 				info:{},
 				user:{},
 				tags:{}
 			},
+			prizes:[],
 			banner: 'http://via.placeholder.com/1440x330',
 			files: null,
-			pizes:[]
+			challenges:[],
+			tagSend:[],
+			tags:[],
+			skills:[],
+			critrials:[],
+			judges:[],
+			judge:[],
+			datetime:''
 		}
 	},
 	created(){
@@ -221,7 +245,41 @@ export default {
 			this.hack.tags = this.hack.info.type[0].split(",");
 			const user = await axios('/auth/user/'+this.hack.info.userId,{method:"GET"})
 			this.hack.user = user.data;
-			console.log(this.hack)
+			const tags = await axios("auth/types",{method:"GET"});	
+			this.tags = tags.data.map(e => {
+				console.log(e.types[0])
+				return {
+					name: e.types[0],
+					code: e.types[0].substring(0, 2) + Math.floor((Math.random() * 10000000))
+				}
+			});
+			const jud = await axios("auth/users",{method:"GET"});
+			this.judges = jud.data.map(j => {
+				return {
+					title: j.name,
+					desc: j.description,
+					img: j.avatar,
+					id: j._id
+				}
+			})
+		},
+		addTag (newTag) {
+		const tag = {
+			name: newTag,
+			code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
+		}
+		this.tags.push(tag)
+		this.ta.push(tag)
+		},
+
+		customLabel({ title, desc }) {
+			return `${title} – ${desc}`
+		},
+
+		updateTag(newTags) {
+			this.autocompleteItems = this.tags;
+			this.skills = newTags;
+			this.tagSend = this.skills.map(e => e.text);
 		},
 
 		publish: async function(){
@@ -240,60 +298,38 @@ export default {
 		},
 
 		newPrize: function(){
-			var col = document.createElement('div');	
-			col.className = "col-md-4 text-center prize-item"
-			var tmp = `<div class="cont">
-				<figure class="full mb-10">
-					<img src="http://api.luisvilches.cl/cup.png" alt="trophy" class="pdImage">
-				</figure>
-				<input type="text" class="form-control" name="prize-name-1" placeholder="Prize name">
-				<input type="text" class="form-control" name="prize-value-1" placeholder="Prize value">
-			</div>`;
-			col.innerHTML = tmp;
-			//var prizeItem = document.querySelector('#prizes .row .prize-item:first-child').cloneNode(true);
-			var container = document.querySelector('#prizes .row');
-			container.appendChild(col);
-			return false;
+			this.prizes.push({title:'',description:''});
 		},
 
 		newChallenge: function(){
-			var challengeItem = document.querySelector('.challenges .challenge-item:first-child').cloneNode(true);
-			var container = document.querySelector('.challenges');
-			container.appendChild(challengeItem);
-			return false;
-		},
-
-		newJuge: function(){
-			var judgeItem = document.querySelector('#judges .row .judge-item:first-child').cloneNode(true);
-			var container = document.querySelector('#judges .row');
-			container.appendChild(judgeItem);
-			return false;
+			this.challenges.push({title:'',description:''});
 		},
 
 		newCriteria: function(){
-			var judgeItem = document.querySelector('#judging-criteria .criterial-item:first-child').cloneNode(true);
-			var container = document.querySelector('#judging-criteria .criterial');
-			container.appendChild(judgeItem);
-			return false;
+			this.critrials.push({text:''});
 		},
 
-		newTag: function(){
-			document.querySelector('.new-tag').style.display = 'block';
+		newPatner(){
+
 		},
 		async updateImageProfilhackathon(){
 			var img = new FormData();
 			img.append('photoPerfil', this.files)
-			//console.log(this.files)
 			const { data } = await axios('/auth/hackathon/update/photo/'+this.hack.info._id,{method:"PUT",data:img})
-			console.log(data)
+
 			if(data.success){
 				this.load();
 			}
+		},
+
+		async update(){
+			console.log(this.$data)
 		}
 	}
 }
 </script>
 <style scoped>
+
 	figure.rounded{border-radius:100% !important;overflow:hidden;position: relative;}
 	figure.rounded img{width:100%;height:auto;display:block;}
 	#file{display:none;}
@@ -336,5 +372,25 @@ export default {
 	.tags li a{display:block;padding:10px;border-radius:5px;color:#555;background:#eee;text-decoration:none;transition:all .3s ease;}
 	.tags li a:hover{background:#ccc}
 
-	.pdImage{padding: 50px !important;}
+	.prize-item .pdImage{ padding:50px!important;}
+	.mt20min{margin-top: -20px;}
+	.option__image{max-width: 30px; float: left; margin-right:10px;position: relative;top:-7px; border-radius: 50px;}
+
+	
+	.theme-orange{
+		z-index: 9999;
+	}
+
+	.theme-orange .vdatetime-popup__header,
+	.theme-orange .vdatetime-calendar__month__day--selected > span > span,
+	.theme-orange .vdatetime-calendar__month__day--selected:hover > span > span {
+	background: #FF9800;
+	}
+
+	.theme-orange .vdatetime-year-picker__item--selected,
+	.theme-orange .vdatetime-time-picker__item--selected,
+	.theme-orange .vdatetime-popup__actions__button {
+	color: #ff9800;
+	}
 </style>
+ 

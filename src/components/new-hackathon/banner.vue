@@ -20,7 +20,7 @@
             <div class="container-lg">
                 <ul>
                     <li><a href="">Edit</a></li>
-                    <li><a href="">Save Changes</a></li>
+                    <li><a href="" @click.prevent="save">Save Changes</a></li>
                 </ul>
             </div>
         </div>
@@ -43,7 +43,7 @@
 <script>
 export default {
   name:"banner",
-  props:['val','type','img','event'],
+  props:['val','type','img','event','save'],
   data(){
       return{
           creator:true
