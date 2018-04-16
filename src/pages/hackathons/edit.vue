@@ -181,7 +181,7 @@
 							<div class="mapa mt-30">
 								<figure class="map full">
 									<!--img src="http://via.placeholder.com/900x300" alt=""-->
-									<Maps/>
+									<!--Maps/-->
 								</figure>
 							</div>
 					</div>
@@ -231,7 +231,8 @@ export default {
 			critrials:[],
 			judges:[],
 			judge:[],
-			datetime:''
+			datetime:'',
+			patners:[]
 		}
 	},
 	created(){
@@ -324,6 +325,22 @@ export default {
 
 		async update(){
 			console.log(this.$data)
+			var f = new FormData();
+			f.append('place',this.hack.info.place);
+			f.append('title',this.hack.info.title);
+			f.append('address',this.hack.info.address);
+			f.append('date',this.hack.info.date);
+			f.append('linkreserv',this.hack.info.linkreserv);
+			f.append('overvies',this.hack.info.overvies);
+			f.append('shedule',this.hack.info.shedule);
+			f.append('type',JSON.stringify(this.skills));
+			f.append('judges',JSON.stringify(this.judges));
+			f.append('prizes',JSON.stringify(this.prizes));
+			f.append('challenge',JSON.stringify(this.challenges));
+			//f.append('patnerts',this.patners);
+
+			const { data } = await axios('auth/hackathon/update/info/'+this.hack.info._id,{method:"PUT",data:f});
+			console.log(data);
 		}
 	}
 }

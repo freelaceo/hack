@@ -1,7 +1,7 @@
 <template>
   <div>
         <form>
-            <input type="hidden" id="address" v-model="address" value={!! address !!}>
+            <input type="hidden" id="address" v-model="address">
         </form>
         <div id="map"></div>
   </div>
