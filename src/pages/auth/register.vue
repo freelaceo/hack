@@ -7,7 +7,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6 nopadding">
+        <div class="col-md-6">
           <div class="register-form">
             <div class="register-form-panel form-wrapper">
               <form @submit.prevent="register" @keydown="form.onKeydown($event)">
@@ -19,6 +19,17 @@
                   <input type="text" class="form-control" name="email" v-bind:placeholder="$t('email')" v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }">
                   <has-error :form="form" field="email"/>
                 </div>
+                <!-- Input para tipo de usuario -->
+                <div class="register-input-wrapper">
+                  <input type="list" list="user-type" class="form-control"  v-bind:placeholder="$t('¿Cómo desea registrarse?')"  :class="{ 'is-invalid': form.errors.has('email') }">
+                  <datalist class="datalist-user-type" id="user-type">
+                    <option value="Participante"/>
+                    <option value="Organizador"/>
+                    <option value="Jurado"/>
+                  </datalist>
+                  <has-error :form="form" field="email"/>
+                </div>
+                <!-- Input para tipo de usuario -->
                 <div class="register-input-wrapper">
                   <input type="password" class="form-control" v-bind:placeholder="$t('password')" v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" name="password" required />
                   <has-error :form="form" field="password"/>
@@ -125,13 +136,16 @@ export default {
 
   .bb{
     text-align: left;
-    padding: 12px 0px;
-  }
-
+    padding: 12px 50px;
+}
   .nopadding{padding: 0!important;}
 
   .mbt{
     margin-bottom: 40px!important;
+  }
+  datalist.datalist-user-type option{
+    color:red;
+    padding: 20px;
   }
   .register-section {
     position: relative;
@@ -139,10 +153,9 @@ export default {
     width: 100%;
     height: auto;
     background-color: #fff;
-    margin-top: 150px;
   }
 
-  @media (max-width: 768px) {
+ @media (max-width: 768px) {
     .register-section {
       height: 900px;
     }
@@ -150,41 +163,39 @@ export default {
 
   .register-section .register-wrapper {
     display: flex;
-    align-items: center;
     flex-direction: column;
+    width: 100%;
     height: 100%;
     justify-content: center;
     margin-top: 60px;
   }
 
   .register-section .register-wrapper h1 {
-    float: left;
-    width: 100%;
-    text-align: center;
-    font-size: 40px;
-    color: #827f7f;
-    font-family: "Avenir Next";
-    font-weight: normal;
-  margin-bottom: 60px;
-  }
+        float: left;
+        width: 100%;
+        text-align: center;
+        font-size: 40px;
+        color: #827f7f;
+        font-family: "Avenir Next";
+        font-weight: normal;
+        margin-bottom: 30px;
+      }
   .register-section .register-wrapper .register-form {
     border: 1px solid #c5c3c3;
     border-radius: 3px;
-    min-height: 500px;
-  }
+    min-height: 515px;
+}
 
   .register-section .register-wrapper .register-form .register-form-panel {
     flex-basis: 500%;
     padding: 60px; }
   .register-section .register-wrapper .register-form .register-advice {
     font-size: 17px;
-    width: 100%;
-    float: left; }
+    width: 100%; }
   .register-section .register-wrapper .register-form .register-advice a {
     text-decoration: none;
     color: #468ee5; }
   .register-section .register-wrapper .register-form .register-input-wrapper {
-    float: left;
     width: 100%;
     margin-bottom: 20px; }
   .register-section .register-wrapper .register-form .register-input-wrapper.last {
@@ -197,20 +208,20 @@ export default {
     font-size: 18px;
     border-radius: 3px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    font-family: MontserratThin;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"!important; 
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
   .register-section .register-wrapper .register-form .register-input-wrapper input:-moz-placeholder {
     color: #8d8c8c;
-    font-family: MontserratRegular; }
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"!important;  }
   .register-section .register-wrapper .register-form .register-input-wrapper input:-ms-input-placeholder {
     color: #8d8c8c;
-    font-family: MontserratRegular; }
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"!important;  }
   .register-section .register-wrapper .register-form .register-input-wrapper input::-webkit-input-placeholder {
     color: #8d8c8c;
-    font-family: MontserratRegular; }
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"!important;  }
   .register-section .register-wrapper .register-form .register-input-wrapper input::-moz-placeholder {
     color: #8d8c8c;
-    font-family: MontserratRegular; }
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"!important;  }
   .register-section .register-wrapper .register-form .register-input-wrapper input:focus {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
   .register-section .register-wrapper .register-form .register-btn-wrapper {
@@ -225,7 +236,7 @@ export default {
     font-size: 18px;
     border-radius: 3px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    font-family: MontserratRegular;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"!important; 
     background-color: #fff;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     line-height: 1;
