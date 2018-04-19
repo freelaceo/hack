@@ -151,9 +151,10 @@ export const actions = {
 
   async createHackathon ({commit},p){
     var userID = state.user;
+    let t = p.skills.map(t => t.name);
     var f = new FormData();
         f.append('place',p.form.place);
-        f.append('type',p.form.type);
+        f.append('type',t);
         f.append('invite',p.form.invite);
         f.append('title',p.form.title);
         f.append('address',p.form.address);

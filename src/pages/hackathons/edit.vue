@@ -1,7 +1,6 @@
 <template>
 	<main>
-		<Banner :img="banner" val="Publish" type="success" :event="publish" :save="update"/>
-		
+		<Banner val="Publish" type="success" :event="publish" :save="update" :hackid="idHack" :load="load" :edit="true"/>
 		<section class="seccion">
 			<div class="container-lg">
 				<div class="row">
@@ -139,7 +138,7 @@
 							</div>
 
 							<div class="mt-30" id="judges">
-								<h2 class="subtitle mb-15 subtitle-add">Judges <span class="btn btn-red mt20min" @click="newJuge()">Add</span></h2>
+								<h2 class="subtitle mb-15 subtitle-add">Judges</h2>
 								<!--div class="row">
 									<div class="col-md-4 text-center judge-item">
 										<div class="cont">
@@ -155,7 +154,7 @@
 								</div-->
 
 								<!--multiselect v-model="skills" tag-placeholder="Add this as new Judge" placeholder="Search or add a Judge" label="name" track-by="code" :options="tags" :multiple="true" :taggable="false" @tag="addTag"></multiselect-->
-								<multiselect v-model="judge" placeholder="Fav No Man’s Sky path" label="title" track-by="title" :multiple="true" :options="judges" :option-height="5" :custom-label="customLabel" :show-labels="false">
+								<multiselect v-model="judge" placeholder="Find Judges" label="title" track-by="title" :multiple="true" :options="judges" :option-height="5" :custom-label="customLabel" :show-labels="false">
 									<template slot="singleLabel" slot-scope="props"><img class="option__image" :src="props.option.img" alt="No Man’s Sky"><span class="option__desc"><span class="option__title">{{ props.option.title }}</span></span></template>
 									<template slot="option" slot-scope="props"><img class="option__image" :src="props.option.img" alt="No Man’s Sky">
 									<div class="option__desc"><span class="option__title">{{ props.option.title }}</span>   |  <span class="option__small">{{ props.option.desc }}</span></div>
@@ -215,6 +214,7 @@ export default {
 	},
 	data(){
 		return {
+			idHack:'',
 			filterValue:'',
 			hack:{
 				info:{},
@@ -236,41 +236,43 @@ export default {
 		}
 	},
 	created(){
-		
-	 this.load();
+	 	this.load();
 	},
 	methods:{
 		load: async function(){
 			const { data } = await axios('/auth/hackathon/url/'+this.$route.params.id,{method:"GET"});
 			this.hack.info = data.data;
+			this.idHack = data.data._id;
+			this.skills = data.data.type.map(e => {
+				return {
+					name: e,
+					code: e.substring(0, 2) + Math.floor((Math.random() * 10000000))
+				}
+			});
+			this.judge = data.data.judges;
 			this.hack.tags = this.hack.info.type[0].split(",");
 			const user = await axios('/auth/user/'+this.hack.info.userId,{method:"GET"})
 			this.hack.user = user.data;
-			const tags = await axios("auth/types",{method:"GET"});	
-			this.tags = tags.data.map(e => {
-				console.log(e.types[0])
-				return {
-					name: e.types[0],
-					code: e.types[0].substring(0, 2) + Math.floor((Math.random() * 10000000))
-				}
-			});
 			const jud = await axios("auth/users",{method:"GET"});
 			this.judges = jud.data.map(j => {
 				return {
 					title: j.name,
 					desc: j.description,
 					img: j.avatar,
-					id: j._id
+					idJudge: j._id
 				}
 			})
+			const tags = await axios("auth/types",{method:"GET"});	
+			this.tags = tags.data.map(e => {
+				return {
+					name: e.types[0],
+					code: e.types[0].substring(0, 2) + Math.floor((Math.random() * 10000000))
+				}
+			});
+			
 		},
 		addTag (newTag) {
-		const tag = {
-			name: newTag,
-			code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
-		}
-		this.tags.push(tag)
-		this.ta.push(tag)
+		this.tags.push(newTag);
 		},
 
 		customLabel({ title, desc }) {
@@ -284,6 +286,7 @@ export default {
 		},
 
 		publish: async function(){
+			this.update();
 			const data = await  axios('/auth/hackathon/publish/'+this.hack.info._id,{method:'put'})
 			this.$router.push({name: 'welcome' });
 		}, 
@@ -324,7 +327,7 @@ export default {
 		},
 
 		async update(){
-			console.log(this.$data)
+			let t = this.skills.map(t => t.name);
 			var f = new FormData();
 			f.append('place',this.hack.info.place);
 			f.append('title',this.hack.info.title);
@@ -333,10 +336,11 @@ export default {
 			f.append('linkreserv',this.hack.info.linkreserv);
 			f.append('overvies',this.hack.info.overvies);
 			f.append('shedule',this.hack.info.shedule);
-			f.append('type',JSON.stringify(this.skills));
-			f.append('judges',JSON.stringify(this.judges));
+			f.append('type',t);
+			f.append('judges',JSON.stringify(this.judge));
 			f.append('prizes',JSON.stringify(this.prizes));
 			f.append('challenge',JSON.stringify(this.challenges));
+			f.append('critrials',JSON.stringify(this.critrials));
 			//f.append('patnerts',this.patners);
 
 			const { data } = await axios('auth/hackathon/update/info/'+this.hack.info._id,{method:"PUT",data:f});

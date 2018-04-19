@@ -130,9 +130,11 @@ export default {
 			this.popular = [];
 		}, 
 		filter:function(data,cat){
+			console.log('data =>',data)
 			return data.filter((item,index) => {
 				if(index <= 4){
-					if(item.type[0].includes(cat)){
+					console.log('item =>',item)
+					if(item.type[0].includes(cat.toLowerCase())){
 						return item;
 					}
 				}

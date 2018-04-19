@@ -21,7 +21,7 @@
                 </div>
                 <!-- Input para tipo de usuario -->
                 <div class="register-input-wrapper">
-                  <input type="list" list="user-type" class="form-control"  v-bind:placeholder="$t('¿Cómo desea registrarse?')"  :class="{ 'is-invalid': form.errors.has('email') }">
+                  <input type="list" list="user-type" class="form-control" v-model="form.role" v-bind:placeholder="$t('¿Cómo desea registrarse?')"  :class="{ 'is-invalid': form.errors.has('role') }">
                   <datalist class="datalist-user-type" id="user-type">
                     <option value="Participante"/>
                     <option value="Organizador"/>
@@ -102,7 +102,8 @@ export default {
       name: '',
       email: '',
       password: '',
-      password_confirmation: ''
+      password_confirmation: '',
+      role: ''
     })
   }),
 
@@ -110,10 +111,11 @@ export default {
     async register () {
       // Register the user.
       var q = new FormData();
-        q.append('name',this.form.name);
-        q.append('email',this.form.email);
-        q.append('password',this.form.password);
-        q.append('password_confirmation',this.form.password_confirmation);
+      q.append('name',this.form.name);
+      q.append('email',this.form.email);
+      q.append('password',this.form.password);
+      q.append('password_confirmation',this.form.password_confirmation);
+      q.append('role',this.form.role);
         
       const register = await axios('/register',{method:"POST",data:q});
       const {data} = await axios('/login',{method:'POST',data:q});

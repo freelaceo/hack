@@ -179,6 +179,7 @@ export default {
         number: 1,
         complete: true,
       },
+      skills:[],
       form: new Form({
         place: '',
         type: [],
@@ -203,6 +204,12 @@ export default {
       
     },
     async createNewHackathon () {
+        this.skills = this.form.type.map(s => {
+          return {
+            name: s,
+            code: ''
+          }
+        })
        await this.$store.dispatch('auth/createHackathon',this);
 
      this.form.reset();

@@ -7,7 +7,7 @@
 						<div id="aside" class="col-md-3">
 
 							<div class="user_img mb-15">
-								<figure class="full"><img src="http://via.placeholder.com/230x230" alt="" class=""></figure>
+								<figure class="full"><img :src="hack.info.photoPerfil" alt="" class=""></figure>
 							</div>
 
 							<div class="user_info">
@@ -128,31 +128,13 @@
 								<div class="prizes mt-30">
 									<h2 class="subtitle mb-15">Prizes</h2>
 									<div class="prizes row">
-										<div class="col-md-4 prize-item">
+										<div v-for="(prize,index) in hack.info.prizes" :key="index" class="col-md-4 prize-item">
 											<div class="cont">
 												<figure class="full mb-15">
-													<img src="http://via.placeholder.com/300x300" alt="trophy">
+													<img src="../assets/trophy.png" alt="trophy">
 												</figure>
-												<h3>First Place</h3>
-												<p class="price">50,000 HKD</p>
-											</div>
-										</div>
-										<div class="col-md-4 prize-item">
-											<div class="cont">
-												<figure class="full mb-15">
-													<img src="http://via.placeholder.com/300x300" alt="trophy">
-												</figure>
-												<h3>Second Place</h3>
-												<p class="price">25,000 HKD</p>
-											</div>
-										</div>
-										<div class="col-md-4 prize-item">
-											<div class="cont">
-												<figure class="full mb-15">
-													<img src="http://via.placeholder.com/300x300" alt="trophy">
-												</figure>
-												<h3>Third Place</h3>
-												<p class="price">10,000 HKD</p>
+												<h3>{{prize.title}}</h3>
+												<p class="price">{{prize.description}}</p>
 											</div>
 										</div>
 									</div>
@@ -162,13 +144,9 @@
 									<h2 class="subtitle mb-15">Challenges</h2>
 
 									<ul class="challenges">
-										<li class="challenge-item">
-											<h4>Smart Workplace</h4>
-											<p class="pbody">Develop intelligent and user friendly solutions to make workplaces more efficient.  Ideas can range from the transportation to work, parking, booking of different facilities to information communication & sharing.</p>
-										</li>
-										<li>
-											<h4>Smart Property Management</h4>
-											<p class="pbody">Develop ideas & solutions to disrupt traditional property management into a whole new operation that saves manpower and allows for proactive & predictive services.</p>
+										<li class="challenge-item" v-for="(challenge,index) in hack.info.challenge" :key="index">
+											<h4>{{challenge.title}}</h4>
+											<p class="pbody">{{challenge.description}}</p>
 										</li>
 									</ul>
 								</div>
@@ -177,58 +155,13 @@
 									<h2 class="subtitle mb-15">Judges</h2>
 
 									<div class="row total">
-										<div class="col-md-4 judge-item">
+										<div class="col-md-4 judge-item"><!-- v-for="(judges,index) in hack.info.judges" :key="index" -->
 											<div class="cont">
 												<figure class="full mb-15">
 													<img src="http://via.placeholder.com/163x163" alt="Usuario">
 												</figure>
 												<h3>Adi Abili</h3>
 												<p class="profesion">#Boss</p>
-											</div>
-										</div>
-										<div class="col-md-4 judge-item">
-											<div class="cont">
-												<figure class="full mb-15">
-													<img src="http://via.placeholder.com/163x163" alt="Usuario">
-												</figure>
-												<h3>Jacob Clarke</h3>
-												<p class="profesion">Managing Director, <br/>LA Capital</p>
-											</div>
-										</div>
-										<div class="col-md-4 judge-item">
-											<div class="cont">
-												<figure class="full mb-15">
-													<img src="http://via.placeholder.com/163x163" alt="Usuario">
-												</figure>
-												<h3>Brian Collins</h3>
-												<p class="profesion">Where to even begin…</p>
-											</div>
-										</div>
-										<div class="col-md-4 judge-item">
-											<div class="cont">
-												<figure class="full mb-15">
-													<img src="http://via.placeholder.com/163x163" alt="Usuario">
-												</figure>
-												<h3>Sabeen Ali</h3>
-												<p class="profesion">47th President of <br/>the United States <br/>of America</p>
-											</div>
-										</div>
-										<div class="col-md-4 judge-item">
-											<div class="cont">
-												<figure class="full mb-15">
-													<img src="http://via.placeholder.com/163x163" alt="Usuario">
-												</figure>
-												<h3>Sabeen Ali</h3>
-												<p class="profesion">Art Director, Pixar</p>
-											</div>
-										</div>
-										<div class="col-md-4 judge-item">
-											<div class="cont">
-												<figure class="full mb-15">
-													<img src="http://via.placeholder.com/163x163" alt="Usuario">
-												</figure>
-												<h3>Simon Machete</h3>
-												<p class="profesion">The Most Dangerous <br/>Man Alive</p>
 											</div>
 										</div>
 									</div>
@@ -238,10 +171,7 @@
 									<h2 class="subtitle mb-15">Judging Criteria</h2>
 
 									<ol class="criterial">
-										<li>Impact - Are you changing the world</li>
-										<li>UX/UI - Is your app pretty? How’s the usability?</li>
-										<li>Tech Chops - How solid is the tech?</li>
-										<li>Execution - Is your team bad ass or what?</li>
+										<li v-for="(item,index) in hack.info.critrials" :key="index">{{item.text}}</li>
 									</ol>
 								</div>
 
@@ -294,6 +224,9 @@ export default {
 			this.hack.tags = this.hack.info.type[0].split(",");
 			const user = await axios('/auth/user/'+this.hack.info.userId,{method:"GET"})
 			this.hack.user = user.data;
+
+
+			console.log(this.hack)
 		},
 		publish: async function(){
 			const data = await  axios('/auth/hackathon/publish/'+this.hack.info._id,{method:'put'})
