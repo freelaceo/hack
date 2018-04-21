@@ -67,5 +67,26 @@
   "AccessBestPractices":"Access Best Practices",
   "GroupMessaging":"Group Messaging",
   "TargetedMarketing":"Targeted Marketing",
-  "GoPremium":"Go Premium"
+  "GoPremium":"Go Premium",
+  "TypeOfRegister":"Type of Register",
+  "create_project":"Create Project",
+  "organize_hackathon":"Let's organize a hackathon!",
+  "Golive_spread_world":"Go live, spread the world, and stay organized",
+  "step":"Step",
+  "of":"of",
+  "where_place":"Where will this hackathon take place?",
+  "next":"Next",
+  "type_hackathon":"What type of Hackathon?",
+  "search_for_theme":"Search for a theme",
+  "Who_invite":"Who should we invite?",
+  "search_skillsets":"Search for skillsets",
+  "more":"More",
+  "about_your_hackathon":"Tell us about your hackathon",
+  "Venue_Address":"Venue Address",
+  "Date_and_time":"Date and time",
+  "Link_to_reserve":"Link to reserve seats?",
+  "Overvies":"Overvies",
+  "Schedule":"Schedule",
+  "title_hackathon":"What is the title of your hackathon?"
+
 }

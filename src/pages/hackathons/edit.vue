@@ -1,6 +1,6 @@
 <template>
 	<main>
-		<Banner val="Publish" type="success" :event="publish" :save="update" :hackid="idHack" :load="load" :edit="true"/>
+		<Banner val="Publish" type="success" :event="publish" :save="update" :hackid="idHack" :edit="true"/>
 		<section class="seccion">
 			<div class="container-lg">
 				<div class="row">
@@ -40,15 +40,6 @@
 								</div>
 							</div>
 						</div>
-
-						<div class="hack-section
-						 mt-60
-						 ">
-							<h2 class="subtitle mb-15 subtitle-add">Patners <span class="btn btn-red mt20min" @click="newPatner()">Add</span></h2>
-							<figure class="full mt-15"><img src="http://via.placeholder.com/230x180" alt="" class=""></figure>
-							<figure class="full mt-15"><img src="http://via.placeholder.com/230x180" alt="" class=""></figure>
-							<figure class="full mt-15"><img src="http://via.placeholder.com/230x180" alt="" class=""></figure>
-						</div>
 					</div>
 
 					<div id="content" class="col-md-9">
@@ -59,7 +50,8 @@
 								<!--li><span class="icon-calendar"></span>October 21-22, 2017</li-->
 								<div class="cont">
 									<span class="fa fa-clock"></span>
-									<input type="text" class="form-control" :value="hack.info.date" placeholder="Fecha">
+									<!--input type="text" class="form-control" :value="hack.info.date" placeholder="Fecha"-->
+									<input type="datetime-local" class="form-control" :value="hack.info.date" placeholder="Fecha">
 									<!--datetime type="datetime" v-model="datetime" format="DD MM YYYY" class="theme-orange"></datetime-->
 								</div>
 								<div class="cont">
@@ -139,21 +131,7 @@
 
 							<div class="mt-30" id="judges">
 								<h2 class="subtitle mb-15 subtitle-add">Judges</h2>
-								<!--div class="row">
-									<div class="col-md-4 text-center judge-item">
-										<div class="cont">
-											<figure class="full mb-10">
-												<img src="http://via.placeholder.com/300x300" alt="trophy">
-												<span class="caption">Subir imágen</span>
-												<input type="file" name="judge-1">
-											</figure>
-											<input type="text" class="form-control" name="judge-name-1" placeholder="Judge name">
-											<input type="text" class="form-control" name="judge-value-1" placeholder="Judge value">
-										</div>
-									</div>
-								</div-->
-
-								<!--multiselect v-model="skills" tag-placeholder="Add this as new Judge" placeholder="Search or add a Judge" label="name" track-by="code" :options="tags" :multiple="true" :taggable="false" @tag="addTag"></multiselect-->
+								<br>
 								<multiselect v-model="judge" placeholder="Find Judges" label="title" track-by="title" :multiple="true" :options="judges" :option-height="5" :custom-label="customLabel" :show-labels="false">
 									<template slot="singleLabel" slot-scope="props"><img class="option__image" :src="props.option.img" alt="No Man’s Sky"><span class="option__desc"><span class="option__title">{{ props.option.title }}</span></span></template>
 									<template slot="option" slot-scope="props"><img class="option__image" :src="props.option.img" alt="No Man’s Sky">
@@ -177,11 +155,15 @@
 
 							<multiselect v-model="skills" tag-placeholder="Add this as new tag" placeholder="Search or add a tag" label="name" track-by="code" :options="tags" :multiple="true" :taggable="false" @tag="addTag"></multiselect>
 
-							<div class="mapa mt-30">
-								<figure class="map full">
-									<!--img src="http://via.placeholder.com/900x300" alt=""-->
-									<!--Maps/-->
-								</figure>
+							<div class="mt-30" id="sponsor">
+								<h2 class="subtitle mb-15 subtitle-add">Sponsors</h2>
+								<br>
+								<multiselect v-model="sponsors" placeholder="Find Sponsor" label="title" track-by="title" :multiple="true" :options="sponsor" :option-height="5" :custom-label="customLabel" :show-labels="false">
+									<template slot="singleLabel" slot-scope="props"><img class="option__image" :src="props.option.img" alt="No Man’s Sky"><span class="option__desc"><span class="option__title">{{ props.option.title }}</span></span></template>
+									<template slot="option" slot-scope="props"><img class="option__image" :src="props.option.img" alt="No Man’s Sky">
+									<div class="option__desc"><span class="option__title">{{ props.option.title }}</span>   |  <span class="option__small">{{ props.option.desc }}</span></div>
+									</template>
+								</multiselect>
 							</div>
 					</div>
 				</div>
@@ -197,7 +179,6 @@ import Banner from '../../components/new-hackathon/banner'
 import { stringify } from 'querystring';
 import VueTagsInput from '@johmun/vue-tags-input';
 import Multiselect from 'vue-multiselect'
-import datetime from 'vuejs-datetimepicker';
 import Maps from '../../components/maps'
 
 export default {
@@ -206,14 +187,13 @@ export default {
 		Banner,
 		VueTagsInput,
 		Multiselect,
-		datetime,
-		Maps
 	},
 	metaInfo () {
 		return { title: this.$t('home') }
 	},
 	data(){
 		return {
+			date:'',
 			idHack:'',
 			filterValue:'',
 			hack:{
@@ -230,9 +210,12 @@ export default {
 			skills:[],
 			critrials:[],
 			judges:[],
+			sponsor:[],
+			sponsors:[],
 			judge:[],
 			datetime:'',
-			patners:[]
+			patners:[],
+
 		}
 	},
 	created(){
@@ -242,6 +225,11 @@ export default {
 		load: async function(){
 			const { data } = await axios('/auth/hackathon/url/'+this.$route.params.id,{method:"GET"});
 			this.hack.info = data.data;
+
+			if( this.creatorVerify(data.data.userId) === false){
+				this.$router.push({name:'welcome'});
+			}
+
 			this.idHack = data.data._id;
 			this.skills = data.data.type.map(e => {
 				return {
@@ -253,11 +241,33 @@ export default {
 			this.hack.tags = this.hack.info.type[0].split(",");
 			const user = await axios('/auth/user/'+this.hack.info.userId,{method:"GET"})
 			this.hack.user = user.data;
-			const jud = await axios("auth/users",{method:"GET"});
-			this.judges = jud.data.map(j => {
+			this.prizes = data.data.prizes;
+			this.challenges = data.data.challenge;
+			this.critrials = data.data.critrials;
+			const us = await axios("auth/users",{method:"GET"});
+			const jud = us.data.filter(a => {
+				if(a.role === 'judge'){
+					return a;
+				}
+			})
+			this.judges = jud.map(j => {
 				return {
 					title: j.name,
-					desc: j.description,
+					desc: j.job,
+					img: j.avatar,
+					idJudge: j._id
+				}
+			});
+
+			const spon = us.data.filter(a => {
+				if(a.role === 'sponsor'){
+					return a;
+				}
+			})
+			this.sponsor = spon.map(j => {
+				return {
+					title: j.name,
+					desc: j.job,
 					img: j.avatar,
 					idJudge: j._id
 				}
@@ -326,6 +336,15 @@ export default {
 			}
 		},
 
+		creatorVerify(id){
+            let user = JSON.parse(window.localStorage.getItem('user'))._id;
+            if(user === id){
+                return true;
+            } else {
+                return false;
+            }
+        },
+
 		async update(){
 			let t = this.skills.map(t => t.name);
 			var f = new FormData();
@@ -341,7 +360,7 @@ export default {
 			f.append('prizes',JSON.stringify(this.prizes));
 			f.append('challenge',JSON.stringify(this.challenges));
 			f.append('critrials',JSON.stringify(this.critrials));
-			//f.append('patnerts',this.patners);
+			f.append('sponsor',JSON.stringify(this.sponsors));
 
 			const { data } = await axios('auth/hackathon/update/info/'+this.hack.info._id,{method:"PUT",data:f});
 			console.log(data);

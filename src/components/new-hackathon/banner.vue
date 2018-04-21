@@ -1,28 +1,26 @@
 <template>
   	<section class="section">
         <div class="banner" v-bind:style="{ backgroundImage: 'url(' + img + ')' }">
-            <div v-if="edit" class="changeImage" @click="upload()"><i class="fas fa-camera"></i></div>
-            <input type="file" name="file" id="file">
+            <div v-if="edit" class="changeImage" @click="uploadBanner()"><i class="fas fa-camera"></i></div>
+            <input type="file" name="file" id="fileBanner">
             <div class="container-lg">
                 <div class="btn-holder">
-                    <div v-if="type === 'success'">
-                        <a @click="event" class="btn btn-lg btn-green">{{val}}</a>
+                    <div v-if="creator && edit == true">
+                        <a @click="event" class="btn btn-lg btn-green">Publish</a>
                     </div>
-                    <div v-else-if="type === 'primary'">
-                        <a @click="event" class="btn btn-lg btn-blue">{{val}}</a>
-                    </div>
+
                     <div v-else>
-                        <a @click="event" class="btn btn-lg">{{val}}</a>
+                        <a @click="event" class="btn btn-lg btn-blue">Join</a>
                     </div>
-                    <a class="btn btn-xs btn-black">...</a>
+                    <!--a class="btn btn-xs btn-black">...</a-->
                 </div>
             </div>
         </div>
         <div v-if="creator" class="options">
             <div class="container-lg">
                 <ul>
-                    <li><a href="">Edit</a></li>
-                    <li><a href="" @click.prevent="save">Save Changes</a></li>
+                    <li v-if="edit"><a href="" @click.prevent="save">Save Changes</a></li>
+                    <li v-else><router-link :to="'/edit/' + this.$route.params.id">Edit</router-link></li>
                 </ul>
             </div>
         </div>
@@ -45,7 +43,7 @@
         display: block;
     }
 
-    #file{display:none;}
+    #fileBanner{display:none;}
 
     .changeImage{
         display:none;
@@ -67,7 +65,7 @@ export default {
   props:['val','type','event','save','hackid','load','edit'],
   data(){
       return{
-          creator:true,
+          creator:null,
           files: null,
           idhack:'',
           img:''
@@ -82,17 +80,20 @@ export default {
           const { data } = await axios('/auth/hackathon/url/'+this.$route.params.id,{method:"GET"});
             this.idhack = data.data._id;
             this.img = data.data.banner;
+            this.creator = this.creatorVerify(data.data.userId);
         },
-        upload: function(){
+        uploadBanner: function(){
 			var self = this;
-			var up = document.querySelector('#file');
+			var up = document.querySelector('#fileBanner');
 			up.click();
 			up.addEventListener('change', function(){
 				self.files = this.files[0];
-				self.updateImageProfilhackathon();
-			})
+				self.updateImageBannerhackathon();
+            });
+            
+            
         },
-        async updateImageProfilhackathon(){
+        async updateImageBannerhackathon(){
 			var img = new FormData();
             img.append('photo', this.files)
 
@@ -101,7 +102,16 @@ export default {
 			if(data.success){
 				this.loaded();
 			}
-		},
+        },
+        
+        creatorVerify(id){
+            let user = JSON.parse(window.localStorage.getItem('user'))._id;
+            if(user === id){
+                return true;
+            } else {
+                return false;
+            }
+        }
   }
 }
 </script>

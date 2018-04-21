@@ -27,6 +27,7 @@
                   </div>
                   <p id="followers" class=" follow-status" v-if="user.followers"><strong>{{user.followers}} </strong>Followers </p>
                   <p id="followins" class=" follow-status" v-if="user.followins"><strong>{{user.followins}} </strong>Following </p>
+                  <p id="short-desc" class=" desc-text" v-if="user.job">{{user.job}}</p>
                   <p id="short-desc" class=" desc-text" v-if="user.description">{{user.description}}</p>
                   <p id="location" class="" v-if="user.location"><i class="fas fa-map-marker-alt" aria-hidden="true"></i>{{user.location}}</p>
                   <div id="social" class="">

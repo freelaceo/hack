@@ -21,12 +21,21 @@
                 </div>
                 <!-- Input para tipo de usuario -->
                 <div class="register-input-wrapper">
-                  <input type="list" list="user-type" class="form-control" v-model="form.role" v-bind:placeholder="$t('¿Cómo desea registrarse?')"  :class="{ 'is-invalid': form.errors.has('role') }">
+                  <!--input type="list" list="user-type" class="form-control" v-model="form.role" v-bind:placeholder="$t('¿Cómo desea registrarse?')"  :class="{ 'is-invalid': form.errors.has('role') }">
                   <datalist class="datalist-user-type" id="user-type">
-                    <option value="Participante"/>
+                    <option option="Participante" label="Hacker">Hacker</option> 
                     <option value="Organizador"/>
                     <option value="Jurado"/>
-                  </datalist>
+                    <option value="Sponsor"/>
+                  </datalist-->
+                  
+                  <select name="" id="" v-model="form.role" class="form-control" :class="{ 'is-invalid': form.errors.has('role') }">
+                    <option value="" disabled selected>{{$t('TypeOfRegister')}}</option>
+                    <option value="hacker">Participante</option>
+                    <option value="organizer">Organizador</option> 
+                    <option value="judge">Jurado</option> 
+                    <option value="sponsor">Sponsor</option> 
+                  </select>
                   <has-error :form="form" field="email"/>
                 </div>
                 <!-- Input para tipo de usuario -->
@@ -104,7 +113,8 @@ export default {
       password: '',
       password_confirmation: '',
       role: ''
-    })
+    }),
+    prueba:''
   }),
 
   methods: {
@@ -129,6 +139,9 @@ export default {
 
       // Update the user.
       await this.$store.dispatch('auth/fetchUser',{success:data.success,token:data.token,user:data.user,router:this.$router});
+    },
+    test(){
+      console.log(this.prueba);
     }
   }
 }
@@ -209,6 +222,18 @@ export default {
     width: 100%;
     font-size: 18px;
     border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"!important; 
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+  .register-section .register-wrapper .register-form .register-input-wrapper select {
+    border: 1px solid #b7b5b5;
+    outline: none;
+    padding: 10px 10px;
+    height: 50px;
+    width: 100%;
+    font-size: 18px;
+    border-radius: 3px;
+    color: #8d8c8c;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"!important; 
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }

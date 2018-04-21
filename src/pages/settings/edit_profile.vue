@@ -22,6 +22,15 @@
           </div>
         </div>
 
+        <!-- Username  -->
+        <div class="form-group">
+          <label class="label-text">{{ $t('job') }}</label>
+          <div class="box-input">
+            <input v-model="form.job" :class="{ 'is-invalid': form.errors.has('job') }" class="form-control" type="text" name="job" >
+            <has-error :form="form" field="job"/>
+          </div>
+        </div>
+
         <!-- Skills  -->
         <div class="form-group">
           <label class="label-text">{{ $t('Skills') }}</label>
@@ -137,6 +146,7 @@ export default {
         linkedin:'',
         other:''
       },
+      job:'',
       skills:''
     })
   }),
@@ -182,6 +192,7 @@ export default {
       f.append('linkedin',this.form.socials.linkedin);
       f.append('other',this.form.socials.other);
       f.append('skills',this.tagSend);
+      f.append('job',this.form.job);
       const { data } = await axios('/auth/user/update/'+this.user._id,{method:"PUT",data:f})
       console.log(data)
       if(data.success){

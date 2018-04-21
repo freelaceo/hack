@@ -4,8 +4,8 @@
          <div class="container-lg">
             <div class="row justify-content-center">
                 <div class="col-sm-12 text-center">
-                    <h1>Let's organize a hackathon!</h1>
-                    <h3>Go live, spread the world, and stay organized</h3>
+                    <h1>{{$t('organize_hackathon')}}</h1>
+                    <h3>{{$t('Golive_spread_world')}}</h3>
                 </div>
             </div>
         </div> 
@@ -17,61 +17,48 @@
                 <form @submit.prevent="createNewHackathon" @keydown="form.onKeydown($event)">
                  <!-- Step 1 -->
                   <div v-show="step.number === 1" class="info-medio-a">
-                      <h4 class="avenir">Step 1 of 3</h4>
+                      <h4 class="avenir">{{$t('step')}} 1 {{$t('of')}} 4</h4>
                       <br>
-                      <h2 class="avenir">Where will this hackathon take place?</h2>
+                      <h2 class="avenir">{{$t('where_place')}}</h2>
                       <br>
                       <form class="form-inline">
                          <input class="form-control mr-sm-2" v-model="form.place" type="search" aria-label="Search">
                        </form>
                      <div class="next-button avenir">
-                        <button @click.prevent="next" class="btn btn-2040 btn-blue">Next</button>
+                        <button @click.prevent="next" class="btn btn-2040 btn-blue">{{$t('next')}}</button>
                      </div>
                   </div>
                    <div v-show="step.number === 2 || step.number === 3" class="info-medio-a">
-                       <h4 class="avenir">Step 1 of 3</h4>
+                       <h4 class="avenir">{{$t('step')}} 1 {{$t('of')}} 4</h4>
                        <br>
-                       <h2 class="avenir">Where will this hackathon take place?</h2>
+                       <h2 class="avenir">{{$t('where_place')}}</h2>
                        <br>
                        <h3 class="avenir">{{form.place}} <strong style="color: #5094E6;">(change location)</strong></h3>
                   </div>
                  <!-- Step 2 -->
                     <div v-show="step.number === 2 || step.number === 3" class="info-medio-b">
-                        <h4 class="avenir">Step 2 of 3</h4>
+                        <h4 class="avenir">{{$t('step')}} 2 {{$t('of')}} 4</h4>
                         <br>
-                        <h2 class="avenir">What type of Hackathon?</h2>
+                        <h2 class="avenir">{{$t('type_hackathon')}}</h2>
                         <br>
                         <form class="form-inline ">
-                           <input class="form-control mr-sm-2 avenir wd100" type="search" placeholder="Search for a theme" aria-label="Search">
+                           <input class="form-control mr-sm-2 avenir wd100" type="search" :placeholder="$t('search_for_theme')" aria-label="Search">
                          </form>
                          <div>
                              <div class="cajita-botones">
-                                      <div class="tags">
+                                      <div class="tags" v-for="(item,index) in types" :key="index">
                                           <label class="check label">
-                                              <input class="check__input" type="checkbox" v-model="form.type" value="virtual" id="virtual">
-                                              <div class="check__text">Virtual</div>
-                                          </label>
-                                      </div>
-                                      <div class="tags">
-                                          <label class="check label">
-                                              <input class="check__input" type="checkbox" v-model="form.type" value="blockchain" id="blockchain">
-                                              <div class="check__text">Blockchain</div>
-                                          </label>
-                                      </div>
-                                      <div class="tags">
-                                          <!--label for="university" class="btn btn-line">University <input type="checkbox" v-model="form.hackathon_type" value="university" id="university" class="badgebox"><span class="badge">&check;</span></label-->
-                                          <label class="check label">
-                                              <input class="check__input" type="checkbox" v-model="form.type" value="university" id="university">
-                                              <div class="check__text">University</div>
+                                              <input class="check__input" type="checkbox" v-model="form.type" :value="item" :id="item">
+                                              <div class="check__text">{{item}}</div>
                                           </label>
                                       </div>
                               </div>
                               <div>
                                      <div class="more">
-                                         <h5><img src="img/reload.png" alt=""> More...</h5>
+                                         <h5 @click="typesAlls"><img src="../../assets/reload.png" alt=""> {{$t('more')}}...</h5>
                                      </div>
                                      <div v-show="step.number === 2" class="next-button">
-                                         <button @click.prevent="next" class="btn btn-2040 btn-blue">Next</button>
+                                         <button @click.prevent="next" class="btn btn-2040 btn-blue">{{$t('next')}}</button>
                                      </div>
                                  <div class=""></div>
 
@@ -81,43 +68,28 @@
 
                    <!-- Step 3 -->
                     <div v-show="step.number === 3" class="info-medio-c">
-                        <h4>Step 3 of 3</h4>
+                        <h4>{{$t('step')}} 3 {{$t('of')}} 4</h4>
                         <br>
-                        <h2>Who should we invite?</h2>
+                        <h2>{{$t('Who_invite')}}</h2>
                         <br>
                         <form class="form-inline">
-                           <input class="form-control mr-sm-2" type="search" placeholder="Search for skillsets" aria-label="Search">
+                           <input class="form-control mr-sm-2" type="search" :placeholder="$t('search_skillsets')" aria-label="Search">
                          </form>
                          <div>
                              <div class="cajita-botones">
-                                         <div class="tags">
-                                             <!--label for="html" class="btn btn-primary">HTML <input type="checkbox" value="virtual" v-model="form.who_invite" id="html" class="badgebox"><span class="badge">&check;</span></label-->
+                                         <div class="tags" v-for="(item,index) in skills" :key="index">
                                              <label class="check label">
-                                                  <input class="check__input" type="checkbox" v-model="form.invite" value="html" id="html">
-                                                  <div class="check__text">HTML</div>
-                                              </label>
-                                         </div>
-                                         <div class="tags">
-                                             <!--label for="javascript" class="btn btn-primary">JavaScript <input type="checkbox" v-model="form.who_invite" value="javascript" id="javascript" class="badgebox"><span class="badge">&check;</span></label-->
-                                             <label class="check label">
-                                                  <input class="check__input" type="checkbox" v-model="form.invite" value="javascript" id="javascript">
-                                                  <div class="check__text">JavaScript</div>
-                                              </label>
-                                         </div>
-                                         <div class="tags">
-                                             <!--label for="css" class="btn btn-primary">CSS <input type="checkbox" v-model="form.who_invite" value="css" id="css" class="badgebox"><span class="badge">&check;</span></label-->
-                                             <label class="check label">
-                                                  <input class="check__input" type="checkbox" v-model="form.invite" value="css" id="css">
-                                                  <div class="check__text">CSS</div>
+                                                  <input class="check__input" type="checkbox" v-model="form.invite" :value="item" :id="item">
+                                                  <div class="check__text">{{item}}</div>
                                               </label>
                                          </div>
                                      </div>
                                 <div>
                                      <div class="more">
-                                         <h5><img src="img/reload.png" alt=""> More...</h5>
+                                         <h5 @click="skillAlls"><img src="../../assets/reload.png" alt=""> {{$t('more')}}...</h5>
                                      </div>
                                      <div v-show="step.number === 3" class="next-button">
-                                         <button @click.prevent="next" class="btn btn-2040 btn-blue">Next</button>
+                                         <button @click.prevent="next" class="btn btn-2040 btn-blue">{{$t('next')}}</button>
                                      </div>
                                       <div class=""></div>
 
@@ -126,34 +98,35 @@
                 </div> <!-- End step 3 -->
                 <!-- Step 4 -->
                   <div v-show="step.number === 4" class="">
-                      <h4>Step 4 of 4</h4>
+                      <h4>{{$t('step')}} 4 {{$t('of')}} 4</h4>
                       <br>
-                      <h1>Tell us about your hackathon</h1>
-                      <b></b>
+                      <h1>{{$t('about_your_hackathon')}}</h1>
+                      <hr>
                   </div>
                  <div v-show="step.number === 4" class="info-medio-d">
                           <div class="form-group">
-                              <label for="title">What is the title of your hackathon?</label>
+                              <label for="title">{{$t('title_hackathon')}}</label>
                               <input type="title" v-model="form.title" class="form-control">
                           </div>
                           <div class="form-group">
-                              <label for="address">Venue Address</label>
+                              <label for="address">{{$t('Venue_Address')}}</label>
                               <input type="address" v-model="form.address" class="form-control">
                           </div>
                           <div class="form-group">
-                              <label for="date-time">Date and time</label>
-                              <input type="date-time" v-model="form.date" class="form-control">
+                              <label for="date-time">{{$t('Date_and_time')}}</label>
+                              <!--input type="date-time" v-model="form.date" class="form-control"-->
+                              <input type="datetime-local" class="form-control" v-model="form.date">
                           </div>
                           <div class="form-group">
-                              <label for="reserve">Link to reserve seats?</label>
+                              <label for="reserve">{{$t('Link_to_reserve')}}</label>
                               <input type="reserve" v-model="form.linkreserv" class="form-control">
                           </div>
                           <div class="form-group">
-                              <label for="overvies">Overvies</label>
+                              <label for="overvies">{{$t('Overvies')}}</label>
                               <textarea v-model="form.overvies" class="form-control" rows="7"></textarea>
                           </div>
                           <div class="form-group">
-                              <label for="Schedule">Schedule</label>
+                              <label for="Schedule">{{$t('Schedule')}}</label>
                               <textarea v-model="form.schedule" class="form-control" rows="7"></textarea>
                           </div>
                           <v-button :loading="form.busy" type="primary">{{ $t('continue') }}</v-button>
@@ -171,6 +144,7 @@ import { mapGetters } from 'vuex'
 import swal from 'sweetalert2'
 import Form from 'vform'
 import i18n from '@/plugins/i18n'
+import axios from 'axios'
 
 export default {
   middleware: 'auth',
@@ -180,6 +154,9 @@ export default {
         complete: true,
       },
       skills:[],
+      types:[],
+      skillsAll:[],
+      typesAll:[],
       form: new Form({
         place: '',
         type: [],
@@ -192,7 +169,36 @@ export default {
         schedule: ''
       }),
     }),
+  created(){
+    this.load();
+  },
   methods:{
+    async load(){
+      const {data} = await axios('/auth/types',{method:"GET"});
+      const skill = await axios('/auth/tags',{method:"GET"});
+
+      this.skillsAll = skill.data.map((r,index) => {
+          return r.tags[0];
+      });;
+      this.typesAll = data.map((r,index )=> {
+          return r.types[0];
+      });
+
+      for(let i = 0; i <= 5;i++){
+        this.skills.push(this.skillsAll[i]);
+      }
+
+      for(let t = 0; t <= 3;t++){
+        this.types.push(this.typesAll[t]);
+      }
+    },
+
+    skillAlls(){
+      this.skills = this.skillsAll;
+    },
+     typesAlls(){
+      this.types = this.typesAll;
+    },
     next() {
       if (this.form.hackathon_place === ''){
         swal({
@@ -256,7 +262,7 @@ h1,h2,h3,h4,h5,h6,p,.avenir{
     font-size: 35px;
 }
 #bg-portada{
-  background-image: url('http://via.placeholder.com/1440x300');
+  background-image: url('../../assets/Create-Hackathon.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -354,7 +360,14 @@ h1,h2,h3,h4,h5,h6,p,.avenir{
 .more{
   margin-top: 20px;
   margin-bottom: 10px;
+  cursor: pointer;
+}
 
+.more img{
+  max-width: 30px;
+  position: relative;
+  top: 8px;
+  margin-right: 5px;
 }
 .info-medio-b button:hover,
 #container-medio .btn-next:hover
