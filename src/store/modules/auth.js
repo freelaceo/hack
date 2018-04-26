@@ -160,7 +160,7 @@ export const actions = {
         f.append('address',p.form.address);
         f.append('linkreserv',p.form.linkreserv);
         f.append('overvies',p.form.overvies);
-        f.append('shedule',p.form.schedule);
+        //f.append('shedule',p.form.schedule);
         f.append('date',p.form.date);
         f.append('userId',userID._id);
     

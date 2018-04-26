@@ -24,7 +24,6 @@
 										<li><router-link :to="{name: 'login'}" class="nav-option">{{ $t('saved') }}</router-link></li>
 										<li><router-link :to="{name: 'login'}" class="nav-option">{{ $t('notifications') }}</router-link></li>
 										<li v-if="user.role === 'organizer'"><router-link :to="{name: 'hackathons.create'}" class="create-h-btn btn btn-md btn-red">{{ $t('create_hackathon') }}</router-link></li>
-										<li v-if="user.role === 'hacker'"><router-link :to="{name: 'hackathons.create'}" class="create-h-btn btn btn-md btn-blue">{{ $t('create_project') }}</router-link></li>
 									 	<li class="dropdown">
 											<a href="#">
 												<h6 class="user-name"><fa icon="user" fixed-width/> {{user.name}}</h6>

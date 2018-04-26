@@ -29,14 +29,14 @@
 </template>
 
 <script>
-import TabsHome from '../components/tabs-home'
-import HackathonItems from '../components/hackathonsItems'
+//import TabsHome from './tabs-home'
+//import HackathonItems from './hackathonsItems'
 export default {
   name:'header-home',
-  components:{
-    TabsHome,
-    HackathonItems
-  }
+  //components:{
+     //TabsHome,
+    //HackathonItems
+  //}
 }
 </script>
 

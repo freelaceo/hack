@@ -87,6 +87,25 @@
   "Link_to_reserve":"Link to reserve seats?",
   "Overvies":"Overvies",
   "Schedule":"Schedule",
-  "title_hackathon":"What is the title of your hackathon?"
+  "title_hackathon":"What is the title of your hackathon?",
+  "day":"day",
+  "mainInfo":"Main info",
+  "Prizes":"Prizes",
+  "Challenges":"Challenges",
+  "Judges":"Judges",
+  "Judging_Criteria":"Judging Criteria",
+  "Sponsors":"Sponsors",
+  "Tags":"Tags",
+  "change-image":"Change image",
+  "Organizers":"Organizers",
+  "Hackers":"Hackers",
+  "Projects":"Projects",
+  "See_all":"See all",
+  "Save_Changes":"Save Changes",
+  "Edit":"Edit",
+  "join":"Join",
+  "publish":"Publish",
+  "Maps":"Maps",
+  "Contact_Organizers":"Contact Organizers"
 
 }

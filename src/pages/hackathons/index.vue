@@ -114,7 +114,6 @@
                           </div>
                           <div class="form-group">
                               <label for="date-time">{{$t('Date_and_time')}}</label>
-                              <!--input type="date-time" v-model="form.date" class="form-control"-->
                               <input type="datetime-local" class="form-control" v-model="form.date">
                           </div>
                           <div class="form-group">
@@ -125,10 +124,10 @@
                               <label for="overvies">{{$t('Overvies')}}</label>
                               <textarea v-model="form.overvies" class="form-control" rows="7"></textarea>
                           </div>
-                          <div class="form-group">
+                          <!--div class="form-group">
                               <label for="Schedule">{{$t('Schedule')}}</label>
                               <textarea v-model="form.schedule" class="form-control" rows="7"></textarea>
-                          </div>
+                          </div-->
                           <v-button :loading="form.busy" type="primary">{{ $t('continue') }}</v-button>
                   </div><!-- End Step 4 -->
                 </form>

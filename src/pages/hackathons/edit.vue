@@ -8,19 +8,19 @@
 						<div class="user_img mb-15">
 							<figure class="full text-center">
 								<img :src="hack.info.photoPerfil" alt="Nombre usuario">
-								<span class="caption" @click="upload()">Cambiar avatar</span>
+								<span class="caption" @click="upload()">{{$t('change-image')}}</span>
 							</figure>
 							<input type="file" name="file" id="file">
 						</div>
 						
 						<div class="user_info">
-							<h2 class="subtitle mb-15">Organizers</h2>
+							<h2 class="subtitle mb-15">{{$t('Organizers')}}</h2>
 							<p class="asidep">{{this.hack.user.name}}</p>
 							<!--a href="" class="btn btn-sm btn-red mt-15">Contact Organizers</a-->
 						</div>
 
 						<div class="hack-section mt-60">
-							<h2 class="subtitle mb-15 subtitle-add">Hackers <span>See all</span></h2>
+							<h2 class="subtitle mb-15 subtitle-add">{{$t('Hackers')}} <!--span>{{$t('See_all')}}</span--></h2>
 							<div class="row total">
 								<div class="col-md-4">
 									<figure class="hacker rounded">
@@ -31,7 +31,7 @@
 						</div>
 
 						<div class="hack-section mt-60">
-							<h2 class="subtitle mb-15 subtitle-add">Projects <span>See all</span></h2>
+							<h2 class="subtitle mb-15 subtitle-add">{{$t('Projects')}} <!--span>{{$t('See_all')}}</span--></h2>
 							<div class="row total">
 								<div class="col-md-4">
 									<figure class="hacker rounded">
@@ -43,7 +43,7 @@
 					</div>
 
 					<div id="content" class="col-md-9">
-						<h2 class="subtitle mb-15">Main info</h2>
+						<h2 class="subtitle mb-15">{{$t('mainInfo')}}</h2>
 						<div class="inputs-box">
 							<input type="text" class="form-control" :value="hack.info.title" placeholder="Nombre del evento">
 							<div id="event-data">
@@ -65,44 +65,24 @@
 							</div>
 
 							<div class="event-desc mt-30">
-								<h2 class="subtitle mb-15">Overview</h2>
+								<h2 class="subtitle mb-15">{{$t('Overvies')}}</h2>
 								<textarea name="" class="form-control" id="" cols="30" rows="10" :value="hack.info.overvies"></textarea>
 							</div>
 
 							<div class="event-desc mt-30">
-								<h2 class="subtitle mb-15">Schedule</h2>
-								<textarea name="" class="form-control" id="" cols="30" rows="10" :value="hack.info.shedule"></textarea>
+								<h2 class="subtitle mb-15 subtitle-add">{{$t('Schedule')}} <span class="btn btn-red mt20min" @click="newShedule();">{{$t('add')}}</span></h2>			
+								<div class="row" id="days">
+									<div class="col-md-4 border-day" v-for="(item,index) in shedule" :key="index">
+										<h3 class="headtitle subtitle-add">{{item.title}}<span class="btn mt20min" @click="newHour(index);">{{$t('add')}}</span></h3>
+										<ul id="event-program">
+											<li v-for="(time, ind) in item.hours" :key="ind"><span class="time"><input type="time" placeholder="Hour" v-model="shedule[index].hours[ind].hour"> | </span><input type="text" placeholder="Description" v-model="shedule[index].hours[ind].description"></li>
+										</ul>
+									</div>						
+								</div>
 							</div>
 
-							<!-- <div class="row">
-								div class="col-md-6">
-									<h3 class="headtitle">Day 1</h3>
-									<ul id="event-program">
-										<li><span class="time">09:00</span>Doors Open</li>
-										<li><span class="time">10:30</span>Opening Ceremony</li>
-										<li><span class="time">12:00</span>Lunch</li>
-										<li><span class="time">01:00</span>Coding Begins</li>
-										<li><span class="time">06:00</span>Dinner</li>
-										<li><span class="time">08:00</span>Pitch Workshop</li>
-										<li><span class="time">12:00</span>Hack Overnight</li>
-									</ul>
-								</div>
-								<div class="col-md-6">
-									<h3 class="headtitle">Day 2</h3>
-									<ul id="event-program">
-										<li><span class="time">07:00</span>Breakfast</li>
-										<li><span class="time">11:00</span>Submit Projects</li>
-										<li><span class="time">01:00</span>Code Freeze</li>
-										<li><span class="time">02:00</span>Pitches</li>
-										<li><span class="time">04:30</span>Awards Ceremony</li>
-										<li><span class="time">05:00</span>Doors Closed</li>
-										<li></li>
-									</ul>
-								</div>						
-							</div> -->
-
 							<div class="mt-30" id="prizes">
-								<h2 class="subtitle mb-15 subtitle-add">Prizes <span class="btn btn-red mt20min" @click="newPrize();">Add</span></h2>
+								<h2 class="subtitle mb-15 subtitle-add">{{$t('Prizes')}} <span class="btn btn-red mt20min" @click="newPrize();">{{$t('add')}}</span></h2>
 								<div class="row" id="prizesItems"> 
 									<div class="col-md-4 text-center prize-item" v-for="(cup,index) in prizes" :key="index">
 										<div class="cont">
@@ -117,7 +97,7 @@
 							</div>
 
 							<div class="mt-30" id="challenges">
-								<h2 class="subtitle mb-15 subtitle-add">Challenges <span class="btn btn-red mt20min" @click="newChallenge()">Add</span></h2>
+								<h2 class="subtitle mb-15 subtitle-add">{{$t('Challenges')}} <span class="btn btn-red mt20min" @click="newChallenge()">{{$t('add')}}</span></h2>
 
 								<ul class="challenges">
 									<li class="challenge-item" v-for="(item,index) in challenges" :key="index">
@@ -130,7 +110,7 @@
 							</div>
 
 							<div class="mt-30" id="judges">
-								<h2 class="subtitle mb-15 subtitle-add">Judges</h2>
+								<h2 class="subtitle mb-15 subtitle-add">{{$t('Judges')}}</h2>
 								<br>
 								<multiselect v-model="judge" placeholder="Find Judges" label="title" track-by="title" :multiple="true" :options="judges" :option-height="5" :custom-label="customLabel" :show-labels="false">
 									<template slot="singleLabel" slot-scope="props"><img class="option__image" :src="props.option.img" alt="No Man’s Sky"><span class="option__desc"><span class="option__title">{{ props.option.title }}</span></span></template>
@@ -141,7 +121,7 @@
 							</div>
 
 							<div class="mt-30" id="judging-criteria">
-								<h2 class="subtitle mb-15 subtitle-add">Judging Criteria <span class="btn btn-red mt20min" @click="newCriteria()">Add</span></h2>
+								<h2 class="subtitle mb-15 subtitle-add">{{$t('Judging_Criteria')}} <span class="btn btn-red mt20min" @click="newCriteria()">{{$t('add')}}</span></h2>
 								<ul class="criterial">
 									<li class="criterial-item" v-for="(c,index) in critrials" :key="index">
 										<input type="text" name="criterial-1" v-model="critrials[index].text" class="form-control small" placeholder="Criteria name">
@@ -150,13 +130,13 @@
 							</div>
 
 							<div class="mt-30" id="tags">
-								<h2 class="subtitle mb-15 subtitle-add">Tags</h2>
+								<h2 class="subtitle mb-15 subtitle-add">{{$t('Tags')}}</h2>
 							</div>
 
 							<multiselect v-model="skills" tag-placeholder="Add this as new tag" placeholder="Search or add a tag" label="name" track-by="code" :options="tags" :multiple="true" :taggable="false" @tag="addTag"></multiselect>
 
 							<div class="mt-30" id="sponsor">
-								<h2 class="subtitle mb-15 subtitle-add">Sponsors</h2>
+								<h2 class="subtitle mb-15 subtitle-add">{{$t('Sponsors')}}</h2>
 								<br>
 								<multiselect v-model="sponsors" placeholder="Find Sponsor" label="title" track-by="title" :multiple="true" :options="sponsor" :option-height="5" :custom-label="customLabel" :show-labels="false">
 									<template slot="singleLabel" slot-scope="props"><img class="option__image" :src="props.option.img" alt="No Man’s Sky"><span class="option__desc"><span class="option__title">{{ props.option.title }}</span></span></template>
@@ -215,6 +195,7 @@ export default {
 			judge:[],
 			datetime:'',
 			patners:[],
+			shedule:[]
 
 		}
 	},
@@ -323,8 +304,15 @@ export default {
 			this.critrials.push({text:''});
 		},
 
-		newPatner(){
+		newShedule(){
+			this.shedule.push({
+				title: this.$t('day') + " " + (this.shedule.length + 1),
+				hours:[]
+			});
+		},
 
+		newHour(index){
+			this.shedule[index].hours.push({hour:'',description:''});
 		},
 		async updateImageProfilhackathon(){
 			var img = new FormData();
@@ -343,7 +331,11 @@ export default {
             } else {
                 return false;
             }
-        },
+		},
+		
+		test(){
+			console.log(this.shedule)
+		},
 
 		async update(){
 			let t = this.skills.map(t => t.name);
@@ -354,7 +346,7 @@ export default {
 			f.append('date',this.hack.info.date);
 			f.append('linkreserv',this.hack.info.linkreserv);
 			f.append('overvies',this.hack.info.overvies);
-			f.append('shedule',this.hack.info.shedule);
+			f.append('shedule',JSON.stringify(this.shedule));
 			f.append('type',t);
 			f.append('judges',JSON.stringify(this.judge));
 			f.append('prizes',JSON.stringify(this.prizes));
@@ -369,9 +361,15 @@ export default {
 }
 </script>
 <style scoped>
-
+	span.time input{text-align: center; padding-left: 2px;}
 	figure.rounded{border-radius:100% !important;overflow:hidden;position: relative;}
 	figure.rounded img{width:100%;height:auto;display:block;}
+	#event-program li input[type=text]{min-width: 180px;}
+	#event-program li {border:1px solid rgba(0,0,0,.2);border-radius: 3px;margin-bottom:2px;}
+	#event-program input{border:none;}
+	#days{padding: 15px;}
+	#days h3{margin-bottom: 20px;margin-top: 20px;}
+	.border-day{border:1px solid rgba(10,10,10,.2); padding: 10px; border-radius: 3px; min-height: 300px;}
 	#file{display:none;}
 	.user_img{position:relative;}
 	.user_img .caption{position:absolute;width:100%;padding:10px 0;background: rgba(0,0,0,.4);color:#fff;left:0;bottom:0;transition:all .3s ease;opacity:0;font-size:14px;cursor:pointer;}

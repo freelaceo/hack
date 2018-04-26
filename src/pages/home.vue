@@ -1,6 +1,6 @@
 <template>
 	<main>
-		<Banner :img="banner" val="Publish" type="success"  :event="publish" :edit="false"/>
+		<Banner val="Publish" type="success"  :event="publish" :edit="false"/>
 			<section class="seccion">
 				<div class="container-lg">
 					<div class="row">
@@ -11,35 +11,35 @@
 							</div>
 
 							<div class="user_info">
-								<h2 class="subtitle mb-15">Organizers</h2>
+								<h2 class="subtitle mb-15">{{$t('Organizers')}}</h2>
 								<p class="asidep">{{this.hack.user.name}}</p>
-								<a href="" class="btn btn-sm btn-red mt-15 btn-organizer">Contact Organizers</a>
+								<a href="" class="btn btn-sm btn-red mt-15 btn-organizer">{{$t('Contact_Organizers')}}</a>
 							</div>
 
 							<div class="hack-section mt-60">
-								<h2 class="subtitle mb-15 subtitle-add">Hackers <!--span>See all</span--></h2>
+								<h2 class="subtitle mb-15 subtitle-add">{{$t('Hackers')}} <span>{{$t('See_all')}}</span></h2>
 								<div class="row total">
-									<div class="col-md-4">
+									<div class="col-md-4" v-for="(item,index) in hackers" :key="index">
 										<figure class="full rounded">
-											<img src="http://via.placeholder.com/100x100" alt="Usuario">
+											<img :src="item.avatar" :alt="item.name">
 										</figure>
 									</div>
 								</div>
 							</div>
 
 							<div class="hack-section mt-60">
-								<h2 class="subtitle mb-15 subtitle-add">Projects <!--span>See all</span--></h2>
+								<h2 class="subtitle mb-15 subtitle-add">{{$t('Projects')}} <span>{{$t('See_all')}}</span></h2>
 								<div class="row total">
-									<div class="col-md-4">
+									<div class="col-md-4" v-for="(item,index) in projects" :key="index">
 										<figure class="full rounded">
-											<img src="http://via.placeholder.com/100x100" alt="Usuario">
+											<img :src="item.avatar" :alt="item.name">
 										</figure>
 									</div>
 								</div>
 							</div>
 
 							<div class="hack-section mt-60">
-								<h2 class="subtitle mb-15 subtitle-add">Patners <!--span>See all</span--></h2>
+								<h2 class="subtitle mb-15 subtitle-add">{{$t('Sponsors')}} <!--span>See all</span--></h2>
 								<figure class="full mt-15" v-for="(item,index) in hack.info.sponsors" :key="index"><img :src="item.img" :alt="item.title" :title="item.title" class="sponImg"><h2 class="text-center"><b>{{item.title}}</b></h2></figure>
 							</div>
 						</div>
@@ -61,20 +61,30 @@
 										<a :href="hack.info.linkreserv" target="_blank">{{hack.info.linkreserv}}</a>
 									</li>
 								</ul>
-
+								<hr>
 								<div class="event-desc mt-30">
-									<h2 class="subtitle mb-15">Overview</h2>
+									<h2 class="subtitle mb-15">{{$t('Overvies')}}</h2>
 									<p class="pbody">{{hack.info.overvies}}</p>
 								</div>
-
+								<hr>
 								<div class="event-desc mt-30">
-									<h2 class="subtitle mb-15">Schedule</h2>
-									<p class="pbody">{{hack.info.shedule}}</p>
+									<h2 class="subtitle mb-15">{{$t('Schedule')}}</h2>
+									
+									<div class="row">
+										<div class="col-md-4" v-for="(item,index) in hack.info.shedule" :key="index">
+										<br>
+										<h2>{{item.title}}</h2>
+										<hr>
+										<ul>
+											<li v-for="(time, ind) in item.hours" :key="ind">{{time.hour}} - {{time.description}}</li>
+										</ul>
+									</div>
+									</div>
 								</div>
 								<br>
 								<hr>
 								<div class="prizes mt-30 minH">
-									<h2 class="subtitle mb-15">Prizes</h2>
+									<h2 class="subtitle mb-15">{{$t('Prizes')}}</h2>
 									<div class="prizes row">
 										<div v-for="(prize,index) in hack.info.prizes" :key="index" class="col-md-4 prize-item">
 											<div class="cont">
@@ -90,7 +100,7 @@
 								<br>
 								<hr>
 								<div class="mt-30 minH" id="challenges">
-									<h2 class="subtitle mb-15">Challenges</h2>
+									<h2 class="subtitle mb-15">{{$t('Challenges')}}</h2>
 									<br>
 									<ul class="challenges ">
 										<li class="challenge-item" v-for="(challenge,index) in hack.info.challenge" :key="index">
@@ -102,7 +112,7 @@
 								<br>
 								<hr>
 								<div class="mt-30 judges minH">
-									<h2 class="subtitle mb-15">Judges</h2>
+									<h2 class="subtitle mb-15">{{$t('Judges')}}</h2>
 									<br>
 									<div class="row total">
 										<div class="col-md-4 judge-item" v-for="(judges,index) in hack.info.judges" :key="index"><!--  -->
@@ -119,7 +129,7 @@
 								<br>
 								<hr>
 								<div class="judging-criteria mt-30 minH">
-									<h2 class="subtitle mb-15">Judging Criteria</h2>
+									<h2 class="subtitle mb-15">{{$t('Judging_Criteria')}}</h2>
 									<br>
 									<ol class="criterial">
 										<li v-for="(item,index) in hack.info.critrials" :key="index"><i class="fas fa-circle"></i> {{item.text}}</li>
@@ -128,7 +138,7 @@
 								<br>
 								<hr>
 								<div class="mt-30" id="tags">
-									<h2 class="subtitle mb-15">Tags</h2>
+									<h2 class="subtitle mb-15">{{$t('Tags')}}</h2>
 									<br>
 									<ul class="tags">
 										<li v-for="(tag,index) in hack.tags" :key="index" class="tags-links">{{tag}}</li>
@@ -137,7 +147,7 @@
 								<br>
 								<hr>
 								<div class="map mt-30">
-									<h2 class="subtitle mb-15">Maps</h2>
+									<h2 class="subtitle mb-15">{{$t('Maps')}}</h2>
 									<br>
 									<GmapMap
 										:center="{lat:Number(latitud), lng:Number(longitud)}"
@@ -183,7 +193,8 @@ export default {
 				user:{},
 				tags:{}
 			},
-			banner:'http://via.placeholder.com/1440x330'
+			hackers:[],
+			projects:[]
 		}
 	},
 	created(){
@@ -201,12 +212,23 @@ export default {
 			this.longitud = data.data.coordinates[0].longitude
 			this.markers.push({position:{lat:data.data.coordinates[0].latitude,lng:data.data.coordinates[0].longitude}})
 
-
-			console.log(this.hack)
+			this.chargerHackers();
 		},
 		publish: async function(){
 			const data = await  axios('/auth/hackathon/publish/'+this.hack.info._id,{method:'put'})
 			this.$router.push({name: 'welcome' });
+		},
+
+		chargerHackers: async function(){
+			this.hack.info.hackers.map(e => {
+				axios('/auth/user/' + e).then(r => this.hackers.push(r.data));
+			});
+		},
+
+		chargerProjects: async function(){
+			this.hack.info.hackers.map(e => {
+				axios('/auth/user/' + e).then(r => this.hackers.push(r.data));
+			});
 		}
 	}
 }

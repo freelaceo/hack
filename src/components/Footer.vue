@@ -55,7 +55,7 @@
 					<div class="col-md-6 text-right">
 						<ul class="copy-menu">
 							<li><a class="links" href="#">Terms</a></li>
-							<li><a class="links"href="#">Privacy</a></li>
+							<li><a class="links" href="#">Privacy</a></li>
 						</ul>
 						<ul class="social">
 							<li><a href="#"><img style="vertical-align:middle" src="https://png.icons8.com/color/29/000000/facebook.png"></a></li>

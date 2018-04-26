@@ -134,6 +134,5 @@ export default {
         text-decoration: none;
         color: #FFF;
         background-color: #4A90E2;
-        box-shadow: ;
     }
 </style>
