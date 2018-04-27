@@ -88,7 +88,7 @@ input:focus, textarea:focus{outline:none;}
 body{font-family: 'Avenir Next', Arial, sans-serif;}
 p, li, label{font-size:14px;line-height:normal;color:#555;margin:0;padding:0}
 img{max-width:100%;}
-figure.full img{width:100%;height:auto;display:block;}
+figure.full img{width:60%;height:auto;display:block;margin:0 auto;}
 .font-16{font-size:16px;}
 .title-2{font-size: 30px;font-weight:600;color:#333;line-height:normal;}
 .title-3{font-size: 22px;font-weight:600;color:#333;line-height:normal;}

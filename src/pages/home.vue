@@ -16,7 +16,7 @@
 								<a href="" class="btn btn-sm btn-red mt-15 btn-organizer">{{$t('Contact_Organizers')}}</a>
 							</div>
 
-							<div class="hack-section mt-60">
+							<div class="hack-section mt-60" v-if="hackers.length != 0">
 								<h2 class="subtitle mb-15 subtitle-add">{{$t('Hackers')}} <span>{{$t('See_all')}}</span></h2>
 								<div class="row total">
 									<div class="col-md-4" v-for="(item,index) in hackers" :key="index">
@@ -27,7 +27,7 @@
 								</div>
 							</div>
 
-							<div class="hack-section mt-60">
+							<div class="hack-section mt-60" v-if="projects.length != 0">
 								<h2 class="subtitle mb-15 subtitle-add">{{$t('Projects')}} <span>{{$t('See_all')}}</span></h2>
 								<div class="row total">
 									<div class="col-md-4" v-for="(item,index) in projects" :key="index">
@@ -36,11 +36,6 @@
 										</figure>
 									</div>
 								</div>
-							</div>
-
-							<div class="hack-section mt-60">
-								<h2 class="subtitle mb-15 subtitle-add">{{$t('Sponsors')}} <!--span>See all</span--></h2>
-								<figure class="full mt-15" v-for="(item,index) in hack.info.sponsors" :key="index"><img :src="item.img" :alt="item.title" :title="item.title" class="sponImg"><h2 class="text-center"><b>{{item.title}}</b></h2></figure>
 							</div>
 						</div>
 						
@@ -54,7 +49,7 @@
 									</li>
 									<li>
 										<span class="fa fa-map-marker-alt"></span>
-										{{hack.info.address}}  <!--a href="map" class="map">(See Map)</a-->
+										{{hack.info.address}}
 									</li>
 									<li>
 										<span class="fa fa-globe"></span>
@@ -68,13 +63,13 @@
 								</div>
 								<hr>
 								<div class="event-desc mt-30">
-									<h2 class="subtitle mb-15">{{$t('Schedule')}}</h2>
+									<h2 class="subtitle mb-15 subtitle-add">{{$t('Schedule')}}</h2>
 									
 									<div class="row">
-										<div class="col-md-4" v-for="(item,index) in hack.info.shedule" :key="index">
+										<div class="col-md-4" v-for="(item,index) in hack.info.shedule" :key="index" >
 										<br>
 										<h2>{{item.title}}</h2>
-										<hr>
+										<hr v-if="!hack.info.shedule.length == 0">
 										<ul>
 											<li v-for="(time, ind) in item.hours" :key="ind">{{time.hour}} - {{time.description}}</li>
 										</ul>
@@ -82,9 +77,9 @@
 									</div>
 								</div>
 								<br>
-								<hr>
+								<br>
 								<div class="prizes mt-30 minH">
-									<h2 class="subtitle mb-15">{{$t('Prizes')}}</h2>
+									<h2 class="subtitle mb-15 subtitle-add">{{$t('Prizes')}}</h2>
 									<div class="prizes row">
 										<div v-for="(prize,index) in hack.info.prizes" :key="index" class="col-md-4 prize-item">
 											<div class="cont">
@@ -97,10 +92,26 @@
 										</div>
 									</div>
 								</div>
+								
+								
+								<div class="hack-section mt-60">
+									<h2 class="subtitle mb-15 subtitle-add">{{$t('Sponsors')}} {{$t('Primarys')}}</h2>
+									<figure class="full mt-15 col-md-4" v-for="(item,index) in hack.info.sponsors" :key="index"><img :src="item.img" :alt="item.title" :title="item.title" class="sponImg"><h2 class="text-center"><b>{{item.title}}</b></h2></figure>
+								</div>
+
+								<div class="hack-section mt-60">
+									<h2 class="subtitle mb-15 subtitle-add">{{$t('Sponsors')}} {{$t('Secondarys')}}</h2>
+									<figure class="full mt-15 col-md-4" v-for="(item,index) in hack.info.sponsors" :key="index"><img :src="item.img" :alt="item.title" :title="item.title" class="sponImg"><h2 class="text-center"><b>{{item.title}}</b></h2></figure>
+								</div>
+
+								<div class="hack-section mt-60">
+									<h2 class="subtitle mb-15 subtitle-add">{{$t('Others')}} {{$t('Sponsors')}}</h2>
+									<figure class="full mt-15 col-md-4" v-for="(item,index) in hack.info.sponsors" :key="index"><img :src="item.img" :alt="item.title" :title="item.title" class="sponImg"><h2 class="text-center"><b>{{item.title}}</b></h2></figure>
+								</div>
 								<br>
-								<hr>
+								<br>
 								<div class="mt-30 minH" id="challenges">
-									<h2 class="subtitle mb-15">{{$t('Challenges')}}</h2>
+									<h2 class="subtitle mb-15 subtitle-add">{{$t('Challenges')}}</h2>
 									<br>
 									<ul class="challenges ">
 										<li class="challenge-item" v-for="(challenge,index) in hack.info.challenge" :key="index">
@@ -110,9 +121,9 @@
 									</ul>
 								</div>
 								<br>
-								<hr>
+								<br>
 								<div class="mt-30 judges minH">
-									<h2 class="subtitle mb-15">{{$t('Judges')}}</h2>
+									<h2 class="subtitle mb-15 subtitle-add">{{$t('Judges')}}</h2>
 									<br>
 									<div class="row total">
 										<div class="col-md-4 judge-item" v-for="(judges,index) in hack.info.judges" :key="index"><!--  -->
@@ -127,27 +138,27 @@
 									</div>
 								</div>
 								<br>
-								<hr>
+								<br>
 								<div class="judging-criteria mt-30 minH">
-									<h2 class="subtitle mb-15">{{$t('Judging_Criteria')}}</h2>
+									<h2 class="subtitle mb-15 subtitle-add">{{$t('Judging_Criteria')}}</h2>
 									<br>
 									<ol class="criterial">
 										<li v-for="(item,index) in hack.info.critrials" :key="index"><i class="fas fa-circle"></i> {{item.text}}</li>
 									</ol>
 								</div>
 								<br>
-								<hr>
+								<br>
 								<div class="mt-30" id="tags">
-									<h2 class="subtitle mb-15">{{$t('Tags')}}</h2>
+									<h2 class="subtitle mb-15 subtitle-add">{{$t('Tags')}}</h2>
 									<br>
 									<ul class="tags">
 										<li v-for="(tag,index) in hack.tags" :key="index" class="tags-links">{{tag}}</li>
 									</ul>
 								</div>
 								<br>
-								<hr>
+								<br>
 								<div class="map mt-30">
-									<h2 class="subtitle mb-15">{{$t('Maps')}}</h2>
+									<h2 class="subtitle mb-15 subtitle-add">{{$t('Maps')}}</h2>
 									<br>
 									<GmapMap
 										:center="{lat:Number(latitud), lng:Number(longitud)}"

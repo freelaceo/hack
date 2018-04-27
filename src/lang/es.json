@@ -97,5 +97,8 @@
   "join":"Unirse",
   "publish":"Publicar",
   "Maps":"Mapa",
-  "Contact_Organizers":"Contactar"
+  "Contact_Organizers":"Contactar",
+  "Primarys":"Primarios",
+  "Secondarys":"Secundarios",
+  "Others":"Otros"
 }

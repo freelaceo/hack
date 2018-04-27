@@ -106,6 +106,9 @@
   "join":"Join",
   "publish":"Publish",
   "Maps":"Maps",
-  "Contact_Organizers":"Contact Organizers"
+  "Contact_Organizers":"Contact Organizers",
+  "Primarys":"Primary",
+  "Secondarys":"Secondary",
+  "Others":"Other"
 
 }
