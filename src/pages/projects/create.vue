@@ -99,8 +99,8 @@
                                 </div>
                          </div-->          
                          <div v-show="step.number === 3" class="next-button">
-                                         <button @click.prevent="next" class="btn btn-2040 btn-blue">{{$t('next')}}</button>
-                                     </div>  
+                              <button @click.prevent="next" class="btn btn-2040 btn-blue">{{$t('next')}}</button>
+                          </div>  
                 </div> <!-- End step 3 -->
                 <!-- Step 4 -->
                   <div v-show="step.number === 4" class="">
