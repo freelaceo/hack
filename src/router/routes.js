@@ -26,8 +26,9 @@ const HomePage = () => import('@/pages/homepage/index').then(m => m.default || m
 const UserProfile = () => import('@/pages/user-profile').then(m => m.default || m)
 
 // User Profile
-const ProjectPage = () => import('@/pages/project-page').then(m => m.default || m)
-
+const ProjectPage = () => import('@/pages/projects/index').then(m => m.default || m)
+//ProjectCreate
+const ProjectCreate = () => import('@/pages/projects/create').then(m => m.default || m)
 export default [
   { path: '/', name: 'welcome', component: Welcome },
 
@@ -61,8 +62,9 @@ export default [
         { path: 'badges', name: 'settings.badges', component: SettingsBadges }
       ] },
       {path:'/explore',name:'home-page',component:HomePage},
-      {path:'/user',name:'user-profile',component:UserProfile},
-      {path:'/project',name:'project-page',component:ProjectPage},
+      {path:'/project',name:'projects',component:ProjectPage},
+      {path:'/project/create',name:'create-projects',component:ProjectCreate},
+
 
   { path: '*', component: NotFound }
 ]

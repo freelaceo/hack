@@ -109,6 +109,9 @@
   "Contact_Organizers":"Contact Organizers",
   "Primarys":"Primary",
   "Secondarys":"Secondary",
-  "Others":"Other"
+  "Others":"Other",
+  "create_new_projects":"Create a new Project",
+  "title_project":"What is the name of the project?",
+  "Project_skill":"Project skill"
 
 }

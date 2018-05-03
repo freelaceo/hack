@@ -100,5 +100,9 @@
   "Contact_Organizers":"Contactar",
   "Primarys":"Primarios",
   "Secondarys":"Secundarios",
-  "Others":"Otros"
+  "Others":"Otros",
+  "create_new_projects":"Creemos un nuevo Proyecto",
+  "title_project":"¿Cual es el nombre del proyecto?",
+  "Project_skill":"Habilidades del proyecto",
+  "description":"Descriptción"
 }
