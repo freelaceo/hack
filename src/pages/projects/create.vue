@@ -46,7 +46,7 @@
                          </form>
                          <div>
                              <div class="cajita-botones">
-                                      <div class="tags" v-for="(item,index) in types" :key="index">
+                                      <div class="tags" v-for="(item,index) in skills" :key="index">
                                           <label class="check label">
                                               <input class="check__input" type="checkbox" v-model="form.type" :value="item" :id="item">
                                               <div class="check__text">{{item}}</div>
@@ -70,34 +70,15 @@
                     <div v-show="step.number === 3" class="info-medio-c">
                         <h4>{{$t('step')}} 3 {{$t('of')}} 4</h4>
                         <br>
-                        <h2>{{$t('description')}}</h2>
+                        <h2>{{$t('stract')}}</h2>
                         <br>
                         <form class="form-inline">
-                           <!--input class="form-control mr-sm-2" type="search" :placeholder="$t('search_skillsets')" aria-label="Search"-->
+                           
                            <div class="form-group" style="width:100%!important;">
-                              <textarea v-model="form.schedule" class="form-control" style="width:100%!important;" rows="7"></textarea>
+                              <textarea v-model="form.stract" class="form-control" style="width:100%!important;" rows="7"></textarea>
                           </div>
                          </form>
-                         <!--div>
-                             <div class="cajita-botones">
-                                         <div class="tags" v-for="(item,index) in skills" :key="index">
-                                             <label class="check label">
-                                                  <input class="check__input" type="checkbox" v-model="form.invite" :value="item" :id="item">
-                                                  <div class="check__text">{{item}}</div>
-                                              </label>
-                                         </div>
-                                     </div>
-                                <div>
-                                     <div class="more">
-                                         <h5 @click="skillAlls"><img src="../../assets/reload.png" alt=""> {{$t('more')}}...</h5>
-                                     </div>
-                                     <div v-show="step.number === 3" class="next-button">
-                                         <button @click.prevent="next" class="btn btn-2040 btn-blue">{{$t('next')}}</button>
-                                     </div>
-                                      <div class=""></div>
 
-                                </div>
-                         </div-->          
                          <div v-show="step.number === 3" class="next-button">
                               <button @click.prevent="next" class="btn btn-2040 btn-blue">{{$t('next')}}</button>
                           </div>  
@@ -106,30 +87,30 @@
                   <div v-show="step.number === 4" class="">
                       <h4>{{$t('step')}} 4 {{$t('of')}} 4</h4>
                       <br>
-                      <h1>{{$t('about_your_hackathon')}}</h1>
+                      <h1>{{$t('link_project')}}</h1>
                       <hr>
                   </div>
                  <div v-show="step.number === 4" class="info-medio-d">
                           <div class="form-group">
-                              <label for="title">{{$t('title_hackathon')}}</label>
+                              <!--label for="title">{{$t('title_hackathon')}}</label-->
                               <input type="title" v-model="form.title" class="form-control">
                           </div>
                           <div class="form-group">
-                              <label for="address">{{$t('Venue_Address')}}</label>
-                              <input type="address" v-model="form.address" class="form-control">
+                              <label for="address">{{$t('img_logo')}}</label>
+                              <input type="file" id="fileLogo" class="form-control">
                           </div>
                           <div class="form-group">
-                              <label for="date-time">{{$t('Date_and_time')}}</label>
-                              <input type="datetime-local" class="form-control" v-model="form.date">
+                              <label for="date-time">{{$t('description')}}</label>
+                              <textarea v-model="form.schedule" class="form-control" style="width:100%!important;" rows="7"></textarea>
                           </div>
-                          <div class="form-group">
+                          <!--div class="form-group">
                               <label for="reserve">{{$t('Link_to_reserve')}}</label>
                               <input type="reserve" v-model="form.linkreserv" class="form-control">
                           </div>
                           <div class="form-group">
                               <label for="overvies">{{$t('Overvies')}}</label>
                               <textarea v-model="form.overvies" class="form-control" rows="7"></textarea>
-                          </div>
+                          </div-->
                           
                           <v-button :loading="form.busy" type="primary">{{ $t('continue') }}</v-button>
                   </div><!-- End Step 4 -->
@@ -156,6 +137,8 @@ export default {
         complete: true,
       },
       skills:[],
+      files:'',
+      idhack:'',
       types:[],
       skillsAll:[],
       typesAll:[],
@@ -167,12 +150,20 @@ export default {
         address: '',
         date: '',
         linkreserv: '',
-        overvies: '',
+        stract: '',
         schedule: ''
       }),
     }),
   created(){
     this.load();
+    var self = this;
+
+    setTimeout(function(){
+      var up = document.querySelector('#fileLogo');
+      up.addEventListener('change', function(){
+          self.files = this.files[0];
+      });
+    },1000)
   },
   methods:{
     async load(){
@@ -193,6 +184,8 @@ export default {
       for(let t = 0; t <= 3;t++){
         this.types.push(this.typesAll[t]);
       }
+      
+      this.idhack = window.sessionStorage.getItem('idhack');
     },
 
     skillAlls(){
@@ -218,12 +211,13 @@ export default {
             code: ''
           }
         })
-       await this.$store.dispatch('auth/createHackathon',this);
+
+       await this.$store.dispatch('auth/createProject',this);
 
      this.form.reset();
      swal({
        type: 'success',
-       title: i18n.t('hackathon_success'),
+       title: i18n.t('project_success'),
      })
     },
   },

@@ -171,6 +171,40 @@ export const actions = {
     p.$router.push({name: 'edit' , params: { id: data.data.titleLink }});
   },
 
+  async createProject ({commit},p){
+    var userID = state.user;
+    let t = p.skills.map(t => t.name);
+    var f = new FormData();
+        f.append('name',p.form.place);
+        f.append('skills',t);
+        f.append('website',p.form.title);
+        f.append('description',p.form.schedule);
+        f.append('hackathonId',p.idhack);
+        f.append('image',p.files);
+        f.append('stract',p.form.stract);
+       // f.append('address',p.form.address);
+       // f.append('linkreserv',p.form.linkreserv);
+       // f.append('overvies',p.form.overvies);
+        //f.append('date',p.form.date);
+        
+    
+    var {data} = await axios('/auth/project/create',{
+        method:"post",
+        data: f
+    })
+    if(data.success){
+      var b = new FormData();
+      b.append('userId',userID._id);
+      b.append('type','founder');
+
+      var join = await axios('/auth/project/join/'+data.data._id,{method:'POST',data:b});
+
+      if(join.data.success){
+        p.$router.push({name: 'projects' , params: { id: data.data.titleLink }});
+      }
+    }
+  },
+
   async expiredSession(){
     return expiresTokenUser();
   },
@@ -178,3 +212,4 @@ export const actions = {
     removeTokenUser();
   }
 }
+//

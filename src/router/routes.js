@@ -62,7 +62,7 @@ export default [
         { path: 'badges', name: 'settings.badges', component: SettingsBadges }
       ] },
       {path:'/explore',name:'home-page',component:HomePage},
-      {path:'/project',name:'projects',component:ProjectPage},
+      {path:'/project/:id',name:'projects',component:ProjectPage},
       {path:'/project/create',name:'create-projects',component:ProjectCreate},
 
 

@@ -7,44 +7,39 @@
                         <div class="info-project col-md-9">
                             <div  class="user_img">
                                 <figure  class="full">
-                                    <img  src="http://via.placeholder.com/200x200" alt=""> 
-                                    <span  class="caption">Cambiar avatar</span>
+                                    <img :src="info.image" alt=""> 
                                 </figure> 
-                                <input type="file" name="file" id="file" class="invisible">
                             </div>
                             <div class="info">
-                                <h1 class="title-project">ShareStop</h1>
+                                <h1 class="title-project">{{info.name}}</h1>
                                 <br>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet nisl turpis. Sed rhoncus turpis nec nisi interdum imperdiet. Donec ipsum libero, sollicitudin sit amet pharetra eget, tincidunt eu justo. Quisque id ex sed mi rutrum convallis eu vel magna. Aenean imperdiet purus ac sapien interdum, ut porta dui tempor.</p>
-                                <!--p id="location" class="" v-if="project.location"><i class="fas fa-map-marker-alt" aria-hidden="true"></i>location</p-->
+                                <p>{{info.stract}}</p>
                                 <br>
                                 <div class="skills">
                                     <ul class="tags">
-                                        <li>UX/UI</li>
-                                        <li>Biz Dev</li>
-                                        <li>Developer</li>
+                                        <li v-for="(item,index) in info.skills" :key="index">{{item}}</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3 box-buton row relative float-right">
                             <div class="dropdown">
-                                <button class="btn btn-primari btn260" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Join projetc
+                                <button v-if="addJoin && info.hackers.length <= 4" class="btn btn-primari btn260" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{$t('Join_projetc')}}
                                 </button>
                                 <div class="dropdown-menu box-join " aria-labelledby="dropdownMenuButton">
-                                    <h4 class="how-to mb"><strong>How would you like to join?</strong></h4>
+                                    <h4 class="how-to mb"><strong>{{$t('How_would_you_like_to_join')}}</strong></h4>
                                     <form action="">
                                         <div class="radio">
-                                            <label>Developer<input type="radio" name="optradio"></label>
+                                            <label>Developer<input type="radio" name="optradio" @click.prevent="joindev"></label>
                                         </div>
                                         <hr>
                                         <div class="radio">
-                                            <label>UX/UI<input type="radio" name="optradio"></label>
+                                            <label>UX/UI<input type="radio" name="optradio" @click.prevent="joinuxui"></label>
                                         </div>
                                         <hr>
                                         <div class="radio disabled">
-                                            <label>Entrepreneur<input type="radio" name="optradio"></label>
+                                            <label>{{$t('Entrepreneur')}}<input type="radio" name="optradio" @click.prevent="joinentrepreneur"></label>
                                         </div>
                                     </form>
                                 </div>
@@ -59,16 +54,16 @@
 				<div class="col-md-12 row">
 					<div class="col-md-4">
 						<div id="social" class="">
-			              <!--a v-if="project.socials.twitter" :href="project.socials.twitter"><i class="social-icons fab fa-twitter"></i></a>
-			              <a v-if="project.socials.facebook" :href="project.socials.facebook"><i class="social-icons fab fa-facebook"></i></a>
-			              <a v-if="project.socials.linkedin" :href="project.socials.linkedin"><i class="social-icons fab fa-linkedin-in"></i></a>
-			              <a v-if="project.socials.other" :href="project.socials.other"><i class="social-icons fab fa-github"></i></a-->
+			              <a v-if="info.socials.twitter" :href="project.socials.twitter"><i class="social-icons fab fa-twitter"></i></a>
+			              <a v-if="info.socials.facebook" :href="project.socials.facebook"><i class="social-icons fab fa-facebook"></i></a>
+			              <a v-if="info.socials.linkedin" :href="project.socials.linkedin"><i class="social-icons fab fa-linkedin-in"></i></a>
+			              <a v-if="info.socials.other" :href="project.socials.other"><i class="social-icons fab fa-github"></i></a>
 		                </div>
-		                <p id="liks" class="" ><i class="fas fa-link" aria-hidden="true"></i>link</p>
-		                <a href="" class="btn btn-secondari mt">Upvote project <span class="badge">4</span></a>
+		                <a id="liks" :href="info.website" ><i class="fas fa-link" aria-hidden="true"></i> {{info.website}}</a>
+		                <a href="" class="btn btn-secondari mt">Upvote project <span class="badge">0</span></a>
 		                <a href="" class="btn btn-primari mt mb">Send message</a>
 		                <hr>
-		                <div class="similar-project mt">
+		                <!--div class="similar-project mt">
 		                	<div class="item">	
 			                	<div  class="user_img-min">
 									<figure  class="full">
@@ -81,22 +76,20 @@
 									<a href="" class="see-more">(See Project)</a>
 								</div>
 							</div>
-		                </div>
+		                </div-->
            			 </div>
 					<div class="col-md-8">
 
-						<h2 class="sub mt">Material project</h2>
+						<!--h2 class="sub mt">Material project</h2-->
 						<!-- Carousel -->
-							<div id="myCarousel" class="carousel slide mt" data-ride="carousel">
+							<!--div id="myCarousel" class="carousel slide mt" data-ride="carousel">
 
-								  <!-- Indicators -->
 								  <ul class="carousel-indicators">
 								    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 								    <li data-target="#myCarousel" data-slide-to="1"></li>
 								    <li data-target="#myCarousel" data-slide-to="2"></li>
 								  </ul>
 								  
-								  <!-- The slideshow -->
 								  <div class="carousel-inner">
 								    <div class="carousel-item active">
 								      <img src="http://via.placeholder.com/1200x800" alt="Los Angeles">
@@ -109,82 +102,38 @@
 								    </div>
 								  </div>
 								  
-								  <!-- Left and right controls -->
 								  <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
 								    <span class="carousel-control-prev-icon"></span>
 								  </a>
 								  <a class="carousel-control-next" href="#myCarousel" data-slide="next">
 								    <span class="carousel-control-next-icon"></span>
 								  </a>
-								</div>
-						<!-- Carousel -->
+								</div-->
 						
 						<h2 class="sub mt">Description</h2>
 						<hr>
-						<p>ShareStop is our solution for a busy and noisey world.</p>
+						<p>{{info.description}}</p>
 
 						<h2 class="sub mt">Founders</h2>
 						<hr>
 						<div class="row">
-							<div class="col-md-4 text-center mt">
-								<div  class="founder_img">
-									<figure  class="full">
-										<img  src="http://via.placeholder.com/150x150" alt="">
+							<div class="col-md-4 text-center mt" v-for="(it,index) in hackers" :key="index">
+								<div class="">
+									<figure class="full">
+										<img class="round-img" :src="it.avatar" :alt="it.name">
 									</figure>
 								</div>
-								<h3 class="founder">Connor smith</h3> 
-								<p class="founder-type"><em>Developer</em></p>
+								<h3 class="founder">{{it.name}}</h3> 
+								<!--p class="founder-type"><em>Developer</em></p-->
 							</div>
-							<div class="col-md-4 text-center mt">
-								<div  class="founder_img">
-									<figure  class="full">
-										<img  src="http://via.placeholder.com/150x150" alt="">
-									</figure>
-								</div>
-								<h3 class="founder">Connor smith</h3> 
-								<p class="founder-type"><em>Developer</em></p>
-							</div>
-							<div class="col-md-4 text-center mt">
-								<div  class="founder_img">
-									<figure  class="full">
-										<img  src="http://via.placeholder.com/150x150" alt="">
-									</figure>
-								</div>
-								<h3 class="founder">Connor smith</h3> 
-								<p class="founder-type"><em>Developer</em></p>
-							</div>
-							<div class="col-md-4 text-center mt">
-								<div  class="founder_img">
-									<figure  class="full">
-										<img  src="http://via.placeholder.com/150x150" alt="">
-									</figure>
-								</div>
-								<h3 class="founder">Connor smith</h3> 
-								<p class="founder-type"><em>Developer</em></p>
-							</div>
-							<div class="col-md-4 text-center mt">
-								<div  class="founder_img">
-									<figure  class="full">
-										<img  src="http://via.placeholder.com/150x150" alt="">
-									</figure>
-								</div>
-								<h3 class="founder">Connor smith</h3> 
-								<p class="founder-type"><em>Developer</em></p>
-							</div>
-							<div class="col-md-4 text-center mt">
-								<div  class="founder_img">
-									<figure  class="full">
-										<img  src="http://via.placeholder.com/150x150" alt="">
-									</figure>
-								</div>
-								<h3 class="founder">Connor smith</h3> 
-								<p class="founder-type"><em>Developer</em></p>
-							</div>
+							
 						</div>
+                        <br>
+                        <br>
 						<h2 class="sub mt">Feedback</h2>
 						<hr>
 						<div class="feedback">
-							<div class="jurado">
+							<!--div class="jurado">
 								<div  class="jurado_img">
 									<figure  class="full">
 										<img  src="http://via.placeholder.com/80x80" alt="">
@@ -195,7 +144,7 @@
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus a nunc laoreet,</p>
 								</div>
 							</div>
-							<p class="feed">Etiam vitae nisi a mauris volutpat consequat a sed enim. Sed porta arcu vel ultricies euismod. Maecenas commodo tincidunt urna, at interdum nisl blandit vel. Sed ultrices risus metus, ac malesuada sapien viverra ut. Morbi interdum neque orci, a efficitur metus tristique nec. Aliquam at magna eu risus dapibus euismod sit amet eget neque. Suspendisse potenti. Nulla lacinia scelerisque risus sed ornare. Morbi commodo quam nisl, vitae feugiat odio maximus eu. Integer suscipit leo sed tellus ornare viverra. Fusce in elit semper, tincidunt nulla eu, imperdiet lorem. Etiam eget erat quam. Sed sit amet mattis arcu, eget luctus tortor. Nullam efficitur tortor ut odio mattis bibendum. Vestibulum a ante tristique, aliquet sapien vitae, interdum eros.</p>
+							<p class="feed">Etiam vitae nisi a mauris volutpat consequat a sed enim. Sed porta arcu vel ultricies euismod. Maecenas commodo tincidunt urna, at interdum nisl blandit vel. Sed ultrices risus metus, ac malesuada sapien viverra ut. Morbi interdum neque orci, a efficitur metus tristique nec. Aliquam at magna eu risus dapibus euismod sit amet eget neque. Suspendisse potenti. Nulla lacinia scelerisque risus sed ornare. Morbi commodo quam nisl, vitae feugiat odio maximus eu. Integer suscipit leo sed tellus ornare viverra. Fusce in elit semper, tincidunt nulla eu, imperdiet lorem. Etiam eget erat quam. Sed sit amet mattis arcu, eget luctus tortor. Nullam efficitur tortor ut odio mattis bibendum. Vestibulum a ante tristique, aliquet sapien vitae, interdum eros.</p-->
 						</div>
 
 					</div>
@@ -206,8 +155,65 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-  name:"projects"
+  name:"projects",
+  data(){
+      return {
+          info:null,
+          hackers:[],
+          addJoin: true,
+          user:null
+      }
+  },
+  created(){
+      this.load();
+  },
+  methods:{
+      async load(){
+          const {data} = await axios('/auth/project/url/'+this.$route.params.id,{method:"GET"});
+          this.info = data.data;
+          this.user = this.getTokenUser().user; 
+          console.log(this.info)
+          this.chargerHackers();
+      },
+      chargerHackers: async function(){
+			this.info.hackers.map(e => {
+                console.log(e)
+                if(e.projectId != 'undefined'){
+                    axios('/auth/user/' + e.projectId).then(r => this.hackers.push(r.data));
+                }
+				//
+			});
+      },
+      async joinentrepreneur(){
+            this.join('entrepreneur');    
+      },
+      async joindev(){
+          this.join('developer');
+      },
+      async joinuxui(){
+            this.join('uxui');
+      },
+      getTokenUser(){
+        return {token:window.localStorage.getItem('token'),user:JSON.parse(window.localStorage.getItem('user'))}
+      },
+      verifyJoin(){
+            this.info.hackers.map(e => {
+                console.log(e,this.user._id);
+                if(e === this.user._id){
+                    this.addJoin = false;
+                }
+            })
+        },
+        async join(type){
+            var w = new FormData();
+            w.append('userId',this.user._id);
+            w.append('type',type);
+            console.log(this.info._id)
+            const {data} = await axios('/auth/project/join/'+this.info._id,{method:'POST',data:w});
+        }
+  }
 }
 </script>
 
@@ -350,7 +356,7 @@ export default {
         margin-left: 20px;
     }
     .tags{margin: 0 !important;padding: 0;}
-    .tags li{display:inline-block;margin:0;padding:5px;border-radius: 2px; color:#FFF;background:#7ED321;text-decoration:none;transition:all .3s ease; font-size: 14px;}
+    .tags li{display:inline-block;margin:0px 5px;padding:5px 10px;border-radius: 2px; color:#FFF;background:#7ED321;text-decoration:none;transition:all .3s ease; font-size: 14px;}
     .tags li:last-of-type{margin-right: 0}
     .box-buton {
         align-items: flex-end;
@@ -506,5 +512,11 @@ export default {
     .carousel-inner img {
         width: 100%;
         height: 100%;
+    }
+
+    .round-img{
+        border-radius: 50%;
+        max-width: 100px;
+        margin-bottom: 20px;
     }
 </style>

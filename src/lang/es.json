@@ -104,5 +104,12 @@
   "create_new_projects":"Creemos un nuevo Proyecto",
   "title_project":"¿Cual es el nombre del proyecto?",
   "Project_skill":"Habilidades del proyecto",
-  "description":"Descriptción"
+  "description":"Descriptción",
+  "link_project":"Link del proyecto",
+  "img_logo":"Logo",
+  "project_success":"Proyecto creado",
+  "stract":"Extracto",
+  "How_would_you_like_to_join":"¿Cómo te gustaría unirte?",
+  "Entrepreneur":"Emprendedor",
+  "Join_projetc":"Unirse al proyecto"
 }

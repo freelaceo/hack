@@ -224,6 +224,7 @@ export default {
 			this.markers.push({position:{lat:data.data.coordinates[0].latitude,lng:data.data.coordinates[0].longitude}})
 
 			this.chargerHackers();
+			this.chargerProjects();
 		},
 		publish: async function(){
 			const data = await  axios('/auth/hackathon/publish/'+this.hack.info._id,{method:'put'})
@@ -237,9 +238,13 @@ export default {
 		},
 
 		chargerProjects: async function(){
-			this.hack.info.hackers.map(e => {
-				axios('/auth/user/' + e).then(r => this.hackers.push(r.data));
-			});
+			console.log('id =>',this.hack.info._id)
+			const {data} = await axios('/auth/project/id/'+this.hack.info._id)
+			this.projects = data.data;
+			console.log('==!">',data,data.data);
+			/*data.data.map(e => {
+				axios('/auth/user/' + e).then(r => this.projects.push(r.data));
+			});*/
 		}
 	}
 }

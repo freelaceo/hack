@@ -7,7 +7,7 @@
                 <div class="btn-holder">
                     <a v-if="creator && edit == true && user.role === 'organizer'" @click.prevent="event" class="btn btn-lg btn-green">{{$t('publish')}}</a>
                     <a v-if="creator == false && addJoin" @click.prevent="join" class="btn btn-lg btn-blue">{{$t('join')}}</a>
-                    <a v-if="addJoin === false && user.role === 'hacker'" class="btn btn-xs btn-black">{{$t('create_project')}}</a>
+                    <a v-if="addJoin === false && user.role === 'hacker'" @click.prevent="crtp" class="btn btn-xs btn-black">{{$t('create_project')}}</a>
                 </div>
             </div>
         </div>
@@ -76,7 +76,7 @@ export default {
         async loaded(){
           const { data } = await axios('/auth/hackathon/url/'+this.$route.params.id,{method:"GET"});
             this.idhack = data.data._id;
-            this.joins = data.data.hakers;
+            this.joins = data.data.hackers;
             this.img = data.data.banner;
             this.user = JSON.parse(window.localStorage.getItem('user'));
             this.creator = this.creatorVerify(data.data.userId);
@@ -113,12 +113,13 @@ export default {
                 return false;
             }
         },
+
         async join(){
 
             const f = new FormData();
             f.append('userId',this.user._id);
             const { data } = await axios('/auth/hackathon/join/' + this.idhack,{method:'POST',data:f});
-
+            console.log(data)
             if(data.success){
                 this.addJoin = false;
             }
@@ -126,10 +127,15 @@ export default {
 
         verifyJoin(){
             this.joins.map(e => {
+                console.log(e,this.user._id);
                 if(e === this.user._id){
                     this.addJoin = false;
                 }
             })
+        },
+        crtp(){
+            window.sessionStorage.setItem('idhack',this.idhack);
+            this.$router.push({name: 'create-projects'})
         }
   }
 }

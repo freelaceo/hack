@@ -112,6 +112,13 @@
   "Others":"Other",
   "create_new_projects":"Create a new Project",
   "title_project":"What is the name of the project?",
-  "Project_skill":"Project skill"
+  "Project_skill":"Project skill",
+  "link_project":"Link Project",
+  "img_logo":"Logo",
+  "project_success":"Project Success",
+  "stract":"Abstract",
+  "How_would_you_like_to_join":"How would you like to join?",
+  "Entrepreneur":"Entrepreneur",
+  "Join_projetc":"Join projetc"
 
 }
