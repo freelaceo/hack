@@ -186,7 +186,7 @@ export const actions = {
        // f.append('linkreserv',p.form.linkreserv);
        // f.append('overvies',p.form.overvies);
         //f.append('date',p.form.date);
-        
+        console.log(p.idhack  )
     
     var {data} = await axios('/auth/project/create',{
         method:"post",

@@ -174,8 +174,8 @@ export default {
           const {data} = await axios('/auth/project/url/'+this.$route.params.id,{method:"GET"});
           this.info = data.data;
           this.user = this.getTokenUser().user; 
-          console.log(this.info)
           this.chargerHackers();
+          this.verifyJoin();
       },
       chargerHackers: async function(){
 			this.info.hackers.map(e => {
@@ -200,8 +200,8 @@ export default {
       },
       verifyJoin(){
             this.info.hackers.map(e => {
-                console.log(e,this.user._id);
-                if(e === this.user._id){
+                console.log('=>',e);
+                if(e.projectId === this.user._id){
                     this.addJoin = false;
                 }
             })

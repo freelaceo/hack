@@ -31,9 +31,11 @@
 								<h2 class="subtitle mb-15 subtitle-add">{{$t('Projects')}} <span>{{$t('See_all')}}</span></h2>
 								<div class="row total">
 									<div class="col-md-4" v-for="(item,index) in projects" :key="index">
-										<figure class="full rounded">
-											<img :src="item.avatar" :alt="item.name">
-										</figure>
+										<router-link :to="'/project/' + item.titleLink">
+											<figure class="full rounded">
+												<img :src="item.image" :alt="item.name">
+											</figure>
+										</router-link>
 									</div>
 								</div>
 							</div>
@@ -238,13 +240,8 @@ export default {
 		},
 
 		chargerProjects: async function(){
-			console.log('id =>',this.hack.info._id)
-			const {data} = await axios('/auth/project/id/'+this.hack.info._id)
+			const {data} = await axios('/auth/project/idfind/'+this.hack.info._id)
 			this.projects = data.data;
-			console.log('==!">',data,data.data);
-			/*data.data.map(e => {
-				axios('/auth/user/' + e).then(r => this.projects.push(r.data));
-			});*/
 		}
 	}
 }
